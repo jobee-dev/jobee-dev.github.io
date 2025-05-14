@@ -1,280 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- ============================================ -->
-    <!--  DISPATCH COMMANDER — Privacy Policy (prod)  -->
-    <!--  UI & meta tags mirror the main index.html   -->
-    <!-- ============================================ -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Jobee Development</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <!-- LOGO + COMPANY NAME CONTAINER -->
+      <div class="header-brand">
+          <a href="index.html" class="logo-link">
+            <img
+              src="images/bee-logo.png"
+              alt="Jobee Dev Logo"
+              class="company-logo"
+            />
+          </a>
+          <h1>Jobee Development</h1>
+        </div>
+      <nav>
+          <a href="index.html">Home</a>
+          <a href="apps.html">Apps</a>
+          <a href="privacy.html" class="active">Privacy Policy</a> <!-- Add 'active' class -->
+      </nav>
+    </div>
+  </header>
 
-    <!-- SEO / ASO -->
-    <title>Privacy Policy | Dispatch Commander – Jobee Development</title>
-    <meta
-      name="description"
-      content="How Jobee Development collects, uses and protects data in the Dispatch Commander mobile game."
-    />
-    <meta
-      name="keywords"
-      content="dispatch commander privacy policy, jobee development privacy, mobile game data use"
-    />
-    <link rel="canonical" href="https://jobee.dev/privacy.html" />
+  <main>
+    <div class="container">
+        <section class="privacy-policy"> <!-- Added class for specific styling -->
+            <h1>Privacy Policy</h1>
+            <p><strong>Effective Date:</strong> [Insert Date - REMEMBER TO UPDATE THIS]</p>
 
-    <!-- Open Graph (minimal) -->
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://jobee.dev/privacy.html" />
-    <meta property="og:title" content="Dispatch Commander – Privacy Policy" />
-    <meta
-      property="og:description"
-      content="Review the privacy practices for the Dispatch Commander mobile game."
-    />
+            <h2>1. Introduction</h2>
+            <p>
+              Welcome to the Jobee Developments website and our Dispatch Commander application. This Privacy Policy explains how we handle any personal data you may interact with while visiting our website or using our app. At Jobee Developments, we are committed to protecting your privacy and complying with the General Data Protection Regulation (GDPR) and other applicable UK data protection laws, including the Data Protection Act 2018.
+            </p>
 
-    <!-- TailwindCSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+            <h2>2. Who We Are</h2>
+            <p>
+              <strong>Jobee Developments</strong><br>
+              [Your Company Address - REMEMBER TO UPDATE THIS]<br>
+              [Your Contact Email - REMEMBER TO UPDATE THIS]<br>
+              [Your Contact Phone Number - REMEMBER TO UPDATE THIS]
+            </p>
+            <p>
+              Our website and application are operated by Jobee Developments. If you have any questions about this Privacy Policy, please contact us at the details provided above.
+            </p>
 
-    <!-- Fonts & Icons -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+            <h2>3. Data Collection and Use</h2>
+            <h3>No Data Collection</h3>
+            <p>
+              Jobee Developments respects your privacy. We do not track, collect, or store any personal data from visitors to our website or users of our Dispatch Commander app. This means that:
+            </p>
+            <ul>
+              <li><strong>Website Usage:</strong> We do not use tracking cookies, analytics tools, or any other technologies that record or store information about your visit.</li>
+              <li><strong>Dispatch Commander App:</strong> Similarly, our app does not collect, track, or store any personal data or usage metrics. No user data is transmitted to any server or third party.</li>
+            </ul>
 
-    <!-- Theme helpers -->
-    <style>
-      :root {
-        --bg: #000;
-        --fg: #d1d5db;
-        --accent: #00ff55;
-        --accent-soft: rgba(0, 255, 85, 0.12);
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--fg);
-      }
-      .code {
-        font-family: "IBM Plex Mono", monospace;
-      }
-      .glow {
-        color: var(--accent);
-        text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-      }
-      .grid-overlay {
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.04) 1px,
-            transparent 1px
-          ),
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
-      }
-      /* limit prose width on large screens */
-      .prose {
-        max-width: 65ch;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Decorative grid overlay -->
-    <div class="fixed inset-0 grid-overlay z-0"></div>
+            <h2>4. Cookies and Similar Technologies</h2>
+            <p>
+              We do not use cookies, web beacons, or any other similar tracking technologies on our website or within Dispatch Commander that track user activities. Any cookies that might be used are strictly essential for the technical operation of our website and app and do not collect any personal data.
+            </p>
 
-    <!-- Header -->
-    <header class="relative z-10 text-center py-20 px-6">
-      <h1 class="text-4xl sm:text-6xl font-extrabold glow mb-4">
-        Privacy&nbsp;Policy
-      </h1>
-      <p class="code text-sm sm:text-base opacity-80">
-        Last updated: <span id="updated">14&nbsp;May&nbsp;2025</span>
-      </p>
-    </header>
+            <h2>5. Legal Basis and Compliance</h2>
+            <p>
+              Since we do not collect or process any personal data, there is no personal data processing taking place that requires a legal basis under GDPR or other related UK regulations. We have designed our website and app with privacy in mind and are committed to the principles of data minimisation and purpose limitation.
+            </p>
 
-    <!-- Simulation disclaimer -->
-    <section
-      class="relative z-10 px-6 max-w-5xl mx-auto mb-12 code text-sm"
-    >
-      <div
-        class="p-6 border border-accent-soft rounded-lg bg-black/60 leading-relaxed"
-      >
-        <strong class="glow">Heads-up:</strong> Dispatch Commander is a
-        <em>fictional simulation game</em>. Any references to incidents, agencies
-        or locations are simulated and must not be used for real-world emergency
-        response.
-      </div>
-    </section>
+            <h2>6. Third-Party Links and External Content</h2>
+            <p>
+              Our website and Dispatch Commander app may contain links to external websites. Please be aware that we have no control over the privacy practices of those sites, and this Privacy Policy does not apply to them. We encourage you to review the privacy policies of any third parties you visit.
+            </p>
 
-    <!-- Policy body -->
-    <main
-      id="policy-wrapper"
-      class="relative z-10 px-6 pb-24 mx-auto prose prose-invert leading-relaxed space-y-6"
-    >
-      <!-- ▼▼▼  PASTE YOUR POLICY MARKDOWN or HTML BETWEEN THESE MARKERS ▼▼▼ -->
-      <!-- START PRIVACY POLICY CONTENT -->
-<p><strong>Last updated:</strong> May 14, 2025<br><strong>Effective Date:</strong> May 24, 2025</p>
-<p>This Privacy Policy ("Policy") describes how Jobee Development Limited ("Company," "we," "us," or "our") collects, uses, and shares personal information of users of our mobile application, Dispatch Commander ("App"), and our related services (collectively, the "Services"). This Policy applies to our App as distributed on mobile application stores and any associated web presence.</p>
-<p>This document is provided for general information and does not constitute legal advice.</p>
-<h2>1. Introduction &amp; Scope</h2>
-<p>Welcome to Dispatch Commander. Your privacy is important to us. This Policy explains what information we collect from you, how we use and protect that information, and your rights regarding your information. By using our Services, you agree to the collection and use of information in accordance with this Policy. If you do not agree with the terms of this Policy, please do not access or use our Services.</p>
-<h2>2. Information We Collect</h2>
-<p>We collect several different types of information for various purposes to provide and improve our Services to you.</p>
-<h3>Data provided by users</h3>
-<p>We may collect personal information that you voluntarily provide to us when you:</p>
-<ul>
-<li>Contact us for support or inquiries (e.g., email address, content of your communication, if such a channel is provided in-app or referenced).</li>
-<li>Participate in surveys or promotions (if applicable).</li>
-<li>Customize in-game elements, such as providing a callsign for your units.</li>
-</ul>
-<h3>Automatic data (device, usage, diagnostics)</h3>
-<p>When you use our App, we may automatically collect certain information, including:</p>
-<ul>
-<li><strong>Device Information:</strong> Device type, operating system and version. We also generate a unique identifier (a universally unique identifier, UUID) for your app installation to distinguish it from others; this ID is stored on your device and will persist until the app is uninstalled or its data is cleared. This ID is not a hardware-based identifier like an IDFA or Android Advertising ID. We may also collect screen resolution, IP address (as part of network communications, see Network Data section), and mobile network information.</li>
-<li><strong>Usage Data:</strong> Information about how you use the App, such as features accessed, game progress, session duration, interactions with game elements, and in-app purchases. This includes statistics related to Mapbox API usage (e.g., number of map loads, routes calculated) which are stored locally on your device for diagnostic and performance monitoring purposes.</li>
-<li><strong>Diagnostic Data:</strong> Crash reports, performance data, and error logs to help us identify and fix problems. This includes the aforementioned Mapbox API usage statistics.</li>
-</ul>
-<h3>Location data (via Mapbox SDK)</h3>
-<p>Our App utilizes the Mapbox SDK to provide map-based functionalities such as displaying in-game locations (e.g., incidents, stations, unit routes) and calculating routes between these points. We have explicitly disabled Mapbox's own telemetry data collection.</p>
-<p><strong>Important Clarification on User Location:</strong> This App <strong>does not</strong> request access to, collect, or process your device's precise GPS location (e.g., for displaying your real-world location on the map). The term "location data" in the context of our Mapbox usage refers to the coordinates of in-game elements and the routes generated between them by Mapbox services.</p>
-<ul>
-<li><strong>Collection Frequency and Purpose:</strong> Mapbox services are used to fetch map tiles, calculate routes for in-game units, and potentially geocode in-game addresses. This occurs when map features are active or game logic requires route calculations.</li>
-<li><strong>Opt-out Mechanisms:</strong> As we do not collect your device's precise GPS location, standard device location service opt-outs are not directly applicable to this specific Mapbox usage. Your interaction with map features is inherent to gameplay.</li>
-<li><strong>Mapbox's Role:</strong> Mapbox acts as a data processor for the data sent to its APIs (e.g., coordinates for routing, IP address as part of standard HTTPS requests). Mapbox's processing of this data is governed by their privacy policy. We encourage you to review the <a href="https://www.mapbox.com/legal/privacy">Mapbox Privacy Policy</a> (particularly Section 2 regarding "Information We Collect Automatically When You Use Our Services and Our Customers' Applications").</li>
-</ul>
-<h3>Network data / edge logs (via Cloudflare Workers/Proxy)</h3>
-<p>Our App uses Cloudflare services (Workers and Proxy) for certain backend functionalities (like daily challenges and API quota management), content delivery, security, and performance optimization.</p>
-<ul>
-<li><strong>Data Sent to Cloudflare Workers:</strong> When interacting with these backend functionalities, your app-generated unique identifier (UUID) may be sent to our Cloudflare Worker to manage API quotas. Standard network request information, such as your IP address, is also processed by Cloudflare.</li>
-<li><strong>Edge Caching &amp; Logs:</strong> Cloudflare may cache game assets and content closer to your location to improve App speed and reliability. Cloudflare also logs network traffic data, which may include your IP address, for security purposes (e.g., to detect and mitigate DDoS attacks, identify malicious traffic) and to provide analytics about service usage.</li>
-<li><strong>IP Anonymization:</strong> Where feasible and configured at the Cloudflare level, we aim to utilize Cloudflare's IP anonymization features.</li>
-<li><strong>Cloudflare's Role:</strong> Cloudflare acts as a data sub-processor for network data and logs. Cloudflare's handling of this data is governed by their privacy policy. We recommend reviewing the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy Policy</a> (particularly Section 3 concerning "Information collected from End Users").</li>
-</ul>
-<h2>3. How We Use Information</h2>
-<p>We use the collected information for various purposes:</p>
-<ul>
-<li>To provide, operate, and maintain our Services, including features like daily challenges.</li>
-<li>To manage and enforce API quotas for services like Mapbox, using your app-generated UUID via our Cloudflare Worker.</li>
-<li>To personalize and improve your experience with the App.</li>
-<li>To manage your account (if applicable - currently no account system is in place) and provide customer support.</li>
-<li>To process in-app purchases and transactions.</li>
-<li>To monitor and analyze usage, trends, and activities in connection with our Services.</li>
-<li>To detect, prevent, and address technical issues and security incidents.</li>
-<li>To ensure legal and regulatory compliance.</li>
-<li>For game balancing and to enhance gameplay mechanics.</li>
-<li>To communicate with you about updates, security alerts, and support messages.</li>
-</ul>
-<h2>4. Legal Bases for Processing (GDPR Art. 6)</h2>
-<p>If you are in the European Economic Area (EEA), our legal basis for collecting and using the personal information described in this Policy depends on the Personal Data we collect and the specific context in which we collect it. We may process your Personal Data because:</p>
-<ul>
-<li><strong>Consent:</strong> You have given us permission to do so (e.g., for location data, direct marketing if applicable). You may withdraw your consent at any time.</li>
-<li><strong>Contractual Necessity:</strong> Processing is necessary for the performance of a contract with you (e.g., to provide the Services you requested, manage your in-app purchases).</li>
-<li><strong>Legitimate Interests:</strong> Processing is in our legitimate interests and not overridden by your data protection interests or fundamental rights and freedoms (e.g., to improve our Services, ensure security, prevent fraud, analyze usage).</li>
-<li><strong>Legal Obligation:</strong> Processing is necessary for compliance with a legal obligation to which we are subject.</li>
-</ul>
-<h2>5. Sharing &amp; Disclosure</h2>
-<p>We do not sell your personal information. We may share your information in the following circumstances:</p>
-<ul>
-<li><strong>Service Providers:</strong> We may share your information with third-party vendors, consultants, and other service providers who perform services on our behalf, such as hosting, data analytics, payment processing, customer service, and technical support. These service providers are authorized to use your personal information only as necessary to provide these services to us and are obligated to protect your information.
-    <ul>
-    <li><strong>Mapbox:</strong> As described in Section 2, for maps and geolocation services for in-game elements. Mapbox acts as a data processor.</li>
-    <li><strong>Cloudflare:</strong> As described in Section 2, for backend functionalities (like daily challenges and API quota management using your app-generated UUID), content delivery network, and security services. Cloudflare acts as a data sub-processor.</li>
-    <li><strong>Analytics / Crash Reporting:</strong> We do not employ additional third-party analytics or crash reporting services beyond the internal diagnostic data collection described in Section 2 (e.g., Mapbox API usage stats stored locally) and any anonymized or aggregated data provided by Cloudflare for service monitoring. Standard platform-provided crash reporting (e.g., from Apple or Google) may also occur.</li>
-    </ul>
-</li>
-<li><strong>Law Enforcement or Legal Requests:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., a court or a government agency), or if we believe in good faith that disclosure is necessary to:
-    <ul>
-    <li>Comply with a legal obligation.</li>
-    <li>Protect and defend our rights or property.</li>
-    <li>Prevent or investigate possible wrongdoing in connection with the Services.</li>
-    <li>Protect the personal safety of users of the Services or the public.</li>
-    <li>Protect against legal liability.</li>
-    </ul>
-</li>
-<li><strong>Corporate Transactions:</strong> If we are involved in a merger, acquisition, financing due diligence, reorganization, bankruptcy, receivership, sale of company assets, or transition of service to another provider, your information may be sold or transferred as part of such a transaction as permitted by law and/or contract.</li>
-</ul>
-<h2>6. Cookies &amp; Similar Technologies</h2>
-<p>Our App primarily operates without traditional web browser cookies as there is no associated web portal. However, the SDKs and technologies we use (such as Mapbox and Cloudflare, and services like <code>AsyncStorage</code> on your device) may use identifiers or local storage mechanisms similar to cookies to:</p>
-<ul>
-<li>Ensure the Services function correctly (e.g., storing your app-generated UUID, game state).</li>
-<li>Remember your preferences and settings if applicable.</li>
-<li>Analyze usage and performance (e.g., local storage of Mapbox API statistics).</li>
-<li>Provide security features.</li>
-</ul>
-<p>For instance, device identifiers (like IDFA or Android Ad ID, though we use a self-generated UUID instead as described in Section 2) may be used by the platform or other SDKs for analytics or to personalize your experience if you have consented to such uses through your device settings. The ePrivacy Directive requirements concerning consent for access to or storage of information on a user's terminal equipment are considered for any data stored locally, such as the app-generated UUID and locally stored diagnostic data.</p>
-<h2>7. International Transfers &amp; Standard Contractual Clauses</h2>
-<p>Your information, including personal data, may be transferred to — and maintained on — computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those in your jurisdiction.</p>
-<p>If you are located in the European Economic Area (EEA), the United Kingdom (UK), or Switzerland, please note that we may transfer your personal data to countries outside of these regions, including the United States. When we do so, we will ensure that appropriate safeguards are in place to protect your personal data, such as by using Standard Contractual Clauses (SCCs) approved by the European Commission, or by relying on an adequacy decision, or other lawful mechanisms. Our service providers, Mapbox and Cloudflare, also outline their data transfer mechanisms in their respective privacy policies.</p>
-<p>By using our Services and providing your information, you consent to these transfers, provided that appropriate safeguards are in place.</p>
-<h2>8. Security Measures</h2>
-<p>We take the security of your data seriously and implement appropriate technical and organizational measures to protect it from unauthorized access, use, alteration, disclosure, or destruction. These measures include:</p>
-<ul>
-<li><strong>End-to-end TLS/SSL encryption:</strong> For data transmitted between your device and our servers, and between our servers and third-party service providers where applicable.</li>
-<li><strong>At-rest encryption:</strong> Protecting data stored on our servers and by our service providers.</li>
-<li><strong>Least Privilege Access:</strong> Limiting access to personal data to personnel who require it for their job functions.</li>
-<li><strong>Cloudflare Web Application Firewall (WAF):</strong> To protect against common web exploits and malicious traffic.</li>
-<li><strong>Mapbox Key Scoping:</strong> Utilizing Mapbox's security features to limit the permissions of API keys.</li>
-<li>Regular security assessments and updates.</li>
-</ul>
-<p>However, please remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
-<h2>9. Data Retention</h2>
-<p>We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy.</p>
-<ul>
-<li><strong>Client-Side Data:</strong> Information stored on your device, such as the app-generated UUID and locally stored diagnostic data (e.g., Mapbox API usage statistics in <code>AsyncStorage</code>), persists until the App's data is cleared by you or the App is uninstalled.</li>
-<li><strong>Server-Side Data (Cloudflare Workers):</strong> Data processed by our Cloudflare Workers, such as the app-generated UUID sent for API quota management and associated logs maintained by Cloudflare, will be retained for up to one year. After this period, it will be deleted or anonymized if retained for statistical purposes.</li>
-<li><strong>General Retention:</strong> We will retain and use your information to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</li>
-</ul>
-<p>Usage data and diagnostic data may be retained for internal analysis purposes. This data is generally retained for a shorter period, except when it is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer periods.</p>
-<h2>10. Your Rights</h2>
-<p>You have certain rights regarding your personal information, subject to local data protection laws.</p>
-<h3>GDPR (General Data Protection Regulation)</h3>
-<p>If you are a resident of the EEA, you have the following data protection rights:</p>
-<ul>
-<li><strong>Access:</strong> The right to request copies of your personal data.</li>
-<li><strong>Rectification:</strong> The right to request that we correct any information you believe is inaccurate or complete information you believe is incomplete.</li>
-<li><strong>Erasure (Right to be Forgotten):</strong> The right to request that we erase your personal data, under certain conditions.</li>
-<li><strong>Restriction of Processing:</strong> The right to request that we restrict the processing of your personal data, under certain conditions.</li>
-<li><strong>Data Portability:</strong> The right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
-<li><strong>Objection to Processing:</strong> The right to object to our processing of your personal data, under certain conditions, particularly where we rely on legitimate interests as our legal basis.</li>
-</ul>
-<h3>CCPA (California Consumer Privacy Act)</h3>
-<p>If you are a California resident, you have the following rights:</p>
-<ul>
-<li><strong>Right to Know:</strong> The right to request information about the categories and specific pieces of personal information we have collected about you, as well as the categories of sources from which such information is collected, the purpose for collecting such information, and the categories of third parties with whom we share such information.</li>
-<li><strong>Right to Delete:</strong> The right to request the deletion of your personal information, subject to certain exceptions.</li>
-<li><strong>Right to Opt-Out of Sale:</strong> We do not sell personal information, so this right is not applicable in that regard. If our practices change, we will update this policy. (Based on <code>TODO: SALE_YN</code> = No)</li>
-<li><strong>Right to Non-Discrimination:</strong> The right not to be discriminated against for exercising any of your CCPA rights.</li>
-</ul>
-<h3>Children's Privacy (COPPA - Children's Online Privacy Protection Act)</h3>
-<p>Our Services are not directed to children under the age of 16, and we do not knowingly collect personal information from children under 16. If you are a parent or guardian and you are aware that your child has provided us with personal information without your consent, please contact us. If we become aware that we have collected personal information from children under 16 without verification of parental consent, we take steps to remove that information from our servers.</p>
-<p>To exercise any of these rights, please contact us at jobee.dev@gmail.com. We will respond to your request in accordance with applicable law.</p>
-<h2>11. Third-Party Links</h2>
-<p>Our Services may contain links to other websites or services that are not operated by us. If you click on a third-party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
-<h2>12. Changes to This Policy</h2>
-<p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this Privacy Policy. We may also provide notice through the App or via email, if appropriate. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-<h2>13. Contact Us</h2>
-<p>If you have any questions about this Privacy Policy, please contact us:</p>
-<p>Jobee Development Limited<br>
-Email: jobee.dev@gmail.com</p>
-      <!-- END PRIVACY POLICY CONTENT -->
-      <!-- ▲▲▲  KEEP THE MARKERS – they help future edits / scripts          -->
-    </main>
+            <h2>7. Your Rights</h2>
+            <p>
+              Under the GDPR and related UK law, you have a variety of rights regarding your personal data. Since we do not collect or process any personal data, most of these rights do not apply. However, if you believe that any personal data has been mistakenly collected or if you have any concerns regarding our data practices, please contact us using the information provided in Section 2.
+            </p>
 
-    <!-- Footer -->
-    <footer
-      class="relative z-10 text-center py-12 code text-xs opacity-70 px-6"
-    >
-      <p class="mb-2">
-        &copy; <span id="year">2024</span> Jobee Development • <!-- Hardcoding year for now, can be dynamic if a small script is re-added -->
-        <a href="/" class="underline hover:text-green-300">Back to Home</a>
-      </p>
-    </footer>
+            <h2>8. Changes to This Privacy Policy</h2>
+            <p>
+              We may update this Privacy Policy from time to time in order to reflect changes to our practices or applicable legal requirements. Any changes will be posted on this page with an updated effective date. We encourage you to review this Privacy Policy periodically.
+            </p>
 
+            <h2>9. Contact Us</h2>
+            <p>
+              If you have any questions, comments, or concerns about this Privacy Policy or our data practices, please contact us:
+            </p>
+            <p>
+              <strong>Jobee Developments</strong><br>
+              [Your Company Address - REMEMBER TO UPDATE THIS]<br>
+              [Your Contact Email - REMEMBER TO UPDATE THIS]<br>
+              [Your Contact Phone Number - REMEMBER TO UPDATE THIS]
+            </p>
+            <br>
+            <br>
+        </section>
+    </div>
+  </main>
 
-
-  </body>
+  <footer>
+      <p>© 2025 Jobee Developments. All Rights Reserved.</p>
+  </footer>
+</body>
 </html>
