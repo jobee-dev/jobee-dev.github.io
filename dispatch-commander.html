@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch Commander | Jobee Development</title>
+  <!-- Link your shared CSS file -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Optional: Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Optional: Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Add specific styles for this page -->
+  <style>
+    /* --- Banner Styles --- */
+    .app-banner-container {
+      position: relative; /* For overlay positioning */
+      /* Using Option 1 background: */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('images/dispatch-commander-banner-map.jpg'); /* CHANGE 'dispatch-commander-banner-map.jpg' if needed */
+      background-size: cover;
+      background-position: center center;
+      padding: 4em 2em; /* Generous padding */
+      margin: -3em 0 3em 0; /* Overlap top/bottom margins like hero */
+      border-radius: 0; /* Full width */
+      color: var(--white); /* Default text color for banner */
+      text-align: center; /* Center align content by default */
+      min-height: 250px; /* Ensure banner has some height */
+      display: flex; /* Use flex for content alignment */
+      align-items: center; /* Vertically center content */
+      justify-content: center; /* Horizontally center content */
+      overflow: hidden; /* Prevent content overflow issues */
+    }
+
+    .app-banner-content {
+      display: flex;
+      align-items: center; /* Align icon and text */
+      gap: 2.5em; /* Space between icon and text */
+      max-width: 1140px; /* Limit content width */
+      width: 100%;
+      margin: 0 auto;
+      position: relative; /* Ensure content is above overlay */
+      z-index: 2;
+      text-align: left; /* Align text to the left */
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      justify-content: center; /* Center items when wrapped */
+    }
+
+    .app-detail-icon {
+      max-width: 140px; /* Slightly smaller icon */
+      height: 140px;
+      object-fit: cover;
+      border-radius: 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+      flex-shrink: 0;
+      border: 3px solid rgba(255, 255, 255, 0.8); /* Subtle white border */
+      background-color: var(--secondary-color);
+    }
+
+    .app-detail-intro {
+      flex-grow: 1;
+    }
+
+    .app-detail-intro h1 {
+        margin-top: 0;
+        font-size: 3rem; /* Large title */
+        color: var(--white);
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Text shadow for readability */
+        margin-bottom: 0.3em;
+    }
+    .app-detail-intro p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.9); /* Slightly off-white */
+        max-width: 600px; /* Limit paragraph width */
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    }
+
+    /* --- Rest of the page styles --- */
+     main section:not(.app-banner-container) { /* Apply standard section styles only to non-banner sections */
+       background-color: var(--white);
+       padding: 2.5em 2em;
+       margin-bottom: 2em;
+       border-radius: 8px;
+       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+     }
+
+     main section h2 { /* Adjust spacing for sections below banner */
+       margin-top: 0;
+     }
+
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 1.5em;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1em;
+      line-height: 1.5;
+    }
+
+    .feature-list .fas {
+      margin-right: 0.8em;
+      color: var(--primary-color);
+      font-size: 1.2em;
+      width: 25px;
+      text-align: center;
+      margin-top: 0.1em;
+    }
+
+    .screenshots {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid var(--medium-grey);
+    }
+
+    .screenshots h3 {
+      text-align: center;
+      margin-bottom: 1.5em;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5em;
+    }
+
+    /* --- Updated Screenshot Grid Image Styles --- */
+    .screenshot-grid img {
+      width: 100%;        /* Fill column width */
+      height: 180px;      /* Fixed height for alignment */
+      object-fit: cover;  /* Crop to fit, don't distort */
+      object-position: center top; /* Optional: focus crop */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 1px solid var(--medium-grey);
+      display: block;
+      cursor: pointer; /* Indicate it's clickable */
+      transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add subtle hover */
+    }
+    .screenshot-grid img:hover {
+       transform: scale(1.03);
+       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .app-links {
+        margin-top: 2em;
+        text-align: center;
+    }
+
+    /* --- Lightbox Modal Styles --- */
+    .lightbox-overlay {
+      position: fixed; /* Cover the whole screen */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85); /* Dark semi-transparent background */
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 2000; /* Ensure it's above everything else */
+      padding: 20px;
+      box-sizing: border-box;
+      cursor: pointer; /* Allow clicking background to close */
+    }
+    .lightbox-overlay.visible {
+      display: flex; /* Show the lightbox */
+    }
+    .lightbox-content {
+      position: relative;
+      cursor: default; /* Don't close when clicking the image itself */
+    }
+    .lightbox-content img {
+      display: block;
+      /* === APPLY VIEWPORT UNITS === */
+      max-width: 90vw;   /* Max 90% of viewport width */
+      max-height: 90vh;  /* Max 90% of viewport height */
+      /* ========================== */
+      width: auto;        /* Maintain aspect ratio */
+      height: auto;       /* Maintain aspect ratio */
+      border-radius: 4px; /* Optional: slight rounding */
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+    .lightbox-close-button {
+      position: absolute;
+      top: -10px; /* Position slightly outside/above */
+      right: -10px;
+      background-color: #333;
+      color: white;
+      border: 2px solid white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 20px;
+      line-height: 33px; /* Center the 'X' */
+      text-align: center;
+      cursor: pointer;
+      z-index: 2001; /* Above the image */
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+     .lightbox-close-button:hover {
+        background-color: #555;
+     }
+
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 768px) {
+        .app-banner-container {
+            padding: 3em 1em;
+            min-height: 200px;
+        }
+        .app-banner-content {
+            flex-direction: column; /* Stack icon and text */
+            gap: 1.5em;
+            text-align: center; /* Center text when stacked */
+        }
+        .app-detail-icon {
+            max-width: 100px;
+            height: 100px;
+            border-radius: 22px;
+        }
+        .app-detail-intro h1 {
+            font-size: 2.2rem;
+        }
+        .app-detail-intro p {
+            font-size: 1rem;
+            margin-left: auto; /* Center paragraph text */
+            margin-right: auto; /* Center paragraph text */
+        }
+        /* Adjust lightbox close button position on mobile */
+        .lightbox-close-button {
+           top: 5px;
+           right: 5px;
+        }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <!-- LOGO + COMPANY NAME CONTAINER -->
+      <div class="header-brand">
+          <a href="index.html" class="logo-link">
+            <img
+              src="images/bee-logo.png"
+              alt="Jobee Dev Logo"
+              class="company-logo"
+            />
+          </a>
+          <h1>Jobee Development</h1> <!-- Reverted header H1 back to company name -->
+        </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="apps.html" class="active">Apps</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- BANNER SECTION -->
+    <section class="app-banner-container">
+        <div class="app-banner-content">
+            <img src="images/dispatch-commander-icon.png" alt="Dispatch Commander App Icon" class="app-detail-icon">
+            <div class="app-detail-intro">
+                <h1>Dispatch Commander</h1>
+                <p>
+                    Take command of your city's emergency services. Dispatch units, manage resources, and tackle dynamic incidents in this real-time strategy simulation.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- END BANNER SECTION -->
+
+    <div class="container">
+        <section class="app-detail-page">
+
+            <h2>Key Features</h2>
+            <ul class="feature-list">
+                <li>
+                    <i class="fas fa-bell"></i>
+                    <div>
+                        <strong>Real-Time Incident Management:</strong> Respond to dynamically generated incidents, from minor calls to major multi-agency emergencies, each with unique requirements and priorities.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-route"></i>
+                    <div>
+                        <strong>Strategic Unit Deployment:</strong> Manage a diverse fleet of vehicles (patrol cars, fire trucks, ambulances, specialized units). Calculate optimal routes and dispatch units effectively across the city using an interactive map interface.
+                    </div>
+                </li>
+                 <li>
+                    <i class="fas fa-city"></i>
+                    <div>
+                        <strong>Station Management & Expansion:</strong> Build and upgrade police stations, firehouses, and ambulance depots. Increase capacity, expand coverage radius, and improve maintenance efficiency.
+                    </div>
+                </li>
+                 <li>
+                    <i class="fas fa-cogs"></i>
+                    <div>
+                        <strong>Resource & Budget Control:</strong> Earn funds by successfully resolving incidents. Manage your budget to purchase new units, upgrade stations, and maintain your fleet's operational readiness.
+                    </div>
+                </li>
+                 <li>
+                    <i class="fas fa-map-marked-alt"></i>
+                    <div>
+                        <strong>Interactive Map Interface:</strong> Visualize units, stations, and active incidents on a detailed city map. Track unit movements and coverage areas in real-time.
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-car"></i>
+                    <div>
+                        <strong>Diverse Vehicle Fleet:</strong> Command a wide range of standard and specialized vehicles, including K9 units, HazMat trucks, Mobile ICUs, SWAT vehicles, and more, each suited for specific incident types.
+                    </div>
+                </li>
+                 <li>
+                    <i class="fas fa-edit"></i>
+                    <div>
+                        <strong>Unit Customization:</strong> Personalize your units with custom callsigns for a more immersive command experience.
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Updated Screenshots Section -->
+            <div class="screenshots">
+                <h3>Screenshots</h3>
+                <div class="screenshot-grid">
+                    <!--
+                      IMPORTANT: UPDATE data-fullsrc paths below!
+                    -->
+                    <img src="images/dc-screenshot-1.png" data-fullsrc="images/dc-screenshot-1.png" alt="Dispatch Commander Screenshot 1 - Incident List">
+                    <img src="images/dc-screenshot-2.png" data-fullsrc="images/dc-screenshot-2.png" alt="Dispatch Commander Screenshot 2 - CAD Window">
+                    <img src="images/dc-screenshot-3.png" data-fullsrc="images/dc-screenshot-3.png" alt="Dispatch Commander Screenshot 3 - Map View">
+                    <!-- Add more images here if needed, following the same pattern -->
+                </div>
+            </div>
+
+             <!-- Placeholder for App Store/Play Store Links -->
+             <div class="app-links">
+                <h3>Get the App</h3>
+                <p>Dispatch Commander is coming soon!</p>
+                <!-- Example Links (replace # with actual links when available) -->
+                <!--
+                <a href="#" class="btn"><i class="fab fa-apple"></i> App Store</a>
+                <a href="#" class="btn"><i class="fab fa-google-play"></i> Google Play</a>
+                -->
+            </div>
+
+        </section>
+    </div>
+  </main>
+
+  <footer>
+      <p>© 2025 Jobee Developments. All Rights Reserved.</p>
+  </footer>
+
+  <!-- LIGHTBOX HTML STRUCTURE -->
+  <div id="lightbox-overlay" class="lightbox-overlay">
+    <div class="lightbox-content">
+        <span id="lightbox-close" class="lightbox-close-button">×</span>
+        <img id="lightbox-image" src="" alt="Enlarged Screenshot">
+    </div>
+  </div>
+
+  <!-- LIGHTBOX JAVASCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const lightboxOverlay = document.getElementById('lightbox-overlay');
+      const lightboxImage = document.getElementById('lightbox-image');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const screenshotImages = document.querySelectorAll('.screenshot-grid img');
+
+      screenshotImages.forEach(img => {
+        img.addEventListener('click', (event) => {
+          // Check if the clicked element actually has the data-fullsrc attribute
+          const fullSrc = event.target.closest('img')?.getAttribute('data-fullsrc'); // Use closest to be safe
+          if (fullSrc && lightboxOverlay && lightboxImage) {
+            lightboxImage.setAttribute('src', fullSrc);
+            lightboxOverlay.classList.add('visible'); // Use class to show
+          }
+        });
+      });
+
+      // Function to close lightbox
+      const closeLightbox = () => {
+        if (lightboxOverlay) {
+          lightboxOverlay.classList.remove('visible'); // Use class to hide
+          // Optional: clear image src to prevent flicker on next open
+          if (lightboxImage) { lightboxImage.setAttribute('src', ''); }
+        }
+      };
+
+      // Close by clicking the overlay background
+      if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', (event) => {
+          // Only close if the click is directly on the overlay, not the content inside
+          if (event.target === lightboxOverlay) {
+            closeLightbox();
+          }
+        });
+      }
+
+      // Close by clicking the close button
+      if (lightboxClose) {
+        lightboxClose.addEventListener('click', () => {
+          closeLightbox();
+        });
+      }
+
+      // Optional: Close on Escape key press
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && lightboxOverlay && lightboxOverlay.classList.contains('visible')) {
+          closeLightbox();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
