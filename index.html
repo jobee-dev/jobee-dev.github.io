@@ -5,15 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>Jobee Development — Dispatch Commander (Coming Soon)</title>
-    <meta name="title" content="Jobee Development — Dispatch Commander (Coming Soon)" />
+    <title>Jobee Development — Dispatch Commander (Coming Soon)</title>
     <meta
       name="description"
-      content="Dispatch Commander is the real‑time global emergency‑dispatch simulator for mobile. Coordinate police, fire, and medical units anywhere on Earth. Coming soon from Jobee Development."
+      content="Dispatch Commander – a real-time global emergency-dispatch simulator for mobile. Coordinate police, fire & ambulance units anywhere on Earth. Coming soon from Jobee Development."
     />
 
-    <!-- TailwindCSS CDN -->
+    <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts & Icons -->
@@ -28,10 +26,10 @@
 
     <style>
       :root {
-        --bg: #000000;
-        --fg: #d1d5db; /* tailwind gray-300 */
+        --bg: #000;
+        --fg: #d1d5db;
         --accent: #00ff55;
-        --accent-soft: rgba(0, 255, 85, 0.2);
+        --accent-soft: rgba(0, 255, 85, 0.12);
       }
       html {
         scroll-behavior: smooth;
@@ -44,70 +42,11 @@
       .code {
         font-family: "IBM Plex Mono", monospace;
       }
-      /* neon glow */
       .glow {
         color: var(--accent);
         text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
       }
-      /* simple glitch effect */
-      .glitch {
-        position: relative;
-      }
-      .glitch::before,
-      .glitch::after {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        opacity: 0.8;
-        clip-path: inset(0 0 0 0);
-      }
-      .glitch::before {
-        animation: glitch-top 2s infinite linear alternate-reverse;
-        color: #00e1ff;
-      }
-      .glitch::after {
-        animation: glitch-bottom 2s infinite linear alternate-reverse;
-        color: #ff005b;
-      }
-      @keyframes glitch-top {
-        0% {
-          clip-path: inset(0 0 85% 0);
-          transform: translate(3px, -3px);
-        }
-        10% {
-          clip-path: inset(0 0 75% 0);
-          transform: translate(-2px, 2px);
-        }
-        20% {
-          clip-path: inset(0 0 90% 0);
-          transform: translate(2px, -1px);
-        }
-        30%, 100% {
-          clip-path: inset(0 0 85% 0);
-          transform: none;
-        }
-      }
-      @keyframes glitch-bottom {
-        0% {
-          clip-path: inset(75% 0 0 0);
-          transform: translate(-3px, 3px);
-        }
-        10% {
-          clip-path: inset(65% 0 0 0);
-          transform: translate(2px, -2px);
-        }
-        20% {
-          clip-path: inset(80% 0 0 0);
-          transform: translate(-1px, 2px);
-        }
-        30%, 100% {
-          clip-path: inset(75% 0 0 0);
-          transform: none;
-        }
-      }
-      /* decorative grid lines */
+      /* grid backdrop */
       .grid-overlay {
         background-image: linear-gradient(
             to right,
@@ -120,120 +59,104 @@
       }
     </style>
   </head>
-  <body class="relative">
-    <!-- GRID OVERLAY -->
-    <div
-      class="fixed inset-0 z-0 grid-overlay backdrop-blur-sm pointer-events-none"
-    ></div>
+  <body>
+    <!-- decorative grid -->
+    <div class="fixed inset-0 grid-overlay z-0"></div>
 
     <!-- HERO -->
     <header class="relative z-10 flex flex-col items-center justify-center h-screen text-center p-6">
-      <h1
-        class="glitch text-5xl sm:text-7xl font-extrabold mb-6"
-        data-text="DISPATCH COMMANDER"
-      >
-        DISPATCH COMMANDER
+      <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
+        DISPATCH COMMANDER
       </h1>
-      <p class="code text-lg sm:text-xl max-w-xl mx-auto mb-10">
-        Real‑time <span class="glow">global</span> emergency‑dispatch simulator.
-        Coordinate police, fire, medical & specialist units <span class="glow">anywhere</span> on Earth.
+      <p class="code text-lg sm:text-xl max-w-xl mx-auto opacity-90">
+        Real-time <span class="glow">global</span> emergency-dispatch simulator.
+        Coordinate police, fire & ambulance units <span class="glow">anywhere</span>
+        on Earth.
       </p>
-      <a
-        href="#notify"
-        class="inline-block code text-sm tracking-wider px-8 py-3 rounded-md border border-accent glow hover:bg-accent-soft transition"
-      >
-        JOIN THE WAITLIST
-      </a>
     </header>
 
     <!-- FEATURES -->
-    <section class="relative z-10 py-24 px-6 max-w-6xl mx-auto">
+    <section class="relative z-10 py-20 px-6 max-w-6xl mx-auto">
       <div class="grid gap-12 md:grid-cols-3">
-        <!-- Feature 1 -->
-        <div class="flex flex-col items-start">
+        <!-- Global Coverage -->
+        <div>
           <span class="material-icons text-3xl glow mb-3">public</span>
-          <h3 class="text-xl font-semibold mb-2">World‑Wide Maps</h3>
+          <h3 class="text-xl font-semibold mb-2">Anywhere on the Globe</h3>
           <p class="code text-sm opacity-80">
-            From New York to Nairobi – tap anywhere on the globe and deploy your
-            response network in seconds.
+            Pick any city – Dispatch Commander renders real-world maps so you
+            can defend the places you care about.
           </p>
         </div>
-        <!-- Feature 2 -->
-        <div class="flex flex-col items-start">
-          <span class="material-icons text-3xl glow mb-3">local_fire_department</span>
-          <h3 class="text-xl font-semibold mb-2">Multi‑Agency Incidents</h3>
+        <!-- Multi-agency -->
+        <div>
+          <span class="material-icons text-3xl glow mb-3">groups</span>
+          <h3 class="text-xl font-semibold mb-2">Multi-Agency Response</h3>
           <p class="code text-sm opacity-80">
-            Handle complex scenarios requiring seamless coordination between
-            police, fire, ambulance, coast guard & more.
+            Seamlessly deploy police, fire & ambulance resources, juggling
+            limited fleets and escalating threats.
           </p>
         </div>
-        <!-- Feature 3 -->
-        <div class="flex flex-col items-start">
-          <span class="material-icons text-3xl glow mb-3">electric_car</span>
-          <h3 class="text-xl font-semibold mb-2">Specialist Assets</h3>
+        <!-- Real-time decisions -->
+        <div>
+          <span class="material-icons text-3xl glow mb-3">access_time</span>
+          <h3 class="text-xl font-semibold mb-2">Every Second Counts</h3>
           <p class="code text-sm opacity-80">
-            Mobilize K9 units, air ambulances, hazmat teams, riot vans, rescue
-            helicopters, drones & customised task‑force vehicles.
+            Incidents evolve in real time. Prioritise, strategise and keep your
+            city safe under pressure.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- SCREENSHOTS (PLACEHOLDER) -->
-    <section class="relative z-10 py-20 bg-gray-900/50 backdrop-blur-lg">
+    <!-- SCREENSHOTS -->
+    <section class="relative z-10 py-20 bg-gray-900/40 backdrop-blur">
       <div class="max-w-5xl mx-auto px-6 text-center">
-        <h2 class="text-2xl font-semibold mb-10">Sneak Peek</h2>
+        <h2 class="text-2xl font-semibold mb-10">Sneak Peek</h2>
         <div class="grid sm:grid-cols-2 gap-8">
           <img
             src="/assets/dispatch-init.png"
-            alt="Dispatch Commander system initialization screenshot"
+            alt="System initialisation screen"
             class="rounded-lg shadow-lg border border-accent-soft"
           />
           <img
             src="/assets/dispatch-hub.png"
-            alt="Dispatch Commander operations center screenshot"
+            alt="Operations hub UI"
             class="rounded-lg shadow-lg border border-accent-soft"
           />
           <img
             src="/assets/dispatch-map.png"
-            alt="Dispatch Commander global map screenshot"
+            alt="Global incident map"
             class="rounded-lg shadow-lg border border-accent-soft sm:col-span-2"
           />
         </div>
         <p class="code text-xs mt-6 opacity-70">
-          *Screenshots from pre‑release build v2.4.1. UI and gameplay may change
-          before launch.
+          *Pre-release screenshots, subject to change.
         </p>
       </div>
     </section>
 
-    <!-- CALL TO ACTION -->
-    <section id="notify" class="relative z-10 py-24 px-6 text-center">
-      <h2 class="text-3xl font-semibold mb-6">
-        Be the first to go<br class="sm:hidden" />
-        <span class="glow">LIVE</span>
-      </h2>
-      <p class="code max-w-lg mx-auto mb-8">
-        Sign up now and we’ll ping you the moment Dispatch Commander hits the App Store & Google Play.
+    <!-- FOLLOW SECTION -->
+    <section class="relative z-10 py-24 px-6 text-center">
+      <h2 class="text-3xl font-semibold mb-4">Follow Our Build-Log</h2>
+      <p class="code max-w-lg mx-auto mb-8 opacity-90">
+        We’re sharing dev updates, behind-the-scenes clips and launch news on
+        social media.
       </p>
-      <a
-        href="mailto:info@jobee.dev?subject=Dispatch%20Commander%20Early%20Access"
-        class="inline-block code text-sm tracking-wider px-10 py-4 rounded-md bg-accent-soft border border-accent glow hover:bg-accent transition"
-      >
-        REQUEST EARLY ACCESS
-      </a>
+      <div class="flex justify-center gap-6">
+        <a
+          href="https://instagram.com/jobee_dev"
+          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
+          target="_blank" rel="noopener"
+        >Instagram</a>
+      </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="relative z-10 text-center py-10 text-sm opacity-60 code">
-      <p class="mb-2">
-        &copy; <span id="year"></span> Jobee Development
-      </p>
-      <p>All trademarks referenced herein are the properties of their respective owners.</p>
+    <footer class="relative z-10 text-center py-10 code text-sm opacity-60">
+      &copy; <span id="year"></span> Jobee Development
     </footer>
 
     <script>
-      // dynamic year
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
