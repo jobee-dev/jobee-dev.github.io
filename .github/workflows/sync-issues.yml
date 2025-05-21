@@ -1,0 +1,38 @@
+name: Mirror Issues to Private Repo
+
+on:
+  issues:
+    types:
+      - opened
+      - edited        # optional: mirror edits too
+      - labeled       # optional: mirror label changes
+      - unlabeled     # optional
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mirror issue to private repo
+        uses: peter-evans/issue-sync@v4
+        with:
+          # The token with access to your PRIVATE repo:
+          github-token: ${{ secrets.PRIVATE_PAT }}
+
+          # Source (public) repo context
+          source-repo: ${{ github.repository }}
+
+          # Target is your private app repo, e.g. "your-user/dispatch-commander"
+          target-repo: your-user/dispatch-commander
+
+          # Mirror title & body exactly
+          copy-title: true
+          copy-body: true
+
+          # Copy all labels (bug, enhancement, etc)
+          labels: ${{ github.event.issue.labels.*.name }}
+
+          # Optional:
+          #   assignees: some-user
+          #   assignee-mapping: public-user:private-user
+          #   comment-on-source: true  # posts back a link to the mirrored issue
