@@ -23,7 +23,7 @@ jobs:
           source-repo: ${{ github.repository }}
 
           # Target is your private app repo, e.g. "your-user/dispatch-commander"
-          target-repo: your-user/dispatch-commander
+          target-repo: jobee-dev/dispatch-commander
 
           # Mirror title & body exactly
           copy-title: true
