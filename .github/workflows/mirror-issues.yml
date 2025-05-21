@@ -1,0 +1,54 @@
+name: Mirror Issues to Private Repo
+
+# Trigger on all the Issue events you care about:
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - labeled
+      - unlabeled
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      # We need the script runner
+      - name: Checkout (for context)
+        uses: actions/checkout@v4
+
+      - name: Mirror issue via GitHub Script
+        uses: actions/github-script@v6
+        with:
+          # Use the PAT so we can write to the private repo
+          github-token: ${{ secrets.PRIVATE_PAT }}
+          script: |
+            // 1️⃣ Identify the incoming issue and the two repos
+            const src = context.payload.repository;           // public repo
+            const issue = context.payload.issue;
+            const target = {
+              owner:   'jobee-dev',                          // ← your GitHub username/org
+              repo:    'dispatch-commander',                 // ← your private repo name
+            };
+
+            // 2️⃣ Prevent infinite loops: only mirror from PUBLIC → PRIVATE
+            if (src.name === target.repo && src.owner.login === target.owner) {
+              return;  // we’re in private already
+            }
+
+            // 3️⃣ Build the new issue body
+            const mirroredBody = [
+              `**Mirrored from [${src.full_name}#${issue.number}](${issue.html_url})**`,
+              '',
+              issue.body || '*No description provided.*'
+            ].join('\n');
+
+            // 4️⃣ Create (or update) the issue in the private repo
+            await github.rest.issues.create({
+              owner:  target.owner,
+              repo:   target.repo,
+              title:  `[${src.name}#${issue.number}] ${issue.title}`,
+              body:   mirroredBody,
+              labels: issue.labels.map(l => l.name)
+            });
