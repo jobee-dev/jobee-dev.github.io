@@ -1,306 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jobee Developments Ltd</title>
+  <meta name="description" content="Jobee Developments Ltd - solo studio crafting deep mobile experiences." />
 
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <title>Dispatch Commander – Global Emergency-Dispatch Simulator | Jobee Development</title>
-    <meta
-      name="description"
-      content="Dispatch Commander is a real-time global emergency-dispatch simulation game for iOS & Android. Coordinate police, fire & ambulance units anywhere on earth. Coming soon from Jobee Development."
-    />
-    <meta
-      name="keywords"
-      content="dispatch commander, emergency dispatch game, police fire ambulance simulator, mobile simulation game, real time strategy app, jobee development"
-    />
-    <link rel="canonical" href="https://jobee.dev/" />
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #d1d5db;
+      --accent: #00ff55;
+      --accent-soft: rgba(0,255,85,0.1);
+      --panel-bg: rgba(255,255,255,0.03);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .code {
+      font-family: "IBM Plex Mono", monospace;
+    }
+    .glow {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+    }
+    .button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--accent);
+      border-radius: 0.5rem;
+      font-family: "IBM Plex Mono", monospace;
+      text-decoration: none;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background 0.3s;
+    }
+    .button:hover {
+      background: var(--accent-soft);
+    }
+    .grid-overlay {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+    a {
+      color: var(--fg);
+      text-underline-offset: 2px;
+    }
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .panel .material-icons {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Grid background overlay -->
+  <div class="grid-overlay"></div>
 
+  <!-- Hero Section -->
+  <header class="flex flex-col items-center justify-center text-center h-screen p-6 relative z-10">
+    <h1 class="text-5xl sm:text-7xl font-extrabold glow mb-4">Jobee Developments Ltd</h1>
+    <p class="text-lg sm:text-xl code mb-8 max-w-lg">
+      Pioneering deep, strategic mobile simulations with PC-grade polish.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a href="/dispatchcommander/index.html" class="button">Launch Dispatch Commander</a>
+      <a href="#about" class="button">Learn About Us</a>
+    </div>
+  </header>
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jobee.dev/" />
-    <meta property="og:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
-    <meta
-      property="og:description"
-      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Launching soon."
-    />
-    <meta property="og:image" content="https://jobee.dev/og-image.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@jobee_dev" />
-    <meta name="twitter:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
-    <meta
-      name="twitter:description"
-      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Launching soon."
-    />
-    <meta name="twitter:image" content="https://jobee.dev/og-image.png" />
-
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "MobileApplication",
-        "name": "Dispatch Commander",
-        "operatingSystem": "iOS, Android",
-        "applicationCategory": "GameApplication",
-        "genre": "Simulation",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Jobee Development",
-          "url": "https://jobee.dev"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "0.00",
-          "priceCurrency": "USD"
-        },
-        "description": "Dispatch Commander is a real-time global emergency-dispatch simulation game for mobile devices."
-      }
-    </script>
-
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-
-
-    <style>
-      :root {
-        --bg: #000;
-        --fg: #d1d5db;
-        --accent: #00ff55;
-        --accent-soft: rgba(0, 255, 85, 0.12);
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--fg);
-      }
-      .code {
-        font-family: "IBM Plex Mono", monospace;
-      }
-      .glow {
-        color: var(--accent);
-        text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-      }
-      .grid-overlay {
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.04) 1px,
-            transparent 1px
-          ),
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
-      }
-      /* CLI cursor */
-      .cursor {
-        display: inline-block;
-        width: 12px;
-        height: 16px;
-        background: var(--accent);
-        margin-left: 4px;
-        animation: blink 1s steps(2, start) infinite;
-      }
-      @keyframes blink {
-        to {
-          visibility: hidden;
-        }
-      }
-    </style>
-  </head>
-  <body>
-
-    <div class="fixed inset-0 grid-overlay z-0"></div>
-
-    <header class="relative z-10 flex flex-col items-center justify-center h-screen text-center p-6">
-      <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
-        DISPATCH COMMANDER
-      </h1>
-      <p class="code text-lg sm:text-xl max-w-xl mx-auto mb-8">
-        Real-time <span class="glow">global</span> emergency-dispatch <span>simulation</span> game. Coordinate police, fire & ambulance units <span class="glow">anywhere</span> on Earth.
-      </p>
-
-  
-      <pre id="cli-feed" class="code text-left text-xs xs:text-sm sm:text-base w-full max-w-full sm:max-w-2xl mx-auto bg-black/60 rounded-lg p-3 sm:p-6 border border-accent-soft overflow-x-auto whitespace-pre-wrap break-words shadow-lg h-40 xs:h-48 sm:h-56"></pre>
-    </header>
-
-
-    <section class="relative z-10 py-20 px-6 max-w-6xl mx-auto">
-      <div class="grid gap-12 md:grid-cols-3">
-
-        <div>
-          <span class="material-icons text-3xl glow mb-3" aria-hidden="true">public</span>
-          <h2 class="text-xl font-semibold mb-2">Anywhere on the Globe</h2>
-          <p class="code text-sm opacity-80">
-            Tap any city – Dispatch Commander renders real-world maps so you can
-            protect the places you know.
-          </p>
-        </div>
-
-        <div>
-          <span class="material-icons text-3xl glow mb-3" aria-hidden="true">groups</span>
-          <h2 class="text-xl font-semibold mb-2">Police · Fire · Ambulance</h2>
-          <p class="code text-sm opacity-80">
-            Balance limited resources and evolving threats across all three core
-            emergency services.
-          </p>
-        </div>
- 
-        <div>
-          <span class="material-icons text-3xl glow mb-3" aria-hidden="true">access_time</span>
-          <h2 class="text-xl font-semibold mb-2">Every Second Counts</h2>
-          <p class="code text-sm opacity-80">
-            Incidents escalate if you're too slow. Prioritise, strategise and
-            keep your city safe under pressure.
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="relative z-10 py-20 bg-gray-900/40 backdrop-blur">
-      <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-2xl font-semibold mb-10">Sneak Peek</h2>
-        <div class="flex flex-wrap justify-center gap-2 lg:flex-nowrap">
-          <img
-            src="/images/dc-screen1.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — system initialization screenshot"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="/images/dc-screen2.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — operations center UI screenshot"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="/images/dc-screen3.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — incident details screenshot"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="/images/dc-screen4.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — global incident map screenshot"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-        </div>
-        <p class="code text-xs mt-6 opacity-70">
-          *Pre-release screenshots from build v2.4.1 — UI and gameplay may change
-          before launch.*
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
+    <h2 class="text-3xl font-semibold glow text-center mb-12">About Us</h2>
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div class="panel">
+        <span class="material-icons">person</span>
+        <h3 class="font-semibold mb-2">Our Story</h3>
+        <p class="text-sm">
+          Born in 2025 from a solo developer’s passion for gaming depth, we set out to redefine what mobile titles can achieve.
         </p>
       </div>
-    </section>
-
-    <!-- ====================================== -->
-    <!-- FOLLOW / SOCIAL                        -->
-    <!-- ====================================== -->
-    <!-- <section class="relative z-10 py-24 px-6 text-center">
-      <h2 class="text-3xl font-semibold mb-4">Follow Our Build-Log</h2>
-      <p class="code max-w-lg mx-auto mb-8 opacity-90">
-        Get weekly dev updates, behind-the-scenes clips and launch news.
-      </p>
-      <div class="flex flex-wrap justify-center gap-6">
-        <a
-          href="https://twitter.com/"
-          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
-          target="_blank" rel="noopener"
-          >Twitter</a
-        >
-        <a
-          href="https://instagram.com/"
-          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
-          target="_blank" rel="noopener"
-          >Instagram</a
-        >
-        <a
-          href="https://youtube.com/"
-          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
-          target="_blank" rel="noopener"
-          >YouTube</a
-        >
+      <div class="panel">
+        <span class="material-icons">visibility</span>
+        <h3 class="font-semibold mb-2">Our Vision</h3>
+        <p class="text-sm">
+          To blur the line between mobile and PC experiences by delivering rich, challenging simulations on the go.
+        </p>
       </div>
-    </section> -->
+      <div class="panel">
+        <span class="material-icons">thumb_up</span>
+        <h3 class="font-semibold mb-2">Our Promise</h3>
+        <p class="text-sm">
+          We commit to relentless polish, creative innovation, and gameplay that captivates and challenges every time.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <footer class="relative z-10 text-center py-12 code text-xs opacity-70 space-y-4 px-6">
-      <p>
-        Dispatch Commander is a <strong>fictional simulation game</strong>. All
-        incidents, agencies and data within the app are simulated and should
-        not be used for real-world emergency response.
-      </p>
-      <p>
-        &copy; <span id="year"></span> Jobee Development •
-        <a
-          href="/privacy.html"
-          class="underline hover:text-green-300"
-          >Privacy Policy</a
-        >
-      </p>
-    </footer>
+  <!-- Footer -->
+  <footer class="text-center py-6 code text-xs opacity-70 relative z-10">
+    &copy; <span id="year"></span> Jobee Developments Ltd
+  </footer>
 
-    <script>
-
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-
-      const feedElem = document.getElementById("cli-feed");
-      const cursor = document.createElement("span");
-      cursor.className = "cursor";
-      feedElem.appendChild(cursor);
-
-      const lines = [
-        "[SYSTEM] Connecting to global dispatch network…",
-        "[OK] Secure channel established.",
-        "[INFO] Incident feed online.",
-        "[ALERT] Emergencies incoming…",
-        "> Launching soon in 2025..."
-      ];
-
-      let lineIdx = 0;
-      let charIdx = 0;
-
-      function typeNextChar() {
-        if (lineIdx >= lines.length) return; // done
-
-        const currentLine = lines[lineIdx];
-        if (charIdx < currentLine.length) {
-          cursor.insertAdjacentText("beforebegin", currentLine[charIdx]);
-          charIdx++;
-          setTimeout(typeNextChar, 30);
-        } else {
-
-          cursor.insertAdjacentHTML("beforebegin", "<br>");
-          lineIdx++;
-          charIdx = 0;
-          setTimeout(typeNextChar, 400);
-        }
-      }
-
-
-      setTimeout(typeNextChar, 600);
-    </script>
-  </body>
+  <script>
+    // Auto-update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
