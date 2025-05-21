@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- ===================================================== -->
-    <!--      DISPATCH COMMANDER – Landing Page (prod)         -->
-    <!-- ===================================================== -->
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- PRIMARY SEO / ASO -->
     <title>Dispatch Commander – Global Emergency-Dispatch Simulator | Jobee Development</title>
     <meta
       name="description"
@@ -20,7 +17,7 @@
     />
     <link rel="canonical" href="https://jobee.dev/" />
 
-    <!-- OPEN GRAPH -->
+
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jobee.dev/" />
     <meta property="og:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
@@ -30,7 +27,6 @@
     />
     <meta property="og:image" content="https://jobee.dev/og-image.png" />
 
-    <!-- TWITTER CARD -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@jobee_dev" />
     <meta name="twitter:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
@@ -40,7 +36,7 @@
     />
     <meta name="twitter:image" content="https://jobee.dev/og-image.png" />
 
-    <!-- STRUCTURED DATA -->
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -63,10 +59,10 @@
       }
     </script>
 
-    <!-- TAILWINDCSS (CDN) -->
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- FONTS & ICONS -->
+
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
@@ -76,7 +72,7 @@
       rel="stylesheet"
     />
 
-    <!-- THEME -->
+
     <style>
       :root {
         --bg: #000;
@@ -126,14 +122,9 @@
     </style>
   </head>
   <body>
-    <!-- ====================================== -->
-    <!-- DECORATIVE GRID                       -->
-    <!-- ====================================== -->
+
     <div class="fixed inset-0 grid-overlay z-0"></div>
 
-    <!-- ====================================== -->
-    <!-- HERO                                   -->
-    <!-- ====================================== -->
     <header class="relative z-10 flex flex-col items-center justify-center h-screen text-center p-6">
       <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
         DISPATCH COMMANDER
@@ -142,16 +133,14 @@
         Real-time <span class="glow">global</span> emergency-dispatch <span>simulation</span> game. Coordinate police, fire & ambulance units <span class="glow">anywhere</span> on Earth.
       </p>
 
-      <!-- Animated Command-Line Feed -->
-      <pre id="cli-feed" class="code text-left text-sm sm:text-base max-w-2xl mx-auto bg-black/60 rounded-lg p-6 border border-accent-soft overflow-hidden shadow-lg"></pre>
+  
+      <pre id="cli-feed" class="code text-left text-xs xs:text-sm sm:text-base w-full max-w-full sm:max-w-2xl mx-auto bg-black/60 rounded-lg p-3 sm:p-6 border border-accent-soft overflow-x-auto whitespace-pre-wrap break-words shadow-lg h-40 xs:h-48 sm:h-56"></pre>
     </header>
 
-    <!-- ====================================== -->
-    <!-- FEATURES                               -->
-    <!-- ====================================== -->
+
     <section class="relative z-10 py-20 px-6 max-w-6xl mx-auto">
       <div class="grid gap-12 md:grid-cols-3">
-        <!-- 1. Global Coverage -->
+
         <div>
           <span class="material-icons text-3xl glow mb-3" aria-hidden="true">public</span>
           <h2 class="text-xl font-semibold mb-2">Anywhere on the Globe</h2>
@@ -160,7 +149,7 @@
             protect the places you know.
           </p>
         </div>
-        <!-- 2. Multi-Agency -->
+
         <div>
           <span class="material-icons text-3xl glow mb-3" aria-hidden="true">groups</span>
           <h2 class="text-xl font-semibold mb-2">Police · Fire · Ambulance</h2>
@@ -169,7 +158,7 @@
             emergency services.
           </p>
         </div>
-        <!-- 3. Real-Time Decisions -->
+ 
         <div>
           <span class="material-icons text-3xl glow mb-3" aria-hidden="true">access_time</span>
           <h2 class="text-xl font-semibold mb-2">Every Second Counts</h2>
@@ -181,9 +170,7 @@
       </div>
     </section>
 
-    <!-- ====================================== -->
-    <!-- SCREENSHOTS                            -->
-    <!-- ====================================== -->
+
     <section class="relative z-10 py-20 bg-gray-900/40 backdrop-blur">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h2 class="text-2xl font-semibold mb-10">Sneak Peek</h2>
@@ -258,9 +245,6 @@
       </div>
     </section> -->
 
-    <!-- ====================================== -->
-    <!-- DISCLAIMER / FOOTER                    -->
-    <!-- ====================================== -->
     <footer class="relative z-10 text-center py-12 code text-xs opacity-70 space-y-4 px-6">
       <p>
         Dispatch Commander is a <strong>fictional simulation game</strong>. All
@@ -277,14 +261,11 @@
       </p>
     </footer>
 
-    <!-- ====================================== -->
-    <!-- SCRIPTS                                -->
-    <!-- ====================================== -->
     <script>
-      // update year automatically
+
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // animated command-line feed
+
       const feedElem = document.getElementById("cli-feed");
       const cursor = document.createElement("span");
       cursor.className = "cursor";
@@ -310,7 +291,7 @@
           charIdx++;
           setTimeout(typeNextChar, 30);
         } else {
-          // line finished – move to next after brief pause
+
           cursor.insertAdjacentHTML("beforebegin", "<br>");
           lineIdx++;
           charIdx = 0;
@@ -318,7 +299,7 @@
         }
       }
 
-      // kick off typing after slight delay
+
       setTimeout(typeNextChar, 600);
     </script>
   </body>
