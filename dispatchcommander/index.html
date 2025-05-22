@@ -122,13 +122,166 @@
           visibility: hidden;
         }
       }
+      
+      /* Navigation Styles */
+      .nav-header {
+        background: rgba(0,0,0,0.9);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+      }
+      .nav-link {
+        color: var(--fg);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nav-link:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .nav-link.active {
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .mobile-menu.active {
+        display: block;
+      }
+      
+      /* Email Signup Styles */
+      .email-signup {
+        background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0,255,85,0.05));
+        border: 2px solid var(--accent);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 500px;
+        position: relative;
+        overflow: hidden;
+      }
+      .email-signup::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        animation: shimmer 3s infinite;
+      }
+      @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+      .email-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 0.5rem;
+        color: var(--fg);
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        font-family: Inter, sans-serif;
+      }
+      .email-input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 8px rgba(0,255,85,0.3);
+      }
+      .email-button {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--accent);
+        color: #000;
+        border: none;
+        border-radius: 0.5rem;
+        font-family: "IBM Plex Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .email-button:hover {
+        background: #00cc44;
+        transform: translateY(-1px);
+      }
+      .email-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+      
+      .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--accent);
+        border-radius: 0.5rem;
+        font-family: "IBM Plex Mono", monospace;
+        text-decoration: none;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: background 0.3s;
+      }
+      .button:hover {
+        background: var(--accent-soft);
+      }
+      
+      @media (max-width: 768px) {
+        .desktop-nav { display: none; }
+        .mobile-nav { display: block; }
+      }
+      @media (min-width: 769px) {
+        .desktop-nav { display: flex; }
+        .mobile-nav { display: none; }
+      }
     </style>
   </head>
   <body>
 
     <div class="fixed inset-0 grid-overlay z-0"></div>
 
-    <header class="relative z-10 flex flex-col items-center justify-center h-screen text-center p-6">
+    <!-- Navigation Header -->
+    <nav class="nav-header fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="/" class="text-xl font-bold glow code">JOBEE.DEV</a>
+          
+          <!-- Desktop Navigation -->
+          <div class="desktop-nav items-center space-x-4">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link active">Dispatch Commander</a>
+            <a href="/support.html" class="nav-link">Support</a>
+          </div>
+          
+          <!-- Mobile Menu Button -->
+          <button class="mobile-nav text-2xl glow" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+          </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
+          <div class="flex flex-col space-y-2 pt-4">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link active">Dispatch Commander</a>
+            <a href="/support.html" class="nav-link">Support</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="relative z-10 flex flex-col items-center justify-center h-screen text-center p-6 pt-24">
       <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
         DISPATCH COMMANDER
       </h1>
@@ -136,6 +289,32 @@
         Real-time <span class="glow">global</span> emergency-dispatch <span>simulation</span> game. Coordinate police, fire & ambulance units <span class="glow">anywhere</span> on Earth.
       </p>
 
+      <!-- Email Signup Section -->
+      <div class="email-signup mb-8">
+        <div class="flex items-center justify-center mb-3">
+          <span class="material-icons text-2xl glow mr-2">rocket_launch</span>
+          <h3 class="text-lg font-semibold glow">Join the Launch List</h3>
+        </div>
+        <p class="code text-sm mb-4 opacity-80">
+          Get notified the moment Dispatch Commander goes live
+        </p>
+        <form id="email-form" onsubmit="submitEmail(event)">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="your@email.com" 
+            required 
+            class="email-input"
+            id="email-input"
+          />
+          <button type="submit" class="email-button" id="email-button">
+            Get Launch Alert
+          </button>
+        </form>
+        <p class="text-xs opacity-60 mt-2 code">
+          Exclusive early access • No spam • Unsubscribe anytime
+        </p>
+      </div>
   
       <pre id="cli-feed" class="code text-left text-xs xs:text-sm sm:text-base w-full max-w-full sm:max-w-2xl mx-auto bg-black/60 rounded-lg p-3 sm:p-6 border border-accent-soft overflow-x-auto whitespace-pre-wrap break-words shadow-lg h-40 xs:h-48 sm:h-56"></pre>
     </header>
@@ -210,7 +389,6 @@
             class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
             loading="lazy"
           />
-        </div>
         <p class="code text-xs mt-6 opacity-70">
           *Pre-release screenshots from alpha build — UI and gameplay may change
           before launch.*
@@ -320,5 +498,37 @@
 
       setTimeout(typeNextChar, 600);
     </script>
+    <script>
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('active');
+      }
+      </script>
+      <script>
+        async function submitEmail(event) {
+          event.preventDefault();
+          const btn = document.getElementById('email-button');
+          const email = document.getElementById('email-input').value.trim();
+          btn.disabled = true;
+          btn.textContent = 'Submitting…';
+        
+          try {
+            const res = await fetch('/api/subscribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email }),
+            });
+            if (!res.ok) throw new Error(await res.text());
+            alert('✅ You’re on the list! Check your inbox for confirmation.');
+          } catch (err) {
+            console.error(err);
+            alert('⚠️ Something went wrong. Please try again later.');
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Get Launch Alert';
+          }
+        }
+        </script>
+        
   </body>
 </html>
