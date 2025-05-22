@@ -163,8 +163,17 @@
         padding: 2rem;
         margin: 2rem auto;
         max-width: 500px;
+        min-width: 320px;
+        width: 90%;
         position: relative;
         overflow: hidden;
+      }
+      @media (max-width: 480px) {
+        .email-signup {
+          padding: 1.5rem;
+          margin: 1.5rem auto;
+          width: 95%;
+        }
       }
       .email-signup::before {
         content: '';
@@ -190,6 +199,8 @@
         font-size: 1rem;
         margin-bottom: 1rem;
         font-family: Inter, sans-serif;
+        min-height: 48px;
+        box-sizing: border-box;
       }
       .email-input:focus {
         outline: none;
@@ -209,6 +220,14 @@
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s;
+        min-height: 48px;
+        box-sizing: border-box;
+      }
+      @media (max-width: 480px) {
+        .email-input, .email-button {
+          font-size: 16px; /* Prevents zoom on iOS */
+          min-height: 44px;
+        }
       }
       .email-button:hover {
         background: #00cc44;
@@ -218,6 +237,29 @@
         opacity: 0.6;
         cursor: not-allowed;
         transform: none;
+      }
+      .email-message {
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.875rem;
+        text-align: center;
+        border: 1px solid;
+        transition: all 0.3s ease;
+      }
+      .email-message.hidden {
+        display: none;
+      }
+      .email-message.success {
+        color: var(--accent);
+        background: rgba(0, 255, 85, 0.1);
+        border-color: var(--accent);
+      }
+      .email-message.error {
+        color: #ff6b6b;
+        background: rgba(255, 107, 107, 0.1);
+        border-color: #ff6b6b;
       }
       
       .button {
@@ -234,6 +276,42 @@
       }
       .button:hover {
         background: var(--accent-soft);
+      }
+      
+      /* Responsive height management */
+      @media (max-height: 700px) {
+        header {
+          min-height: auto !important;
+          padding-top: 6rem !important;
+          padding-bottom: 2rem !important;
+        }
+        .email-signup {
+          margin: 1rem auto !important;
+          padding: 1.25rem !important;
+        }
+        #cli-feed {
+          height: 120px !important;
+        }
+        h1 {
+          font-size: 3rem !important;
+          margin-bottom: 1rem !important;
+        }
+        header p {
+          font-size: 1rem !important;
+          margin-bottom: 1.5rem !important;
+        }
+      }
+      
+      @media (max-height: 600px) {
+        .email-signup {
+          padding: 1rem !important;
+        }
+        #cli-feed {
+          height: 100px !important;
+        }
+        h1 {
+          font-size: 2.5rem !important;
+        }
       }
       
       @media (max-width: 768px) {
@@ -281,7 +359,7 @@
       </div>
     </nav>
 
-    <header class="relative z-10 flex flex-col items-center justify-center h-screen text-center p-6 pt-24">
+    <header class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center p-6 pt-24 pb-12">
       <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
         DISPATCH COMMANDER
       </h1>
@@ -311,6 +389,7 @@
             Get Launch Alert
           </button>
         </form>
+        <div id="email-message" class="email-message hidden"></div>
         <p class="text-xs opacity-60 mt-2 code">
           Exclusive early access • No spam • Unsubscribe anytime
         </p>
@@ -505,10 +584,27 @@
       }
       </script>
       <script>
+        function showMessage(text, type) {
+          const messageEl = document.getElementById('email-message');
+          messageEl.textContent = text;
+          messageEl.className = `email-message ${type}`;
+          
+          // Auto-hide success messages after 5 seconds
+          if (type === 'success') {
+            setTimeout(() => {
+              messageEl.className = 'email-message hidden';
+            }, 5000);
+          }
+        }
+
         async function submitEmail(event) {
           event.preventDefault();
           const btn = document.getElementById('email-button');
           const email = document.getElementById('email-input').value.trim();
+          
+          // Hide any existing messages
+          document.getElementById('email-message').className = 'email-message hidden';
+          
           btn.disabled = true;
           btn.textContent = 'Submitting…';
         
@@ -519,10 +615,11 @@
               body: JSON.stringify({ email }),
             });
             if (!res.ok) throw new Error(await res.text());
-            alert('✅ You’re on the list! Check your inbox for confirmation.');
+            showMessage('✅ You\'re on the list! Check your inbox for confirmation.', 'success');
+            document.getElementById('email-input').value = ''; // Clear the input
           } catch (err) {
             console.error(err);
-            alert('⚠️ Something went wrong. Please try again later.');
+            showMessage('⚠️ Something went wrong. Please try again later.', 'error');
           } finally {
             btn.disabled = false;
             btn.textContent = 'Get Launch Alert';
