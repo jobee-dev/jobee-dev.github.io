@@ -614,12 +614,27 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ email }),
             });
-            if (!res.ok) throw new Error(await res.text());
+            
+            if (!res.ok) {
+              const errorText = await res.text();
+              
+              // Check for specific error types
+              if (res.status === 409 || errorText.includes('already subscribed') || errorText.includes('already exists')) {
+                showMessage('📧 This email is already on our launch list! You\'ll be notified when we go live.', 'error');
+              } else if (res.status === 400) {
+                showMessage('⚠️ Please enter a valid email address.', 'error');
+              } else {
+                showMessage('⚠️ Something went wrong. Please try again later.', 'error');
+              }
+              return;
+            }
+            
             showMessage('✅ You\'re on the list! Check your inbox for confirmation.', 'success');
             document.getElementById('email-input').value = ''; // Clear the input
           } catch (err) {
             console.error(err);
-            showMessage('⚠️ Something went wrong. Please try again later.', 'error');
+            // Network errors or other unexpected errors
+            showMessage('⚠️ Connection error. Please check your internet and try again.', 'error');
           } finally {
             btn.disabled = false;
             btn.textContent = 'Get Launch Alert';
