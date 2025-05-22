@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Jobee Developments Ltd</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #d1d5db;
+      --accent: #00ff55;
+      --accent-soft: rgba(0,255,85,0.12);
+      --panel-bg: rgba(255,255,255,0.04);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .glow {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+    }
+    .grid-overlay {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+    .panel .material-icons {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    label span {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      margin-bottom: 0.25rem;
+      opacity: 0.8;
+      font-size: 0.875rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.5rem;
+      color: var(--fg);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-family: Inter, sans-serif;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 4px var(--accent-soft);
+    }
+    .button {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem;
+      border: 2px solid var(--accent);
+      border-radius: 0.5rem;
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      transition: background 0.3s;
+      margin-top: 0.5rem;
+    }
+    .button:hover {
+      background: var(--accent-soft);
+    }
+    a.underline {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+  <div class="py-16 px-6">
+    <h1 class="text-4xl sm:text-5xl font-extrabold glow text-center mb-8">Support & Contact</h1>
+    <div class="panel">
+      <div class="flex flex-col items-center mb-6">
+        <span class="material-icons">support_agent</span>
+        <p class="text-center mb-2">
+          Have questions, bug reports, or need assistance? Drop us a line below or email us directly at
+          <a href="mailto:support@jobee.dev" class="underline">support@jobee.dev</a>.
+        </p>
+      </div>
+      <form action="https://formspree.io/f/xanozegv" method="POST" class="space-y-4">
+        <label>
+          <span>Your Email</span>
+          <input type="email" name="_replyto" required placeholder="you@example.com" />
+        </label>
+        <label>
+          <span>Subject</span>
+          <input type="text" name="subject" required placeholder="Bug report, question…" />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="5" required placeholder="Describe what’s on your mind…"></textarea>
+        </label>
+        <!-- honeypot -->
+        <input type="text" name="_gotcha" style="display:none" />
+        <button type="submit" class="button">Send Message</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
