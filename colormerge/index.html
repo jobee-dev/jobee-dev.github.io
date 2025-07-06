@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <title>Colour Merge – Dreamy Physics Puzzle Game</title>
+    <meta
+      name="description"
+      content="Dive into Colour Merge—a hyper-casual puzzle game where color, physics, and strategy collide! Merge vibrant balls, create dazzling colors, and master the rainbow."
+    />
+    <meta
+      name="keywords"
+      content="colour merge, color merge, physics puzzle, merge game, casual game, mobile game, 2048, puzzle app, jobee development"
+    />
+    <link rel="canonical" href="https://jobee.dev/colour_merge.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jobee.dev/colour_merge.html" />
+    <meta property="og:title" content="Colour Merge – Dreamy Physics Puzzle Game" />
+    <meta
+      property="og:description"
+      content="Merge vibrant balls, create dazzling colors, and master the rainbow in this addictive physics puzzle game for iOS & Android."
+    />
+    <meta property="og:image" content="https://i.imgur.com/G5g2mJc.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@jobee_dev" />
+    <meta name="twitter:title" content="Colour Merge – Dreamy Physics Puzzle Game" />
+    <meta
+      name="twitter:description"
+      content="Merge vibrant balls, create dazzling colors, and master the rainbow in this addictive physics puzzle game."
+    />
+    <meta name="twitter:image" content="https://i.imgur.com/G5g2mJc.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "Colour Merge",
+        "operatingSystem": "iOS",
+        "applicationCategory": "GameApplication",
+        "genre": "Puzzle",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Jobee Development",
+          "url": "https://jobee.dev"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD"
+        },
+        "description": "Colour Merge is a hyper-casual mobile puzzle game that fuses color-matching merge mechanics with realistic physics, wrapped in a dreamy, minimalist aesthetic."
+      }
+    </script>
+    
+    <!-- Tailwind CSS Script - Required for header layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Page-specific variables */
+        --gradient-start: #667eea;
+        --gradient-mid: #764ba2;
+        --gradient-end: #f093fb;
+        --text-primary: rgba(255, 255, 255, 0.9);
+        --text-secondary: rgba(255, 255, 255, 0.7);
+        --text-muted: rgba(255, 255, 255, 0.4);
+        --glass-surface: rgba(255, 255, 255, 0.15);
+        --subtle-surface: rgba(255, 255, 255, 0.1);
+        --shadow-color: rgba(46, 38, 77, 0.3);
+        
+        /* Spacing System */
+        --space-sm: 8px;
+        --space-md: 16px;
+        --space-lg: 24px;
+        --space-xl: 40px;
+        --space-xxl: 60px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--gradient-mid);
+        color: var(--text-primary);
+        overflow-x: hidden;
+      }
+      
+      .gradient-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+        z-index: -2;
+      }
+
+      /* START: HEADER STYLES (THEMED FOR THIS PAGE) */
+      .nav-header {
+        background: rgba(27, 27, 46, 0.4); /* Dark purple glass */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .code {
+        font-family: "IBM Plex Mono", monospace;
+      }
+      .glow {
+        color: #fff; /* Bright text for glow effect */
+        text-shadow: 0 0 8px var(--gradient-end), 0 0 16px var(--gradient-end);
+      }
+      .nav-link {
+        color: var(--text-secondary); /* Use page's secondary text color */
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nav-link:hover {
+        color: var(--text-primary);
+        background: var(--subtle-surface);
+      }
+      .nav-link.active {
+        color: #fff; /* Make active text fully white for pop */
+        background: var(--glass-surface);
+      }
+      /* END: HEADER STYLES */
+
+      .mobile-menu { display: none; }
+      .mobile-menu.active { display: block; }
+
+      @media (max-width: 768px) {
+        .desktop-nav { display: none; }
+        .mobile-nav { display: block; }
+      }
+      @media (min-width: 769px) {
+        .desktop-nav { display: flex; }
+        .mobile-nav { display: none; }
+      }
+
+      /* Main Content & Sections (Page-Specific Theme) */
+      main {
+        padding: 0 var(--space-lg);
+      }
+      section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: var(--space-xxl) 0;
+      }
+
+      .hero {
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-top: 100px;
+        position: relative;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        letter-spacing: 4px;
+        text-transform: lowercase;
+        margin-bottom: var(--space-md);
+        animation: fadeIn 1s ease-out, float 8s ease-in-out infinite;
+      }
+      .hero p {
+        font-size: 1.125rem;
+        font-weight: 400;
+        max-width: 600px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: var(--space-xl);
+        animation: fadeIn 1s ease-out forwards;
+        animation-delay: 0.2s;
+        opacity: 0;
+      }
+      .hero-screenshot {
+        width: 250px;
+        height: auto;
+        border-radius: 40px;
+        box-shadow: 0 20px 40px var(--shadow-color);
+        animation: fadeIn 1s ease-out forwards, float 8s ease-in-out infinite;
+        opacity: 0;
+        animation-delay: 0.4s;
+        margin-top: var(--space-xl);
+        border: 4px solid rgba(255,255,255,0.2);
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: var(--space-md);
+        margin-top: var(--space-lg);
+        animation: fadeIn 1s ease-out forwards;
+        animation-delay: 0.6s;
+        opacity: 0;
+      }
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 28px;
+        background-color: var(--glass-surface);
+        color: var(--text-primary);
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+      }
+      .cta-button:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      .cta-button .material-icons {
+        margin-right: var(--space-sm);
+        font-size: 24px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: var(--space-xl);
+        letter-spacing: 2px;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--space-lg);
+      }
+      .feature-card {
+        background: var(--glass-surface);
+        padding: var(--space-lg);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease;
+        animation: float 8s ease-in-out infinite;
+      }
+      .feature-card:hover { transform: translateY(-10px) scale(1.02); }
+      .feature-icon {
+        background: var(--subtle-surface);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-md);
+      }
+      .feature-icon .material-icons { font-size: 32px; color: #fff; }
+      .feature-card h3 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: var(--space-sm);
+      }
+      .feature-card p {
+        color: var(--text-secondary);
+        font-weight: 400;
+        line-height: 1.5;
+      }
+      
+      .gallery-container {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-lg);
+        flex-wrap: wrap;
+      }
+      .gallery-container img {
+        width: 240px;
+        height: auto;
+        border-radius: 30px;
+        box-shadow: 0 15px 30px var(--shadow-color);
+        border: 3px solid rgba(255,255,255,0.15);
+        transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        animation: float 8s ease-in-out infinite;
+      }
+      .gallery-container img:hover {
+        transform: scale(1.05) translateY(-15px);
+        z-index: 10;
+      }
+      
+      .final-cta { text-align: center; }
+      .final-cta h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: var(--space-lg);
+        letter-spacing: 2px;
+      }
+
+      footer {
+        text-align: center;
+        padding: var(--space-xl) var(--space-lg);
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        background: rgba(0,0,0,0.2);
+      }
+      footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s;
+      }
+      footer a:hover {
+        color: #fff;
+        border-bottom-color: var(--text-secondary);
+      }
+
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-12px); }
+        100% { transform: translateY(0px); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 { font-size: 2rem; }
+        .hero p { font-size: 1rem; }
+        .cta-buttons { flex-direction: column; align-items: center; }
+        .section-title, .final-cta h2 { font-size: 1.75rem; }
+        section { padding: var(--space-xl) 0; }
+        .gallery-container img { width: 180px; }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="gradient-background"></div>
+
+    <!-- Navigation Header -->
+    <nav class="nav-header fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="/" class="text-xl font-bold glow code">JOBEE.DEV</a>
+          
+          <!-- Desktop Navigation -->
+          <div class="desktop-nav items-center space-x-4">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+            <a href="#" class="nav-link active">Colour Merge</a>
+            <a href="/support.html" class="nav-link">Support</a>
+          </div>
+          
+          <!-- Mobile Menu Button -->
+          <button class="mobile-nav text-2xl glow" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+          </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
+          <div class="flex flex-col space-y-2 pt-4">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+            <a href="#" class="nav-link active">Colour Merge</a>
+            <a href="/support.html" class="nav-link">Support</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>colour merge</h1>
+            <p>
+                A hyper-casual puzzle game that fuses color-matching merge mechanics with realistic physics, wrapped in a dreamy, minimalist aesthetic.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button" style="cursor: default;"><span class="material-icons">apple</span> App Store - Coming Soon</a>
+            </div>
+            <img src="images/home.png" alt="Colour Merge home screen on a phone" class="hero-screenshot" />
+        </header>
+
+        <!-- Features Section -->
+        <section id="features">
+            <h2 class="section-title">Why You'll Love Colour Merge</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><span class="material-icons">device_hub</span></div>
+                    <h3>Addictive Merge Gameplay</h3>
+                    <p>Tap to drop, match colors, and merge your way to higher scores. Simple to learn, impossible to put down!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><span class="material-icons">bubble_chart</span></div>
+                    <h3>Realistic Physics Fun</h3>
+                    <p>Every ball bounces, rolls, and stacks with lifelike motion, making each game unique and full of surprises.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><span class="material-icons">palette</span></div>
+                    <h3>Dreamy Minimalist Design</h3>
+                    <p>Enjoy a clean interface with soft gradients, glassy effects, and smooth animations designed for visual delight.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><span class="material-icons">all_inclusive</span></div>
+                    <h3>Endless Challenge</h3>
+                    <p>No levels, no timers. Just you and your strategy. How high can you score before the board overflows?</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><span class="material-icons">bolt</span></div>
+                    <h3>Power-Ups & Combos</h3>
+                    <p>Unleash Bombs, Rainbow Balls, and more to clear space and trigger epic chain reactions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><span class="material-icons">public</span></div>
+                    <h3>Global Leaderboards</h3>
+                    <p>Compete with friends and players worldwide. Share your high scores with a single tap!</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2 class="section-title">A Glimpse of the Dream</h2>
+            <div class="gallery-container">
+                <img src="https://i.imgur.com/G5g2mJc.png" alt="Colour Merge Home Screen" />
+                <img src="https://i.imgur.com/lM5tE81.png" alt="Colour Merge Shop Screen" />
+                <img src="https://i.imgur.com/XlY5M3P.png" alt="Colour Merge Quests Screen" />
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta">
+            <h2>Download now and start merging your way to the top!</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a href="#" class="cta-button" style="cursor: default;"><span class="material-icons">apple</span> Coming soon to App Store</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 text-center py-12 text-xs space-y-4 px-6">
+      <p>
+        © <span id="year"></span> Jobee Development •
+        <a
+          href="/colormerge/privacy.html"
+          >Privacy Policy</a
+        >
+      </p>
+    </footer>
+
+    <script>
+      // Update copyright year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('active');
+      }
+    </script>
+        
+  </body>
+</html>

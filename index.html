@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <link rel="icon" href="/favicon.ico" />
 
   <meta charset="UTF-8" />
@@ -48,7 +48,9 @@
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      transition: background 0.3s;
+      transition: all 0.3s;
+      min-width: 300px; /* Ensure buttons have same width */
+      text-align: center;
     }
     .button:hover {
       background: var(--accent-soft);
@@ -111,73 +113,29 @@
       display: block;
     }
     
-    /* Email Signup Styles */
-    .email-signup {
-      background: linear-gradient(135deg, var(--panel-bg), rgba(0,255,85,0.05));
-      border: 2px solid var(--accent);
-      border-radius: 1rem;
-      padding: 2rem;
-      margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
+    /* NEW: Styles for the Colour Merge themed button */
+    .button-merge {
+      color: #f093fb; /* Light purple/pink from the gradient */
+      border: 2px solid transparent; /* Make border transparent to show background gradient */
+      background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                  linear-gradient(to right, #667eea, #f093fb) border-box;
+      text-shadow: 0 0 6px #f093fb; /* Matching purple glow */
     }
-    .email-signup::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      animation: shimmer 3s infinite;
-    }
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-    .email-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 0.5rem;
-      color: var(--fg);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      font-family: Inter, sans-serif;
-    }
-    .email-input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 8px rgba(0,255,85,0.3);
-    }
-    .email-button {
-      width: 100%;
-      padding: 0.75rem;
-      background: var(--accent);
-      color: #000;
-      border: none;
-      border-radius: 0.5rem;
-      font-family: "IBM Plex Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .email-button:hover {
-      background: #00cc44;
-      transform: translateY(-1px);
-    }
-    .email-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
+
+    .button-merge:hover {
+      color: #fff; /* Brighter text on hover */
+      /* Apply a semi-transparent purple background on hover, keeping the gradient border */
+      background: linear-gradient(rgba(118, 75, 162, 0.25), rgba(118, 75, 162, 0.25)) padding-box,
+                  linear-gradient(to right, #667eea, #f093fb) border-box;
+      text-shadow: 0 0 8px #f093fb;
     }
     
     @media (max-width: 768px) {
       .desktop-nav { display: none; }
       .mobile-nav { display: block; }
+      .button {
+        min-width: 250px;
+      }
     }
     @media (min-width: 769px) {
       .desktop-nav { display: flex; }
@@ -200,6 +158,7 @@
         <div class="desktop-nav items-center space-x-4">
           <a href="/" class="nav-link active">Home</a>
           <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+          <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
           <a href="/support.html" class="nav-link">Support</a>
         </div>
         
@@ -212,31 +171,33 @@
       <!-- Mobile Navigation -->
       <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
         <div class="flex flex-col space-y-2 pt-4">
-          <a href="/" class="nav-link active">Home</a>
-          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
-          <a href="/support.html" class="nav-link">Support</a>
+            <a href="/" class="nav-link active">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+            <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+            <a href="/support.html" class="nav-link">Support</a>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <header class="flex flex-col items-center justify-center text-center h-screen p-6 relative z-10">
+  <header class="flex flex-col items-center justify-center text-center min-h-screen p-6 relative z-10">
     <h1 class="text-5xl sm:text-7xl font-extrabold glow mb-4">Jobee Developments Ltd</h1>
     <p class="text-lg sm:text-xl code mb-8 max-w-lg">
       Pioneering deep, strategic mobile simulations with PC-grade polish.
     </p>
     
-    <!-- Email Signup Section -->
-    
-    
-    <div class="flex flex-col sm:flex-row gap-4">
+    <!-- Action Buttons Container -->
+    <div class="flex flex-col items-center gap-4 mt-8">
       <a href="/dispatchcommander/index.html" class="button">Launch Dispatch Commander</a>
+      <a href="/colormerge/index.html" class="button button-merge">Enter Colour Merge</a>
     </div>
-    <br>
-    <div> 
-      <a href="#about" class="button">Learn About Us</a>
-      <a href="/support.html" class="button">Support</a>
+
+    <!-- Secondary Links -->
+    <div class="mt-8"> 
+      <a href="#about" class="underline hover:text-gray-300 transition-colors">Learn About Us</a>
+      <span class="mx-2 opacity-50">|</span>
+      <a href="/support.html" class="underline hover:text-gray-300 transition-colors">Support</a>
     </div>
   </header>
 
@@ -270,7 +231,7 @@
 
   <!-- Footer -->
   <footer class="text-center py-6 code text-xs opacity-70 relative z-10">
-    &copy; <span id="year"></span> Jobee Developments Ltd
+    © <span id="year"></span> Jobee Developments Ltd
   </footer>
 
   <script>
@@ -281,64 +242,6 @@
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('active');
-    }
-    
-    // Email form submission
-    async function submitEmail(event) {
-      event.preventDefault();
-      
-      const form = document.getElementById('email-form');
-      const button = document.getElementById('email-button');
-      const input = document.getElementById('email-input');
-      const email = input.value;
-      
-      // Disable form
-      button.disabled = true;
-      button.textContent = 'Submitting...';
-      
-      try {
-        // Brevo API endpoint - replace with your actual list ID
-        const response = await fetch('https://api.brevo.com/v3/contacts', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'api-key': 'YOUR_BREVO_API_KEY' // Replace with your actual API key
-          },
-          body: JSON.stringify({
-            email: email,
-            listIds: [1], // Replace with your actual list ID
-            attributes: {
-              SIGNUP_SOURCE: 'Main Website',
-              SIGNUP_DATE: new Date().toISOString()
-            }
-          })
-        });
-        
-        if (response.ok || response.status === 400) {
-          // Success or already exists
-          button.textContent = 'Thanks!';
-          button.style.background = '#00cc44';
-          input.value = '';
-          
-          // Show success message
-          setTimeout(() => {
-            button.textContent = 'Notify Me';
-            button.disabled = false;
-            button.style.background = '';
-          }, 3000);
-        } else {
-          throw new Error('Subscription failed');
-        }
-      } catch (error) {
-        console.error('Email signup error:', error);
-        button.textContent = 'Try Again';
-        button.disabled = false;
-        
-        // Reset after 2 seconds
-        setTimeout(() => {
-          button.textContent = 'Notify Me';
-        }, 2000);
-      }
     }
     
     // Close mobile menu when clicking outside
