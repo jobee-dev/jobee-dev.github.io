@@ -12,7 +12,7 @@
     <title>Dispatch Commander – Global Emergency-Dispatch Simulator | Jobee Development</title>
     <meta
       name="description"
-      content="Dispatch Commander is a real-time global emergency-dispatch simulation game for iOS & Android. Coordinate police, fire & ambulance units anywhere on earth. Coming soon from Jobee Development."
+      content="Dispatch Commander is a real-time global emergency-dispatch simulation game for iOS & Android. Coordinate police, fire & ambulance units anywhere on earth. Available now from Jobee Development."
     />
     <meta
       name="keywords"
@@ -26,7 +26,7 @@
     <meta property="og:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
     <meta
       property="og:description"
-      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Launching soon."
+      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Available now."
     />
     <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/dispatchcommander" />
 
@@ -35,7 +35,7 @@
     <meta name="twitter:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
     <meta
       name="twitter:description"
-      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Launching soon."
+      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Available now."
     />
     <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/dispatchcommander" />
 
@@ -154,112 +154,97 @@
       .mobile-menu.active {
         display: block;
       }
-      
-      /* Email Signup Styles */
-      .email-signup {
-        background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0,255,85,0.05));
-        border: 2px solid var(--accent);
-        border-radius: 1rem;
-        padding: 2rem;
-        margin: 2rem auto;
-        max-width: 500px;
-        min-width: 320px;
-        width: 90%;
+
+      /* UPDATED: Cyberpunk Button with Glitch Animation */
+      @keyframes glitch-anim {
+        10% { clip-path: polygon(0 2%, 100% 2%, 100% 98%, 0 98%); }
+        20% { clip-path: polygon(0 78%, 100% 78%, 100% 100%, 0 100%); }
+        30% { clip-path: polygon(0 44%, 100% 44%, 100% 56%, 0 56%); }
+        40% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+        50% { clip-path: polygon(0 40%, 100% 40%, 100% 85%, 0 85%); }
+        60% { clip-path: polygon(0 63%, 100% 63%, 100% 80%, 0 80%); }
+        70% { clip-path: var(--clip); }
+        80% { clip-path: polygon(0 55%, 100% 55%, 100% 65%, 0 65%); }
+        90% { clip-path: polygon(0 85%, 100% 85%, 100% 95%, 0 95%); }
+        100% { clip-path: var(--clip); }
+      }
+      @keyframes glitch-anim2 {
+        0% { clip-path: var(--clip); }
+        45% { clip-path: var(--clip); }
+        50% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+        55% { clip-path: var(--clip); }
+        100% { clip-path: var(--clip); }
+      }
+      .cybr-btn {
+        --color: hsl(0, 0%, 100%);
+        --shadow-primary-hue: 141; /* Site green */
+        --font-size: 20px;
+        --border: 3px;
+        --clip: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 70%);
+        
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--color);
+        cursor: pointer;
+        background: transparent;
+        text-transform: uppercase;
+        font-size: var(--font-size);
+        outline: transparent;
+        letter-spacing: 2px;
         position: relative;
-        overflow: hidden;
+        font-weight: 700;
+        border: 0;
+        min-width: 0;
+        width: 100%;
+        max-width: 330px;
+        height: auto;
+        line-height: 1.2;
+        padding: 1rem 1.5rem;
+        word-break: break-word;
+        white-space: normal;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 1.5rem;
       }
-      @media (max-width: 480px) {
-        .email-signup {
-          padding: 1.5rem;
-          margin: 1.5rem auto;
-          width: 95%;
-        }
+      .cybr-btn span[aria-hidden] {
+        display: inline-block;
+        animation: blink 1s steps(2, start) infinite;
       }
-      .email-signup::before {
+      .cybr-btn:after,
+      .cybr-btn:before {
         content: '';
         position: absolute;
         top: 0;
-        left: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        animation: shimmer 3s infinite;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        clip-path: var(--clip);
+        z-index: -1;
       }
-      @keyframes shimmer {
-        0% { left: -100%; }
-        100% { left: 100%; }
+      .cybr-btn:before {
+        background: hsl(var(--shadow-primary-hue), 90%, 50%);
+        transform: translate(var(--border), 0);
       }
-      .email-input {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 0.5rem;
-        color: var(--fg);
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        font-family: Inter, sans-serif;
-        min-height: 48px;
-        box-sizing: border-box;
+      .cybr-btn:after {
+        background: rgba(0,0,0,0.5);
       }
-      .email-input:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 8px rgba(0,255,85,0.3);
-      }
-      .email-button {
-        width: 100%;
-        padding: 0.75rem;
-        background: var(--accent);
-        color: #000;
-        border: none;
-        border-radius: 0.5rem;
-        font-family: "IBM Plex Mono", monospace;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        min-height: 48px;
-        box-sizing: border-box;
-      }
-      @media (max-width: 480px) {
-        .email-input, .email-button {
-          font-size: 16px; /* Prevents zoom on iOS */
-          min-height: 44px;
-        }
-      }
-      .email-button:hover {
-        background: #00cc44;
-        transform: translateY(-1px);
-      }
-      .email-button:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
-      }
-      .email-message {
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
-        margin-top: 1rem;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.875rem;
-        text-align: center;
-        border: 1px solid;
-        transition: all 0.3s ease;
-      }
-      .email-message.hidden {
+      .cybr-btn__glitch {
+        position: absolute;
+        top: calc(var(--border) * -1);
+        left: calc(var(--border) * -1);
+        right: calc(var(--border) * -1);
+        bottom: calc(var(--border) * -1);
+        background: hsl(var(--shadow-primary-hue), 90%, 50%);
+        clip-path: var(--clip);
+        z-index: -1;
         display: none;
       }
-      .email-message.success {
-        color: var(--accent);
-        background: rgba(0, 255, 85, 0.1);
-        border-color: var(--accent);
+      .cybr-btn:hover .cybr-btn__glitch {
+        display: block;
+        animation: glitch-anim 1s infinite;
       }
-      .email-message.error {
-        color: #ff6b6b;
-        background: rgba(255, 107, 107, 0.1);
-        border-color: #ff6b6b;
+      .cybr-btn:hover:before {
+        animation: glitch-anim2 1s infinite linear alternate-reverse;
       }
       
       .button {
@@ -285,10 +270,6 @@
           padding-top: 6rem !important;
           padding-bottom: 2rem !important;
         }
-        .email-signup {
-          margin: 1rem auto !important;
-          padding: 1.25rem !important;
-        }
         #cli-feed {
           height: 120px !important;
         }
@@ -303,9 +284,6 @@
       }
       
       @media (max-height: 600px) {
-        .email-signup {
-          padding: 1rem !important;
-        }
         #cli-feed {
           height: 100px !important;
         }
@@ -321,6 +299,13 @@
       @media (min-width: 769px) {
         .desktop-nav { display: flex; }
         .mobile-nav { display: none; }
+      }
+      @media (max-width: 500px) {
+        .cybr-btn {
+          font-size: 1rem;
+          padding: 0.75rem 1rem;
+          max-width: 100%;
+        }
       }
     </style>
   </head>
@@ -369,33 +354,11 @@
         Real-time <span class="glow">global</span> emergency-dispatch <span>simulation</span> game. Coordinate police, fire & ambulance units <span class="glow">anywhere</span> on Earth.
       </p>
 
-      <!-- Email Signup Section -->
-      <div class="email-signup mb-8">
-        <div class="flex items-center justify-center mb-3">
-          <span class="material-icons text-2xl glow mr-2">rocket_launch</span>
-          <h3 class="text-lg font-semibold glow">Join the Launch List</h3>
-        </div>
-        <p class="code text-sm mb-4 opacity-80">
-          Get notified the moment Dispatch Commander goes live
-        </p>
-        <form id="email-form" onsubmit="submitEmail(event)">
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="your@email.com" 
-            required 
-            class="email-input"
-            id="email-input"
-          />
-          <button type="submit" class="email-button" id="email-button">
-            Get Launch Alert
-          </button>
-        </form>
-        <div id="email-message" class="email-message hidden"></div>
-        <p class="text-xs opacity-60 mt-2 code">
-          Exclusive early access • No spam • Unsubscribe anytime
-        </p>
-      </div>
+      <!-- UPDATED: App Store Button with animation elements -->
+      <a href="https://apps.apple.com/gb/app/dispatch-commander/id6740238633" class="cybr-btn" role="button">
+        Download Now<span aria-hidden>_</span>On The Apple App Store
+        <span aria-hidden class="cybr-btn__glitch"></span>
+      </a>
   
       <pre id="cli-feed" class="code text-left text-xs xs:text-sm sm:text-base w-full max-w-full sm:max-w-2xl mx-auto bg-black/60 rounded-lg p-3 sm:p-6 border border-accent-soft overflow-x-auto whitespace-pre-wrap break-words shadow-lg h-40 xs:h-48 sm:h-56"></pre>
     </header>
@@ -436,91 +399,99 @@
 
     <section class="relative z-10 py-20 bg-gray-900/40 backdrop-blur">
       <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-2xl font-semibold mb-10">Sneak Peek</h2>
+        <h2 class="text-2xl font-semibold mb-10">Promo Pics</h2>
         <div class="flex flex-wrap justify-center gap-2 lg:flex-nowrap">
           <img
-            src="images/dc-screen1.png"
+            src="images/1.png"
             width="220"
             height="440"
-            alt="Dispatch Commander — system initialization screenshot"
+            alt="Dispatch Commander — Command a city"
             class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
             loading="lazy"
           />
           <img
-            src="images/dc-screen2.png"
+            src="images/2.png"
             width="220"
             height="440"
-            alt="Dispatch Commander — operations center UI screenshot"
+            alt="Dispatch Commander — Track every unit"
             class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
             loading="lazy"
           />
           <img
-            src="images/dc-screen3.png"
+            src="images/3.png"
             width="220"
             height="440"
-            alt="Dispatch Commander — incident details screenshot"
+            alt="Dispatch Commander — Deploy the perfect response"
             class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
             loading="lazy"
           />
           <img
-            src="images/dc-screen4.png"
+            src="images/4.png"
             width="220"
             height="440"
             alt="Dispatch Commander — global incident map screenshot"
             class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
             loading="lazy"
           />
-        <p class="code text-xs mt-6 opacity-70">
-          *Pre-release screenshots from alpha build — UI and gameplay may change
-          before launch.*
-        </p>
+          <img
+            src="images/4.png"
+            width="220"
+            height="440"
+            alt="Dispatch Commander — Upgrade your stations"
+            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
+            loading="lazy"
+          />
+          <img
+            src="images/5.png"
+            width="220"
+            height="440"
+            alt="Dispatch Commander — Master logistics & budget"
+            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
+            loading="lazy"
+          />
+          <img
+            src="images/6.png"
+            width="220"
+            height="440"
+            alt="Dispatch Commander — Operate worldwide"
+            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
+            loading="lazy"
+          />
+          <img
+            src="images/7.png"
+            width="220"
+            height="440"
+            alt="Dispatch Commander — Try the new custody cells update"
+            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
+            loading="lazy"
+          />
+          <img
+            src="images/8.png"
+            width="220"
+            height="440"
+            alt="Dispatch Commander — Transfer patients to hospital"
+            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
+            loading="lazy"
+          />
+
+        </div>
       </div>
 
       <!-- Feedback buttons -->
-<div class="flex flex-wrap gap-4 justify-center mt-12">
-  <a
-    href="https://github.com/jobee-dev/jobee-dev.github.io/issues/new?labels=bug&template=bug_report.md"
-    class="button"
-    >Report a Bug</a
-  >
-  <a
-    href="https://github.com/jobee-dev/jobee-dev.github.io/issues/new?labels=enhancement&template=feature_request.md"
-    class="button"
-    >Suggest a Feature</a
-  >
-</div>
-
-    </section>
-
-    <!-- ====================================== -->
-    <!-- FOLLOW / SOCIAL                        -->
-    <!-- ====================================== -->
-    <!-- <section class="relative z-10 py-24 px-6 text-center">
-      <h2 class="text-3xl font-semibold mb-4">Follow Our Build-Log</h2>
-      <p class="code max-w-lg mx-auto mb-8 opacity-90">
-        Get weekly dev updates, behind-the-scenes clips and launch news.
-      </p>
-      <div class="flex flex-wrap justify-center gap-6">
+      <div class="flex flex-wrap gap-4 justify-center mt-12">
         <a
-          href="https://twitter.com/"
-          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
-          target="_blank" rel="noopener"
-          >Twitter</a
+          href="https://github.com/jobee-dev/jobee-dev.github.io/issues/new?labels=bug&template=bug_report.md"
+          class="button"
+          >Report a Bug</a
         >
         <a
-          href="https://instagram.com/"
-          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
-          target="_blank" rel="noopener"
-          >Instagram</a
-        >
-        <a
-          href="https://youtube.com/"
-          class="code px-6 py-3 border border-accent rounded-md glow hover:bg-accent-soft transition"
-          target="_blank" rel="noopener"
-          >YouTube</a
+          href="https://github.com/jobee-dev/jobee-dev.github.io/issues/new?labels=enhancement&template=feature_request.md"
+          class="button"
+          >Suggest a Feature</a
         >
       </div>
-    </section> -->
+
+    </section>
 
     <footer class="relative z-10 text-center py-12 code text-xs opacity-70 space-y-4 px-6">
       <p>
@@ -529,7 +500,7 @@
         not be used for real-world emergency response.
       </p>
       <p>
-        &copy; <span id="year"></span> Jobee Development •
+        © <span id="year"></span> Jobee Development •
         <a
           href="/privacy.html"
           class="underline hover:text-green-300"
@@ -539,9 +510,7 @@
     </footer>
 
     <script>
-
       document.getElementById("year").textContent = new Date().getFullYear();
-
 
       const feedElem = document.getElementById("cli-feed");
       const cursor = document.createElement("span");
@@ -552,8 +521,8 @@
         "[SYSTEM] Connecting to global dispatch network…",
         "[OK] Secure channel established.",
         "[INFO] Incident feed online.",
-        "[ALERT] Emergencies incoming…",
-        "> Launching soon in 2025..."
+        "[ALERT] Emergencies available in your area.",
+        "> Dispatch Commander is now live."
       ];
 
       let lineIdx = 0;
@@ -568,7 +537,6 @@
           charIdx++;
           setTimeout(typeNextChar, 30);
         } else {
-
           cursor.insertAdjacentHTML("beforebegin", "<br>");
           lineIdx++;
           charIdx = 0;
@@ -576,73 +544,13 @@
         }
       }
 
-
       setTimeout(typeNextChar, 600);
-    </script>
-    <script>
+
       function toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
         menu.classList.toggle('active');
       }
-      </script>
-      <script>
-        function showMessage(text, type) {
-          const messageEl = document.getElementById('email-message');
-          messageEl.textContent = text;
-          messageEl.className = `email-message ${type}`;
-          
-          // Auto-hide success messages after 5 seconds
-          if (type === 'success') {
-            setTimeout(() => {
-              messageEl.className = 'email-message hidden';
-            }, 5000);
-          }
-        }
-
-        async function submitEmail(event) {
-          event.preventDefault();
-          const btn = document.getElementById('email-button');
-          const email = document.getElementById('email-input').value.trim();
-          
-          // Hide any existing messages
-          document.getElementById('email-message').className = 'email-message hidden';
-          
-          btn.disabled = true;
-          btn.textContent = 'Submitting…';
-        
-          try {
-            const res = await fetch('/api/subscribe', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email }),
-            });
-            
-            if (!res.ok) {
-              const errorText = await res.text();
-              
-              // Check for specific error types
-              if (res.status === 409 || errorText.includes('already subscribed') || errorText.includes('already exists')) {
-                showMessage('📧 This email is already on our launch list! You\'ll be notified when we go live.', 'error');
-              } else if (res.status === 400) {
-                showMessage('⚠️ Please enter a valid email address.', 'error');
-              } else {
-                showMessage('⚠️ Something went wrong. Please try again later.', 'error');
-              }
-              return;
-            }
-            
-            showMessage('✅ You\'re on the list! Check your inbox for confirmation.', 'success');
-            document.getElementById('email-input').value = ''; // Clear the input
-          } catch (err) {
-            console.error(err);
-            // Network errors or other unexpected errors
-            showMessage('⚠️ Connection error. Please check your internet and try again.', 'error');
-          } finally {
-            btn.disabled = false;
-            btn.textContent = 'Get Launch Alert';
-          }
-        }
-        </script>
+    </script>
         
   </body>
 </html>
