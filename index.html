@@ -129,6 +129,22 @@
                   linear-gradient(to right, #667eea, #f093fb) border-box;
       text-shadow: 0 0 8px #f093fb;
     }
+
+    /* NEW: HackerSim themed button and header CTA */
+    .button-hs {
+      color: #00e5ff;
+      border: 2px solid transparent;
+      background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                  linear-gradient(90deg, #00e5ff, #ff00e5, #00e5ff) border-box;
+      text-shadow: 0 0 6px #00e5ff;
+    }
+    .button-hs:hover {
+      color: #fff;
+      background: linear-gradient(rgba(0,229,255,0.18), rgba(255,0,229,0.18)) padding-box,
+                  linear-gradient(90deg, #00e5ff, #ff00e5, #00e5ff) border-box;
+      text-shadow: 0 0 8px #00e5ff;
+    }
+    
     
     @media (max-width: 768px) {
       .desktop-nav { display: none; }
@@ -159,6 +175,7 @@
           <a href="/" class="nav-link active">Home</a>
           <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
           <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+          <a href="/hackersim/index.html" class="nav-link">HackerSim</a>
           <a href="/support.html" class="nav-link">Support</a>
         </div>
         
@@ -174,6 +191,7 @@
             <a href="/" class="nav-link active">Home</a>
             <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
             <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+            <a href="/hackersim/index.html" class="nav-link">HackerSim</a>
             <a href="/support.html" class="nav-link">Support</a>
         </div>
       </div>
@@ -188,9 +206,10 @@
     </p>
     
     <!-- Action Buttons Container -->
-    <div class="flex flex-col items-center gap-4 mt-8">
+      <div class="flex flex-col items-center gap-4 mt-8">
       <a href="/dispatchcommander/index.html" class="button">Launch Dispatch Commander</a>
       <a href="/colormerge/index.html" class="button button-merge">Enter Colour Merge</a>
+        <a href="/hackersim/index.html" class="button button-hs">Enter HackerSim</a>
     </div>
 
     <!-- Secondary Links -->

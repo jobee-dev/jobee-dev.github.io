@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="/favicon.ico" />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HackerSim – Cyber Strategy Simulation | Jobee Development</title>
+    <meta
+      name="description"
+      content="Enter the digital underground. Build a cyber empire through strategic hacking, real‑time markets, mining, botnets, research, and a living Heat system."
+    />
+    <meta
+      name="keywords"
+      content="hackersim, hacking simulator, cyber strategy game, mobile simulation, botnet, crypto market, mining, heat system, jobee development"
+    />
+    <link rel="canonical" href="https://jobee.dev/hackersim/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jobee.dev/hackersim/" />
+    <meta property="og:title" content="HackerSim – Cyber Strategy Simulation" />
+    <meta
+      property="og:description"
+      content="Build your cyber empire through strategic hacking, real‑time market trading, mining ops, botnets, and a living Heat system that fights back."
+    />
+    <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/hackersim" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@jobee_dev" />
+    <meta name="twitter:title" content="HackerSim – Cyber Strategy Simulation" />
+    <meta
+      name="twitter:description"
+      content="Strategic hacking, market trading, mining, botnets, research, hardware upgrades, and a living Heat system."
+    />
+    <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/hackersim" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "HackerSim",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "GameApplication",
+        "genre": "Simulation",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Jobee Development",
+          "url": "https://jobee.dev"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD"
+        },
+        "description": "Enter the digital underground. Build a cyber empire through strategic hacking, real-time market trading, mining operations, botnets, research, and a living Heat system that fights back."
+      }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #000;
+        --fg: #d1d5db;
+        --accent: #00ff55;
+        --accent-soft: rgba(0, 255, 85, 0.12);
+        --panel-bg: rgba(255,255,255,0.04);
+        /* HackerSim unique accents */
+        --hs-accent: #00e5ff; /* cyan */
+        --hs-accent-2: #ff00e5; /* magenta */
+        --hs-accent-soft: rgba(0,229,255,0.12);
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        overflow-x: hidden;
+      }
+      .code { font-family: "IBM Plex Mono", monospace; }
+      .glow { /* keep for header */
+        color: var(--accent);
+        text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+      }
+      .hs-glow { /* page-unique glow */
+        color: var(--hs-accent);
+        text-shadow: 0 0 8px var(--hs-accent), 0 0 16px var(--hs-accent-2);
+      }
+
+      /* Header (match site) */
+      .nav-header {
+        background: rgba(0,10,14,0.9);
+        border-bottom: 1px solid rgba(0,229,255,0.25);
+        backdrop-filter: blur(10px);
+        position: relative;
+        box-shadow: inset 0 -10px 30px rgba(0,229,255,0.04);
+      }
+      .nav-header::after {
+        content: "";
+        position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+        background: linear-gradient(90deg, var(--hs-accent), var(--hs-accent-2), var(--hs-accent));
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      .nav-link {
+        color: var(--fg);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nav-link:hover { color: var(--hs-accent); background: var(--hs-accent-soft); }
+      .nav-link.active { color: var(--hs-accent); background: var(--hs-accent-soft); box-shadow: inset 0 0 12px rgba(255,0,229,0.18); }
+      .nav-header .glow { color: var(--hs-accent); text-shadow: 0 0 8px var(--hs-accent), 0 0 16px var(--hs-accent-2); }
+      .mobile-menu { display: none; }
+      .mobile-menu.active { display: block; }
+
+      /* Background effects */
+      #matrix {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: 0;
+        opacity: 0.22;
+        pointer-events: none;
+      }
+      .grid-overlay {
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .scanlines:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.03),
+          rgba(255,255,255,0.03) 1px,
+          transparent 2px,
+          transparent 4px
+        );
+        mix-blend-mode: overlay;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Terminal CTA button (unique to this page) */
+      @keyframes scan {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+      }
+      .term-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0.9rem 1.2rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-radius: 10px;
+        background: #0b0b0b;
+        border: 2px solid transparent;
+        background-image: linear-gradient(#0b0b0b, #0b0b0b),
+          linear-gradient(90deg, var(--hs-accent), var(--hs-accent-2), var(--hs-accent));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+      }
+      .term-btn:hover {
+        animation: scan 1.6s linear infinite;
+        background-size: 100% 100%, 200% 100%;
+        box-shadow: 0 0 30px rgba(255, 0, 229, 0.2);
+        transform: translateY(-1px);
+      }
+      .term-caret { color: var(--hs-accent); text-shadow: 0 0 10px var(--hs-accent); }
+      @keyframes blink { to { visibility: hidden; } }
+
+      .panel {
+        background: var(--panel-bg);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+      }
+
+      /* Terminal window card */
+      .terminal {
+        background: rgba(10,10,10,0.8);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      }
+      .terminal .titlebar {
+        display: flex; align-items: center; gap: 6px;
+        padding: 8px 12px; background: rgba(255,255,255,0.04);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .dot { width: 10px; height: 10px; border-radius: 9999px; }
+      .dot.red { background: #ff5f56; }
+      .dot.yellow { background: #ffbd2e; }
+      .dot.green { background: #27c93f; }
+      .terminal .body { padding: 14px; }
+      .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 12px; }
+      .badge.cyan { background: rgba(0,229,255,0.12); color: var(--hs-accent); border: 1px solid rgba(0,229,255,0.25); }
+      .badge.mag { background: rgba(255,0,229,0.12); color: var(--hs-accent-2); border: 1px solid rgba(255,0,229,0.25); }
+
+      /* Heat gauge */
+      .heat {
+        position: relative; height: 10px; border-radius: 9999px; overflow: hidden;
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+      }
+      .heat .bar { height: 100%; width: 40%; background: linear-gradient(90deg, #11ff00, #ff7700, #ff0033); filter: saturate(1.2); animation: heatPulse 3s ease-in-out infinite; }
+      @keyframes heatPulse { 0%, 100% { width: 35%; } 50% { width: 70%; } }
+
+      /* Helpers */
+      #cli-feed { border-color: var(--accent-soft); font-size: 13px; }
+      @media (max-width: 640px) { #cli-feed { font-size: 11px; } }
+      .bg-accent { background: var(--accent); }
+
+      @media (max-width: 768px) {
+        .desktop-nav { display: none; }
+        .mobile-nav { display: block; }
+        .cybr-btn { font-size: 1rem; max-width: 100%; }
+      }
+      @media (min-width: 769px) {
+        .desktop-nav { display: flex; }
+        .mobile-nav { display: none; }
+      }
+    </style>
+  </head>
+  <body class="scanlines">
+    <canvas id="matrix"></canvas>
+    <div class="grid-overlay"></div>
+
+    <!-- Navigation Header -->
+    <nav class="nav-header fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="/" class="text-xl font-bold glow code">JOBEE.DEV</a>
+
+          <!-- Desktop Navigation -->
+          <div class="desktop-nav items-center space-x-4">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+            <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+            <a href="/hackersim/index.html" class="nav-link active">HackerSim</a>
+            <a href="/support.html" class="nav-link">Support</a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button class="mobile-nav text-2xl glow" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
+          <div class="flex flex-col space-y-2 pt-4">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+            <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+            <a href="/hackersim/index.html" class="nav-link active">HackerSim</a>
+            <a href="/support.html" class="nav-link">Support</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center p-6 pt-28 pb-12">
+      <h1 id="title" class="text-5xl sm:text-7xl font-extrabold mb-4 hs-glow tracking-tight">HACKER SIM</h1>
+      <p class="code text-lg sm:text-xl max-w-2xl mx-auto opacity-90 mb-6">
+        Enter the digital underground. Build your cyber empire through strategic hacking, real‑time market trading, mining operations, and a living Heat system that fights back.
+      </p>
+      <div class="flex items-center gap-2 mb-6">
+        <span class="badge cyan">Simulation</span>
+        <span class="badge mag">Strategy</span>
+        <span class="badge cyan">Offline Progression</span>
+      </div>
+
+      <a href="/support.html" class="term-btn" role="button">
+        <span class="term-caret">$</span> Join the Waitlist
+      </a>
+
+      <div class="terminal w-full max-w-full sm:max-w-2xl mx-auto mt-8">
+        <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">/var/log/hackersim</span></div>
+        <div class="body">
+          <pre id="cli-feed" class="code text-left text-xs sm:text-sm whitespace-pre-wrap break-words leading-relaxed overflow-x-auto"></pre>
+        </div>
+      </div>
+    </header>
+
+    <!-- What you'll do -->
+    <section class="relative z-10 py-20 px-6 max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-10 glow text-center">What you’ll do</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">multi-stage-hacks.sh</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">travel_explore</span><h3 class="font-semibold">Multi‑stage hacks</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Recon → Penetrate → Escalate → Extract → Cleanup. Each stage changes your success odds and risk in real time.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">heat-monitor.log</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">whatshot</span><h3 class="font-semibold">Manage Heat</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Every action raises attention. High Heat reduces target availability and success rates—cool it down with tactical tools.</p>
+            <div class="heat mt-3"><div class="bar"></div></div>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">market-terminal</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">show_chart</span><h3 class="font-semibold">Play the market</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Trade a simulated crypto economy with trends, volatility, seasonal events, alerts, and a full price history.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">mining-daemon</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">memory</span><h3 class="font-semibold">Mine crypto (in‑game)</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Run mining ops that generate on‑chain amounts (e.g., 0.00012345 BTC/hr) while you cover electricity costs.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">botnet-orchestrator</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">hub</span><h3 class="font-semibold">Build botnets</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Deploy malware, scale infections, choose roles (mining, theft, DDoS), and weigh detection risk vs. reward.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">research-lab</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">science</span><h3 class="font-semibold">Research & skills</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Unlock advanced exploits, networking, cryptography, social engineering, malware, and hardware bonuses.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">hardware-config</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">settings</span><h3 class="font-semibold">Upgrade hardware</h3></div>
+          <p class="code text-sm opacity-80 mt-2">CPU, GPU, RAM, storage, network, and cooling—optimize performance to boost success and throughput.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">contracts</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">assignment</span><h3 class="font-semibold">Contracts & streaks</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Time‑boxed jobs with hot bonuses, near‑miss graces, and streak systems that reward consistency.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">daily-rewards</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">today</span><h3 class="font-semibold">Daily rewards</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Claim escalating bonuses with streak protection and milestone celebrations (7/30/100/365 days).</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">achievements</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">emoji_events</span><h3 class="font-semibold">Achievements & titles</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Earn badges, unlock titles, and show off your mastery.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">offline-engine</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">schedule</span><h3 class="font-semibold">Offline progression</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Time‑based activities keep running—return to meaningful results, not nothing.</p>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">leaderboards</span></div>
+          <div class="body">
+          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">leaderboard</span><h3 class="font-semibold">Game Center</h3></div>
+          <p class="code text-sm opacity-80 mt-2">Compete on lifetime earnings leaderboards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why you'll love it -->
+    <section class="relative z-10 py-16 px-6 max-w-5xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-6 glow text-center">Why you’ll love it</h2>
+      <ul class="grid gap-4">
+        <li class="panel code text-sm">Strategic depth without grind: Every system interlocks—Heat, equipment, research, market, botnets, and mining.</li>
+        <li class="panel code text-sm">Real agency: Abort risky hacks, choose targets, hedge with mining, or lay low to cool Heat.</li>
+        <li class="panel code text-sm">Fair monetization: Optional boosts and QoL—no paywalls for core play.</li>
+      </ul>
+    </section>
+
+    <!-- Important notice -->
+    <section class="relative z-10 py-12 px-6 max-w-4xl mx-auto">
+      <div class="panel border border-red-500/30">
+        <div class="flex items-center gap-2 mb-2"><span class="material-icons text-red-400">report</span><h3 class="font-semibold">Important</h3></div>
+        <p class="code text-sm opacity-90">This is a strategy simulation. No real hacking activity is taught or enabled.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-12 code text-xs opacity-70 space-y-4 px-6">
+      <p>
+        © <span id="year"></span> Jobee Development •
+        <a href="/privacy.html" class="underline hover:text-green-300">Privacy Policy</a>
+      </p>
+    </footer>
+
+    <script>
+      // Copyright year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('active');
+      }
+
+      // Matrix rain background
+      const canvas = document.getElementById('matrix');
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
+      window.addEventListener('resize', resize);
+      const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#*+-/~=_';
+      let columns = [], fontSize = 14;
+      function init() {
+        const cols = Math.floor(canvas.width / fontSize);
+        columns = new Array(cols).fill(1);
+      }
+      function draw() {
+        ctx.fillStyle = 'rgba(0,0,0,0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(0,229,255,0.8)';
+        ctx.font = fontSize + 'px "IBM Plex Mono", monospace';
+        for (let i = 0; i < columns.length; i++) {
+          const text = chars.charAt(Math.floor(Math.random() * chars.length));
+          ctx.fillText(text, i * fontSize, columns[i] * fontSize);
+          if (columns[i] * fontSize > canvas.height && Math.random() > 0.975) columns[i] = 0;
+          columns[i]++;
+        }
+        requestAnimationFrame(draw);
+      }
+      resize();
+      requestAnimationFrame(draw);
+
+      // Scramble hero title effect
+      const title = document.getElementById('title');
+      const original = title.textContent;
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let frame = 0;
+      function scramble() {
+        const progress = Math.min(1, frame / 30);
+        let out = '';
+        for (let i = 0; i < original.length; i++) {
+          if (original[i] === ' ') { out += ' '; continue; }
+          out += (Math.random() < progress) ? original[i] : alphabet[Math.floor(Math.random()*alphabet.length)];
+        }
+        title.textContent = out;
+        frame++;
+        if (progress < 1) requestAnimationFrame(scramble); else title.textContent = original;
+      }
+      setTimeout(scramble, 400);
+
+      // CLI-style teaser feed
+      const feedElem = document.getElementById("cli-feed");
+      const cursor = document.createElement("span");
+      cursor.className = "inline-block w-3 h-4 ml-1 align-baseline animate-pulse";
+      cursor.style.background = 'linear-gradient(180deg, var(--hs-accent), var(--hs-accent-2))';
+      feedElem.appendChild(cursor);
+
+      const rest = [
+        "[BOOT] Initialising neural rig…",
+        "[OK] Quantum VPN tunnel established.",
+        "[INFO] Market feed synced. Volatility: HIGH.",
+        "[HINT] Multi‑stage hacks unlocked: Recon → Penetrate → Escalate → Extract → Cleanup.",
+        "[ALERT] Heat rising. Recommend cooldown protocols.",
+        "> HackerSim link coming soon."
+      ];
+      const lines = rest;
+
+      let lineIdx = 0;
+      let charIdx = 0;
+
+      function typeNextChar() {
+        if (lineIdx >= lines.length) return;
+        const currentLine = lines[lineIdx];
+        if (charIdx < currentLine.length) {
+          cursor.insertAdjacentText("beforebegin", currentLine[charIdx]);
+          charIdx++;
+          setTimeout(typeNextChar, 22);
+        } else {
+          cursor.insertAdjacentHTML("beforebegin", "\n");
+          lineIdx++;
+          charIdx = 0;
+          setTimeout(typeNextChar, 380);
+        }
+      }
+
+      setTimeout(typeNextChar, 500);
+    </script>
+  </body>
+  </html>
+
+
