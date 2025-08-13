@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.ico" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — Hacker Sim: Cyber Ops</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="canonical" href="https://jobee.dev/hackersim/privacy.html" />
+  <meta name="description" content="How Hacker Sim: Cyber Ops handles analytics, diagnostics, purchases, and your data." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jobee.dev/hackersim/privacy.html" />
+  <meta property="og:title" content="Privacy Policy — Hacker Sim: Cyber Ops" />
+  <meta property="og:description" content="How Hacker Sim: Cyber Ops handles analytics, diagnostics, purchases, and your data." />
+  <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/hackersim" />
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #d1d5db;
+      --accent: #00ff55;
+      --accent-soft: rgba(0, 255, 85, 0.12);
+      --panel-bg: rgba(255,255,255,0.04);
+      --hs-accent: #00e5ff;
+      --hs-accent-2: #ff00e5;
+      --hs-accent-soft: rgba(0,229,255,0.12);
+      color-scheme: light dark;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "IBM Plex Mono", monospace;
+      line-height: 1.6;
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+    .container { max-width: 880px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 2rem; margin: 0 0 8px; }
+    h2 { font-size: 1.4rem; margin: 32px 0 10px; font-weight: 700; line-height: 1.35; border-bottom: 1px solid rgba(0,229,255,0.25); padding-bottom: 6px; }
+    h3 { font-size: 1.2rem; margin: 20px 0 8px; font-weight: 600; line-height: 1.4; }
+    p { margin: 12px 0; }
+    ul { margin: 10px 0 16px 24px; list-style: disc outside; }
+    li { margin: 6px 0; }
+    hr.section { margin: 28px 0; border: 0; height: 1px; background: rgba(255,255,255,0.08); }
+    .meta { color: #9aa3af; font-size: 0.9rem; }
+    .card { background: rgba(127,127,127,0.06); border: 1px solid rgba(127,127,127,0.2); border-radius: 10px; padding: 16px; }
+    a { color: var(--hs-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.95em; }
+    .code { font-family: "IBM Plex Mono", monospace; }
+    .glow { color: var(--hs-accent); text-shadow: 0 0 8px var(--hs-accent), 0 0 16px var(--hs-accent-2); }
+
+    /* Header */
+    .nav-header { background: rgba(0,10,14,0.9); border-bottom: 1px solid rgba(0,229,255,0.25); backdrop-filter: blur(10px); position: relative; box-shadow: inset 0 -10px 30px rgba(0,229,255,0.04); }
+    .nav-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, var(--hs-accent), var(--hs-accent-2), var(--hs-accent)); opacity: 0.6; pointer-events: none; }
+    .nav-link { color: var(--fg); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.25rem; transition: all 0.3s; font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .nav-link:hover { color: var(--hs-accent); background: var(--hs-accent-soft); }
+    .nav-link.active { color: var(--hs-accent); background: var(--hs-accent-soft); box-shadow: inset 0 0 12px rgba(255,0,229,0.18); }
+    .mobile-menu { display: none; }
+    .mobile-menu.active { display: block; }
+
+    /* Background effects */
+    #matrix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; opacity: 0.22; pointer-events: none; }
+    .grid-overlay { position: fixed; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+    .scanlines:before { content: ""; position: fixed; inset: 0; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 2px, transparent 4px); mix-blend-mode: overlay; pointer-events: none; z-index: 1; }
+
+    /* Panels */
+    .panel { background: var(--panel-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 1.25rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 12px; }
+    .badge.cyan { background: rgba(0,229,255,0.12); color: var(--hs-accent); border: 1px solid rgba(0,229,255,0.25); }
+
+    /* Terminal window card */
+    .terminal { background: rgba(10,10,10,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin: 16px 0; }
+    .terminal .titlebar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .dot { width: 10px; height: 10px; border-radius: 9999px; }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+    .terminal .body { padding: 14px; }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      .mobile-nav { display: block; }
+    }
+    @media (min-width: 769px) {
+      .desktop-nav { display: flex; }
+      .mobile-nav { display: none; }
+    }
+  </style>
+</head>
+<body class="scanlines">
+  <canvas id="matrix"></canvas>
+  <div class="grid-overlay"></div>
+
+  <nav class="nav-header fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="text-xl font-bold glow code">JOBEE.DEV</a>
+        <div class="desktop-nav items-center space-x-4">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+          <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+          <a href="/hackersim/index.html" class="nav-link active">HackerSim</a>
+          <a href="/support.html" class="nav-link">Support</a>
+        </div>
+        <button class="mobile-nav text-2xl glow" onclick="toggleMobileMenu()">
+          <span class="material-icons">menu</span>
+        </button>
+      </div>
+      <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
+        <div class="flex flex-col space-y-2 pt-4">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
+          <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
+          <a href="/hackersim/index.html" class="nav-link active">HackerSim</a>
+          <a href="/support.html" class="nav-link">Support</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative z-10 flex flex-col items-center justify-center text-center p-6 pt-28 pb-6">
+    <h1 class="text-4xl sm:text-6xl font-extrabold mb-2 hs-glow tracking-tight">PRIVACY POLICY</h1>
+    <p class="code text-sm opacity-80">
+      For the app “Hacker Sim: Cyber Ops” • Effective date: <strong>2025-08-13</strong>
+    </p>
+    <div class="mt-4">
+      <span class="badge cyan">Transparency</span>
+      <span class="badge cyan">Security</span>
+    </div>
+  </header>
+  <main class="container relative z-10">
+    <p class="opacity-90">
+      This Privacy Policy describes how we collect, use, and share information when you use the App on iOS.
+      We are committed to transparency and to collecting only what is needed to operate, secure, and improve the App.
+    </p>
+    <hr class="section"/>
+
+    <h2>At a glance</h2>
+    <ul>
+      <li>No third‑party ads and no tracking across other companies’ apps or websites.</li>
+      <li>Analytics and crash diagnostics are used to improve stability and gameplay.</li>
+      <li>Game progress is stored <em>on your device</em>; we do not run a cloud save service.</li>
+      <li>Game Center provides leaderboards; we do not receive your real identity from Apple.</li>
+      <li>Purchases are processed by Apple via StoreKit; we do not receive your payment card details.</li>
+    </ul>
+
+    <h2>Information we collect</h2>
+
+    <h3>1) Usage analytics (Firebase Analytics)</h3>
+    <p>
+      We use Google Firebase Analytics to understand how the App is used so we can improve features and balance gameplay.
+      Firebase generates a pseudonymous installation identifier and records in‑app events (for example: screen views, session starts/ends, daily login, hack start/complete, research start/complete, equipment upgrades, modal opens/closes).
+      We may set non‑personal user properties (for example: player level, heat level, total earnings, app version) to help us analyze aggregated behavior.
+    </p>
+    <p>Data categories processed by Firebase Analytics may include:</p>
+    <ul>
+      <li>App interactions and event parameters (non‑PII)</li>
+      <li>App instance/installation identifiers</li>
+      <li>Device and app metadata (e.g., device model, OS and app version)</li>
+      <li>IP address (transiently processed by Firebase for service delivery and geolocation at a regional level)</li>
+    </ul>
+    <p>
+      Learn more: <a href="https://firebase.google.com/support/privacy" rel="noopener" target="_blank">Firebase privacy and security</a>.
+    </p>
+
+    <h3>2) Crash diagnostics (Firebase Crashlytics)</h3>
+    <p>
+      We use Firebase Crashlytics to collect crash reports and diagnostics to improve stability. Reports may include stack traces, timestamps, device and app metadata, session info, breadcrumbs (recent in‑app actions), and performance metrics. For serious errors we may include a minimal snapshot of game state (for example: player stats and current activities) to reproduce and fix issues. This information is used solely for debugging and quality.
+    </p>
+    <p>Learn more: <a href="https://firebase.google.com/terms/crashlytics-app-distribution-data-processing-terms" rel="noopener" target="_blank">Crashlytics data processing terms</a>.</p>
+
+    <h3>3) Game Center (Apple)</h3>
+    <p>
+      The App integrates with Apple Game Center for leaderboards. Authentication and identity are handled by Apple. We do not receive your real name, email address, or contacts from Game Center. We can submit and fetch scores and present leaderboards inside the App.
+      Display names and scores shown on leaderboards are provided by Apple according to your Game Center settings.
+    </p>
+
+    <h3>4) In‑App Purchases (StoreKit)</h3>
+    <p>
+      Purchases are processed by Apple via StoreKit. We receive product identifiers and transaction metadata to grant entitlements (e.g., consumables or non‑consumables). We do not receive or store your payment card details. Some purchase receipts or transaction IDs may be retained for entitlement validation and customer support.
+    </p>
+
+    <h3>5) Notifications and preferences</h3>
+    <p>
+      If you opt in to push notifications, we may use a device token provided by Apple to deliver in‑game alerts (e.g., activity completion, market events). Notification preferences are stored on your device. You can change notification permissions at any time in iOS Settings.
+      We do not use notifications for advertising.
+    </p>
+
+    <h3>6) On‑device game data</h3>
+    <p>
+      Your game progress, backups, and related metadata are stored locally on your device (using iOS storage). We do not operate a cloud‑save service. Deleting the App will remove locally stored game data.
+    </p>
+
+    <hr class="section"/>
+    <h2>Information we <em>do not</em> collect</h2>
+    <ul>
+      <li>No precise location, contacts, photos, camera, microphone, health, or calendar data.</li>
+      <li>No advertising identifiers for cross‑app tracking.</li>
+      <li>No personal contact information (e.g., name, email) unless you proactively provide it when contacting support.</li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>How we use your information</h2>
+    <ul>
+      <li>To operate the App and provide features (e.g., leaderboards, purchases, notifications).</li>
+      <li>To analyze usage and improve gameplay balance and UX.</li>
+      <li>To monitor performance, investigate crashes, and enhance stability/security.</li>
+      <li>To provide customer support and resolve issues related to purchases or crashes.</li>
+      <li>To comply with legal obligations and enforce our terms.</li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>Legal bases for processing (EEA/UK users)</h2>
+    <ul>
+      <li><strong>Legitimate interests</strong>: diagnostics, security, and essential analytics to improve the App.</li>
+      <li><strong>Performance of a contract</strong>: providing App functionality, purchases, and leaderboards.</li>
+      <li><strong>Consent</strong>: push notifications (you can withdraw in iOS Settings).</li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>Data storage and retention</h2>
+    <ul>
+      <li><strong>On‑device data</strong>: stored until you delete the App or clear data from the App’s settings (if available).</li>
+      <li><strong>Analytics and diagnostics</strong>: retained by Firebase for periods consistent with their defaults and service requirements. Aggregated reports may be kept longer for trend analysis.</li>
+      <li><strong>Purchase records</strong>: retained as needed for entitlement management, fraud prevention, and legal compliance.</li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>Sharing and transfers</h2>
+    <ul>
+      <li><strong>Service providers</strong>: We share data with vendors only to operate the App (e.g., Google Firebase for analytics and crash reporting, Apple for Game Center and purchases). They process data on our behalf under appropriate terms.</li>
+      <li><strong>No sale of personal data</strong> and no sharing for third‑party advertising.</li>
+      <li>
+        <strong>International transfers</strong>: Firebase and Apple may process data on servers outside your country.
+        Protective measures (such as standard contractual clauses) or equivalent safeguards are used where required.
+      </li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>Your choices and rights</h2>
+    <ul>
+      <li><strong>Notifications</strong>: control in iOS Settings &gt; Notifications.</li>
+      <li><strong>Game Center</strong>: manage Game Center account in iOS Settings &gt; Game Center.</li>
+      <li><strong>Purchases</strong>: manage subscriptions and purchase history in iOS Settings &gt; Apple ID.</li>
+      <li><strong>Local data</strong>: delete the App to remove on‑device game data. If the App offers an in‑app “reset/clear data” option, you can use it to delete local data without uninstalling.</li>
+      <li><strong>Privacy rights</strong>: Depending on your location, you may have rights to access, correct, delete, or restrict processing of your personal data, and to object or request portability. To exercise rights, contact us (see Contact section).</li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>Children’s privacy</h2>
+    <p>
+      The App is not directed to children under 13 and does not knowingly collect personal information from children. If you believe a child provided personal information, please contact us and we will delete it.
+    </p>
+
+    <hr class="section"/>
+    <h2>Security</h2>
+    <p>
+      We implement technical and organizational measures appropriate to the risk, including limiting data collection to what is necessary, using reputable platform services (Apple, Firebase), and restricting access. No method of transmission or storage is 100% secure.
+    </p>
+
+    <hr class="section"/>
+    <h2>Third‑party policies</h2>
+    <ul>
+      <li>Google Firebase: <a href="https://firebase.google.com/support/privacy" rel="noopener" target="_blank">Privacy &amp; Security</a></li>
+      <li>Apple Game Center: <a href="https://www.apple.com/legal/privacy/" rel="noopener" target="_blank">Apple Privacy Policy</a></li>
+    </ul>
+
+    <hr class="section"/>
+    <h2>Contact</h2>
+    <p>
+      If you have questions or requests regarding this Privacy Policy, please contact us at:
+    </p>
+    <p>
+      <strong>Email:</strong> <a href="mailto:support@jobee.dev">support@jobee.dev</a><br/>
+      <strong>Support:</strong> <a href="/support.html" class="underline">jobee.dev/support</a>
+    </p>
+
+    <hr class="section"/>
+    <h2>Changes to this policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. We will post the updated version in this location and update the “Effective date” above. Significant changes may also be communicated in‑app.
+    </p>
+
+    <hr/>
+    <p class="meta">
+      App privacy summary (for App Store): Data used for App functionality, analytics, and diagnostics; not linked to your identity; not used for tracking across apps or websites.
+    </p>
+  </main>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.toggle('active');
+    }
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
+    window.addEventListener('resize', resize);
+    const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#*+-/~=_';
+    let columns = [], fontSize = 14;
+    function init() {
+      const cols = Math.floor(canvas.width / fontSize);
+      columns = new Array(cols).fill(1);
+    }
+    function draw() {
+      ctx.fillStyle = 'rgba(0,0,0,0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,229,255,0.8)';
+      ctx.font = fontSize + 'px "IBM Plex Mono", monospace';
+      for (let i = 0; i < columns.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, columns[i] * fontSize);
+        if (columns[i] * fontSize > canvas.height && Math.random() > 0.975) columns[i] = 0;
+        columns[i]++;
+      }
+      requestAnimationFrame(draw);
+    }
+    resize();
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>
+
+
