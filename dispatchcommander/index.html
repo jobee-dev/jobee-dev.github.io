@@ -64,6 +64,8 @@
 
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/site-chrome.css" />
+    <script src="/assets/site-chrome.js" defer></script>
 
 
     <link
@@ -309,44 +311,11 @@
       }
     </style>
   </head>
-  <body>
+  <body data-site-page="dispatch">
 
     <div class="fixed inset-0 grid-overlay z-0"></div>
 
-    <!-- Navigation Header -->
-  <nav class="nav-header fixed top-0 left-0 right-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <!-- Logo -->
-        <a href="/" class="text-xl font-bold glow code">JOBEE.DEV</a>
-        
-        <!-- Desktop Navigation -->
-        <div class="desktop-nav items-center space-x-4">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
-          <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
-          <a href="/hackersim/index.html" class="nav-link">HackerSim</a>
-          <a href="/support.html" class="nav-link">Support</a>
-        </div>
-        
-        <!-- Mobile Menu Button -->
-        <button class="mobile-nav text-2xl glow" onclick="toggleMobileMenu()">
-          <span class="material-icons">menu</span>
-        </button>
-      </div>
-      
-      <!-- Mobile Navigation -->
-      <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
-        <div class="flex flex-col space-y-2 pt-4">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
-          <a href="index.html" class="nav-link">Colour Merge</a>
-          <a href="/hackersim/index.html" class="nav-link">HackerSim</a>
-          <a href="/support.html" class="nav-link">Support</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+    <div data-site-header></div>
 
     <header class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center p-6 pt-24 pb-12">
       <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
@@ -495,25 +464,9 @@
 
     </section>
 
-    <footer class="relative z-10 text-center py-12 code text-xs opacity-70 space-y-4 px-6">
-      <p>
-        Dispatch Commander is a <strong>fictional simulation game</strong>. All
-        incidents, agencies and data within the app are simulated and should
-        not be used for real-world emergency response.
-      </p>
-      <p>
-        © <span id="year"></span> Jobee Development •
-        <a
-          href="/dispatchcommander/privacy.html"
-          class="underline hover:text-green-300"
-          >Privacy Policy</a
-        >
-      </p>
-    </footer>
+    <div data-site-footer></div>
 
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-
       const feedElem = document.getElementById("cli-feed");
       const cursor = document.createElement("span");
       cursor.className = "cursor";
@@ -548,10 +501,6 @@
 
       setTimeout(typeNextChar, 600);
 
-      function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('active');
-      }
     </script>
         
   </body>

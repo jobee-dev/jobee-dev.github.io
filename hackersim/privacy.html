@@ -14,6 +14,8 @@
     rel="stylesheet"
   />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/site-chrome.css" />
+  <script src="/assets/site-chrome.js" defer></script>
   <link rel="canonical" href="https://jobee.dev/hackersim/privacy.html" />
   <meta name="description" content="How Hacker Sim: Cyber Ops handles analytics, diagnostics, purchases, and your data." />
   <meta property="og:type" content="website" />
@@ -96,36 +98,11 @@
     }
   </style>
 </head>
-<body class="scanlines">
+<body class="scanlines" data-site-page="hackersim-privacy">
   <canvas id="matrix"></canvas>
   <div class="grid-overlay"></div>
 
-  <nav class="nav-header fixed top-0 left-0 right-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <a href="/" class="text-xl font-bold glow code">JOBEE.DEV</a>
-        <div class="desktop-nav items-center space-x-4">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
-          <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
-          <a href="/hackersim/index.html" class="nav-link active">HackerSim</a>
-          <a href="/support.html" class="nav-link">Support</a>
-        </div>
-        <button class="mobile-nav text-2xl glow" onclick="toggleMobileMenu()">
-          <span class="material-icons">menu</span>
-        </button>
-      </div>
-      <div id="mobile-menu" class="mobile-menu mt-4 pb-4 border-t border-gray-800">
-        <div class="flex flex-col space-y-2 pt-4">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/dispatchcommander/index.html" class="nav-link">Dispatch Commander</a>
-          <a href="/colormerge/index.html" class="nav-link">Colour Merge</a>
-          <a href="/hackersim/index.html" class="nav-link active">HackerSim</a>
-          <a href="/support.html" class="nav-link">Support</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <div data-site-header></div>
 
   <header class="relative z-10 flex flex-col items-center justify-center text-center p-6 pt-28 pb-6">
     <h1 class="text-4xl sm:text-6xl font-extrabold mb-2 hs-glow tracking-tight">PRIVACY POLICY</h1>
@@ -295,11 +272,8 @@
       App privacy summary (for App Store): Data used for App functionality, analytics, and diagnostics; not linked to your identity; not used for tracking across apps or websites.
     </p>
   </main>
+  <div data-site-footer></div>
   <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      if (menu) menu.classList.toggle('active');
-    }
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
@@ -328,5 +302,4 @@
   </script>
 </body>
 </html>
-
 

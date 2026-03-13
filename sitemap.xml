@@ -31,4 +31,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Blog landing page -->
+  <url>
+    <loc>https://jobee.dev/blog/</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog article: Campaign Mode -->
+  <url>
+    <loc>https://jobee.dev/blog/campaign-mode-is-out-starting-with-friday-night.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

@@ -1,0 +1,85 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+}
+
+.site-header__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+}
+
+.site-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-header__desktop {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-header__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.site-header__mobile-shell {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid rgba(107, 114, 128, 0.35);
+}
+
+.site-header__mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 10;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.site-footer--compact {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.site-footer--code {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.site-footer--muted {
+  opacity: 0.7;
+}
+
+.site-footer__line {
+  margin: 0;
+}
+
+.site-footer__line + .site-footer__line {
+  margin-top: 0.5rem;
+}

@@ -31,6 +31,8 @@
     <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/dispatchcommander/privacy" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/site-chrome.css" />
+    <script src="/assets/site-chrome.js" defer></script>
 
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
@@ -78,14 +80,53 @@
       .prose {
         max-width: 65ch;
       }
+      .nav-header {
+        background: rgba(0, 0, 0, 0.9);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+      }
+      .nav-link {
+        color: var(--fg);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nav-link:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .nav-link.active {
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .mobile-menu.active {
+        display: block;
+      }
+      @media (max-width: 768px) {
+        .desktop-nav { display: none; }
+        .mobile-nav { display: block; }
+      }
+      @media (min-width: 769px) {
+        .desktop-nav { display: flex; }
+        .mobile-nav { display: none; }
+      }
     </style>
   </head>
-  <body>
+  <body data-site-page="dispatch-privacy">
 
     <div class="fixed inset-0 grid-overlay z-0"></div>
+    <div data-site-header></div>
 
 
-    <header class="relative z-10 text-center py-20 px-6">
+    <header class="relative z-10 text-center pt-32 pb-20 px-6">
       <h1 class="text-4xl sm:text-6xl font-extrabold glow mb-4">
         Privacy&nbsp;Policy
       </h1>
@@ -259,16 +300,7 @@
 Email: jobee.dev@gmail.com</p>
 
     </main>
-
-    <footer
-      class="relative z-10 text-center py-12 code text-xs opacity-70 px-6"
-    >
-      <p class="mb-2">
-        &copy; <span id="year">2025</span> Jobee Development • 
-        <a href="/" class="underline hover:text-green-300">Back to Home</a>
-        • <a href="/hackersim/index.html" class="underline hover:text-green-300">HackerSim</a>
-      </p>
-    </footer>
+    <div data-site-footer></div>
 
 
 
