@@ -92,6 +92,41 @@
     }
   };
 
+  const CRITICAL_HEADER_CSS = `
+    .site-header{position:fixed;top:0;right:0;left:0;z-index:50}
+    .site-header__inner{max-width:72rem;margin:0 auto;padding:16px 24px}
+    .site-header__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:48px}
+    .nav-header{--site-header-accent:#63f3ff;--site-header-accent-soft:rgba(99,243,255,0.08);--site-header-active-shadow:inset 0 0 0 1px rgba(99,243,255,0.16);--site-header-active-text:#f3f7ff;background:rgba(4,6,8,0.82);border-bottom:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(18px);box-shadow:0 10px 36px rgba(0,0,0,0.2)}
+    .site-header .site-brand{display:inline-flex;align-items:center;font:700 20px/20px "IBM Plex Mono",monospace;letter-spacing:.14em;text-decoration:none;color:#f3f7ff;text-shadow:0 0 16px rgba(99,243,255,0.14)}
+    .site-header__desktop{display:flex;align-items:center;gap:.5rem}
+    .site-header .nav-link{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border-radius:8px;color:#94a3b8;text-decoration:none;font:600 12px/12px "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color .22s ease,background .22s ease,box-shadow .22s ease}
+    .site-header .nav-link:hover{color:#f3f7ff;background:rgba(255,255,255,0.04)}
+    .site-header .nav-link.active{color:var(--site-header-active-text);background:var(--site-header-accent-soft);box-shadow:var(--site-header-active-shadow)}
+    .site-header .site-header__toggle{display:none;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;padding:0;border:1px solid rgba(255,255,255,0.1);border-radius:999px;background:rgba(255,255,255,0.03);color:#f3f7ff;cursor:pointer;font-size:32px;transition:border-color .22s ease,background .22s ease}
+    .site-header .site-header__toggle:hover{border-color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.06)}
+    .site-header .site-header__mobile-shell{display:none;margin-top:1rem;padding-bottom:1rem;border-top:1px solid rgba(255,255,255,0.1)}
+    .site-header .site-header__mobile-links{display:flex;flex-direction:column;gap:.5rem;padding-top:1rem}
+    .site-header .mobile-menu.active{display:block}
+    @media (max-width:768px){.desktop-nav{display:none!important}.mobile-nav{display:inline-flex!important}}
+    @media (min-width:769px){.desktop-nav{display:flex!important}.mobile-nav{display:none!important}.site-header .site-header__mobile-shell,.site-header .site-header__mobile-shell.active{display:none!important}}
+    .site-header--dispatch{--site-header-accent:#00ff55;--site-header-accent-soft:rgba(0,255,85,0.12);--site-header-active-shadow:0 0 18px rgba(0,255,85,0.12),inset 0 0 0 1px rgba(0,255,85,0.2)}
+    .site-header--colormerge{--site-header-accent:#f093fb;--site-header-accent-soft:rgba(240,147,251,0.14);--site-header-active-shadow:0 0 18px rgba(240,147,251,0.14),inset 0 0 0 1px rgba(240,147,251,0.24);background:rgba(118,75,162,0.34);border-bottom:1px solid rgba(255,255,255,0.14);box-shadow:0 10px 36px rgba(46,38,77,0.22)}
+    .site-header--colormerge .site-brand{text-shadow:0 0 16px rgba(240,147,251,0.28)}
+    .site-header--colormerge .nav-link:hover{background:rgba(255,255,255,0.08)}
+    .site-header--hackersim{--site-header-accent:#00e5ff;--site-header-accent-soft:rgba(0,229,255,0.12);--site-header-active-shadow:0 0 18px rgba(0,229,255,0.14),inset 0 0 0 1px rgba(255,0,229,0.24)}
+  `;
+
+  function ensureCriticalHeaderStyles() {
+    if (document.querySelector("[data-site-chrome-critical]")) {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.setAttribute("data-site-chrome-critical", "true");
+    style.textContent = CRITICAL_HEADER_CSS;
+    document.head.appendChild(style);
+  }
+
   function renderHeader(currentPage) {
     const pageConfig = PAGE_CONFIG[currentPage] || PAGE_CONFIG.home;
     const activeNav = pageConfig.activeNav;
@@ -157,6 +192,8 @@
   const page = document.body.dataset.sitePage || "home";
   const headerTarget = document.querySelector("[data-site-header]");
   const footerTarget = document.querySelector("[data-site-footer]");
+
+  ensureCriticalHeaderStyles();
 
   if (headerTarget) {
     headerTarget.innerHTML = renderHeader(page);
