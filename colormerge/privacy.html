@@ -56,13 +56,6 @@
       z-index: -2;
     }
 
-    /* START: HEADER STYLES (THEMED FOR THIS PAGE) */
-    .nav-header {
-      background: rgba(27, 27, 46, 0.4); /* Dark purple glass */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
     .code {
       font-family: "IBM Plex Mono", monospace;
     }
@@ -70,29 +63,6 @@
       color: #fff; /* Bright text for glow effect */
       text-shadow: 0 0 8px var(--gradient-end), 0 0 16px var(--gradient-end);
     }
-    .nav-link {
-      color: var(--text-secondary); /* Use page's secondary text color */
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      transition: all 0.3s;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .nav-link:hover {
-      color: var(--text-primary);
-      background: var(--subtle-surface);
-    }
-    .nav-link.active {
-      color: #fff; /* Make active text fully white for pop */
-      background: var(--glass-surface);
-    }
-    /* END: HEADER STYLES */
-
-    .mobile-menu { display: none; }
-    .mobile-menu.active { display: block; }
 
     @media (max-width: 768px) {
       .desktop-nav { display: none; }

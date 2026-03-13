@@ -3,221 +3,530 @@
   <head>
     <link rel="icon" href="/favicon.ico" />
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jobee Developments Ltd</title>
-  <meta name="description" content="Jobee Developments Ltd - solo studio crafting deep mobile experiences." />
-  <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/" />
-  <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jobee Developments Ltd | Mobile Strategy & Simulation Games</title>
+    <meta
+      name="description"
+      content="Jobee Developments Ltd builds mobile strategy and simulation games with deeper systems, cleaner UI, and long-tail progression."
+    />
+    <meta
+      name="keywords"
+      content="Jobee Developments, mobile strategy games, mobile simulation games, Dispatch Commander, HackerSim, Colour Merge"
+    />
+    <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/" />
+    <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/" />
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/site-chrome.css" />
-  <script src="/assets/site-chrome.js" defer></script>
-  <!-- Google Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/site-chrome.css" />
+    <script src="/assets/site-chrome.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-  <style>
-    :root {
-      --bg: #000;
-      --fg: #d1d5db;
-      --accent: #00ff55;
-      --accent-soft: rgba(0,255,85,0.1);
-      --panel-bg: rgba(255,255,255,0.03);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-    }
-    .code {
-      font-family: "IBM Plex Mono", monospace;
-    }
-    .glow {
-      color: var(--accent);
-      text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-    }
-    .button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border: 2px solid var(--accent);
-      border-radius: 0.5rem;
-      font-family: "IBM Plex Mono", monospace;
-      text-decoration: none;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: all 0.3s;
-      min-width: 300px; /* Ensure buttons have same width */
-      text-align: center;
-    }
-    .button:hover {
-      background: var(--accent-soft);
-    }
-    .grid-overlay {
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-    }
-    a {
-      color: var(--fg);
-      text-underline-offset: 2px;
-    }
-    .panel {
-      background: var(--panel-bg);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 0.5rem;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .panel .material-icons {
-      font-size: 2rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    
-    /* Navigation Styles */
-    .nav-header {
-      background: rgba(0,0,0,0.9);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-    }
-    .nav-link {
-      color: var(--fg);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      transition: all 0.3s;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .nav-link:hover {
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .nav-link.active {
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .mobile-menu {
-      display: none;
-    }
-    .mobile-menu.active {
-      display: block;
-    }
-    
-    /* NEW: Styles for the Colour Merge themed button */
-    .button-merge {
-      color: #f093fb; /* Light purple/pink from the gradient */
-      border: 2px solid transparent; /* Make border transparent to show background gradient */
-      background: linear-gradient(var(--bg), var(--bg)) padding-box,
-                  linear-gradient(to right, #667eea, #f093fb) border-box;
-      text-shadow: 0 0 6px #f093fb; /* Matching purple glow */
-    }
-
-    .button-merge:hover {
-      color: #fff; /* Brighter text on hover */
-      /* Apply a semi-transparent purple background on hover, keeping the gradient border */
-      background: linear-gradient(rgba(118, 75, 162, 0.25), rgba(118, 75, 162, 0.25)) padding-box,
-                  linear-gradient(to right, #667eea, #f093fb) border-box;
-      text-shadow: 0 0 8px #f093fb;
-    }
-
-    /* NEW: HackerSim themed button and header CTA */
-    .button-hs {
-      color: #00e5ff;
-      border: 2px solid transparent;
-      background: linear-gradient(var(--bg), var(--bg)) padding-box,
-                  linear-gradient(90deg, #00e5ff, #ff00e5, #00e5ff) border-box;
-      text-shadow: 0 0 6px #00e5ff;
-    }
-    .button-hs:hover {
-      color: #fff;
-      background: linear-gradient(rgba(0,229,255,0.18), rgba(255,0,229,0.18)) padding-box,
-                  linear-gradient(90deg, #00e5ff, #ff00e5, #00e5ff) border-box;
-      text-shadow: 0 0 8px #00e5ff;
-    }
-    
-    
-    @media (max-width: 768px) {
-      .desktop-nav { display: none; }
-      .mobile-nav { display: block; }
-      .button {
-        min-width: 250px;
+    <style>
+      :root {
+        --bg: #06080b;
+        --bg-2: #0b1118;
+        --text: #f3f7ff;
+        --muted: #8f9caf;
+        --line: rgba(255, 255, 255, 0.1);
+        --line-strong: rgba(255, 255, 255, 0.18);
+        --accent: #63f3ff;
+        --accent-soft: rgba(99, 243, 255, 0.1);
+        --accent-strong: rgba(99, 243, 255, 0.2);
       }
-    }
-    @media (min-width: 769px) {
-      .desktop-nav { display: flex; }
-      .mobile-nav { display: none; }
-    }
-  </style>
-</head>
-<body data-site-page="home">
-  <!-- Grid background overlay -->
-  <div class="grid-overlay"></div>
 
-  <div data-site-header></div>
+      * {
+        box-sizing: border-box;
+      }
 
-  <!-- Hero Section -->
-  <header class="flex flex-col items-center justify-center text-center min-h-screen p-6 relative z-10">
-    <h1 class="text-5xl sm:text-7xl font-extrabold glow mb-4">Jobee Developments Ltd</h1>
-    <p class="text-lg sm:text-xl code mb-8 max-w-lg">
-      Pioneering deep, strategic mobile simulations with PC-grade polish.
-    </p>
-    
-    <!-- Action Buttons Container -->
-      <div class="flex flex-col items-center gap-4 mt-8">
-      <a href="/dispatchcommander/index.html" class="button">Launch Dispatch Commander</a>
-      <a href="/colormerge/index.html" class="button button-merge">Enter Colour Merge</a>
-        <a href="/hackersim/index.html" class="button button-hs">Enter HackerSim</a>
-    </div>
+      html {
+        scroll-behavior: smooth;
+      }
 
-    <!-- Secondary Links -->
-    <div class="mt-8"> 
-      <a href="#about" class="underline hover:text-gray-300 transition-colors">Learn About Us</a>
-      <span class="mx-2 opacity-50">|</span>
-      <a href="/support.html" class="underline hover:text-gray-300 transition-colors">Support</a>
-    </div>
-  </header>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, rgba(99, 243, 255, 0.1), transparent 24rem),
+          radial-gradient(circle at 85% 20%, rgba(122, 162, 255, 0.08), transparent 28rem),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      }
 
-  <!-- About Section -->
-  <section id="about" class="py-20 px-6 max-w-5xl mx-auto relative z-10">
-    <h2 class="text-3xl font-semibold glow text-center mb-12">About Us</h2>
-    <div class="grid gap-8 sm:grid-cols-3">
-      <div class="panel">
-        <span class="material-icons">person</span>
-        <h3 class="font-semibold mb-2">Our Story</h3>
-        <p class="text-sm">
-          Born in 2025 from a solo developer's passion for gaming depth, we set out to redefine what mobile titles can achieve.
-        </p>
-      </div>
-      <div class="panel">
-        <span class="material-icons">visibility</span>
-        <h3 class="font-semibold mb-2">Our Vision</h3>
-        <p class="text-sm">
-          To blur the line between mobile and PC experiences by delivering rich, challenging simulations on the go.
-        </p>
-      </div>
-      <div class="panel">
-        <span class="material-icons">thumb_up</span>
-        <h3 class="font-semibold mb-2">Our Promise</h3>
-        <p class="text-sm">
-          We commit to relentless polish, creative innovation, and gameplay that captivates and challenges every time.
-        </p>
-      </div>
-    </div>
-  </section>
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 16rem);
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.75), transparent 75%);
+      }
 
-  <div data-site-footer></div>
+      a {
+        color: inherit;
+      }
 
-</body>
+      .code {
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .glow {
+        color: var(--text);
+        text-shadow: 0 0 16px rgba(99, 243, 255, 0.14);
+      }
+
+      .home-shell {
+        position: relative;
+        z-index: 1;
+        width: min(1160px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 8.5rem 0 5rem;
+      }
+
+      .eyebrow {
+        margin: 0 0 1rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+        gap: 4rem;
+        align-items: end;
+      }
+
+      .home-title,
+      .section-title,
+      .project-name,
+      .hero-side__title {
+        margin: 0;
+        letter-spacing: -0.07em;
+      }
+
+      .home-title {
+        max-width: 10ch;
+        font-size: clamp(3.4rem, 8vw, 6.8rem);
+        line-height: 0.9;
+        font-weight: 700;
+      }
+
+      .hero-copy,
+      .hero-side__copy,
+      .project-copy,
+      .section-note {
+        color: var(--muted);
+      }
+
+      .hero-copy {
+        max-width: 38rem;
+        margin: 1.5rem 0 0;
+        font-size: 1.08rem;
+        line-height: 1.85;
+      }
+
+      .hero-actions,
+      .project-actions,
+      .studio-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+      }
+
+      .hero-actions {
+        margin-top: 1.8rem;
+      }
+
+      .button,
+      .button-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0.8rem 1.1rem;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        text-decoration: none;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .button {
+        background: linear-gradient(135deg, rgba(99, 243, 255, 0.18), rgba(122, 162, 255, 0.08));
+      }
+
+      .button-ghost {
+        background: transparent;
+      }
+
+      .button:hover,
+      .button-ghost:hover,
+      .project-link:hover,
+      .text-link:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem 1.3rem;
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-side {
+        padding-left: 2rem;
+        border-left: 1px solid var(--line);
+      }
+
+      .hero-side__title {
+        font-size: clamp(1.8rem, 3vw, 2.7rem);
+        line-height: 0.96;
+        font-weight: 650;
+      }
+
+      .hero-side__copy {
+        margin: 1rem 0 0;
+        line-height: 1.8;
+      }
+
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.35rem;
+        color: var(--text);
+        text-decoration: none;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+
+      .text-link::after {
+        content: "->";
+      }
+
+      .section {
+        margin-top: 5rem;
+        padding-top: 1.6rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+        gap: 2rem;
+        align-items: end;
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 0.96;
+        font-weight: 700;
+      }
+
+      .section-note {
+        margin: 0;
+        line-height: 1.8;
+      }
+
+      .projects {
+        border-top: 1px solid var(--line);
+      }
+
+      .project-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 2rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .project-meta {
+        margin: 0 0 0.6rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .project-item--dispatch .project-meta {
+        color: #8bffb5;
+      }
+
+      .project-item--colour .project-meta {
+        color: #f4a7ff;
+      }
+
+      .project-item--hacker .project-meta {
+        color: #7ddcff;
+      }
+
+      .project-name {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        line-height: 0.95;
+        font-weight: 650;
+      }
+
+      .project-copy {
+        max-width: 42rem;
+        margin: 0.9rem 0 0;
+        line-height: 1.8;
+      }
+
+      .project-actions {
+        align-self: center;
+        justify-content: flex-end;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 12.5rem;
+        min-height: 3rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        text-decoration: none;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .project-link:hover,
+      .button:hover,
+      .button-ghost:hover {
+        border-color: var(--accent-strong);
+        background: rgba(99, 243, 255, 0.06);
+      }
+
+      .studio-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .studio-copy {
+        max-width: 40rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.9;
+      }
+
+      .studio-links {
+        margin-top: 1.5rem;
+        justify-content: flex-start;
+        padding-top: 0.3rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .section-head,
+        .studio-grid,
+        .project-item {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          gap: 2.5rem;
+        }
+
+        .hero-side {
+          padding-left: 0;
+          padding-top: 1.6rem;
+          border-left: 0;
+          border-top: 1px solid var(--line);
+        }
+
+        .project-actions {
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .desktop-nav {
+          display: none;
+        }
+
+        .mobile-nav {
+          display: block;
+        }
+
+        .home-shell {
+          width: min(100% - 1rem, 1160px);
+          padding-top: 7.25rem;
+        }
+
+        .home-title {
+          font-size: clamp(2.8rem, 13vw, 4.8rem);
+        }
+
+        .section-title {
+          font-size: clamp(1.9rem, 8vw, 2.8rem);
+        }
+
+        .project-link,
+        .button,
+        .button-ghost {
+          width: 100%;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .desktop-nav {
+          display: flex;
+        }
+
+        .mobile-nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-site-page="home">
+    <div data-site-header></div>
+
+    <main class="home-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Jobee Developments Ltd</p>
+          <h1 class="home-title glow">Mobile strategy and simulation with more weight.</h1>
+          <p class="hero-copy">
+            Jobee Developments builds games with clearer systems, stronger identity, and
+            updates that add real value. The goal is simple: make mobile games that feel
+            considered, durable, and worth sticking with.
+          </p>
+          <div class="hero-actions">
+            <a href="/dispatchcommander/index.html" class="button">Dispatch Commander</a>
+            <a href="/blog/" class="button-ghost">Studio Updates</a>
+          </div>
+          <ul class="hero-meta code">
+            <li>03 live products</li>
+            <li>Campaign Mode out now</li>
+            <li>iOS focused</li>
+          </ul>
+        </div>
+
+        <aside class="hero-side">
+          <p class="eyebrow">Latest Release</p>
+          <h2 class="hero-side__title">Campaign Mode is live for Dispatch Commander.</h2>
+          <p class="hero-side__copy">
+            Friday Night is the first campaign arc: three linked missions, more carryover
+            pressure, and a shift structure that feels more connected from start to finish.
+          </p>
+          <a href="/blog/campaign-mode-is-out-starting-with-friday-night.html" class="text-link"
+            >Read the release post</a
+          >
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Projects</p>
+            <h2 class="section-title">Current games and products.</h2>
+          </div>
+          <p class="section-note">
+            Each project has its own tone and visual language, but the studio focus stays
+            the same: readability, depth, and product decisions that hold up over time.
+          </p>
+        </div>
+
+        <div class="projects">
+          <article class="project-item project-item--dispatch">
+            <div>
+              <p class="project-meta">Simulation • Live</p>
+              <h3 class="project-name">Dispatch Commander</h3>
+              <p class="project-copy">
+                A real-time emergency dispatch simulation built around operational
+                pressure, resource decisions, and now a growing campaign structure.
+              </p>
+            </div>
+            <div class="project-actions">
+              <a href="/dispatchcommander/index.html" class="project-link">Game Page</a>
+              <a
+                href="/blog/campaign-mode-is-out-starting-with-friday-night.html"
+                class="project-link"
+                >Latest Update</a
+              >
+            </div>
+          </article>
+
+          <article class="project-item project-item--colour">
+            <div>
+              <p class="project-meta">Puzzle • Live</p>
+              <h3 class="project-name">Colour Merge</h3>
+              <p class="project-copy">
+                A cleaner, more tactile puzzle game built around satisfying motion, colour
+                progression, and quick readability on mobile.
+              </p>
+            </div>
+            <div class="project-actions">
+              <a href="/colormerge/index.html" class="project-link">Game Page</a>
+            </div>
+          </article>
+
+          <article class="project-item project-item--hacker">
+            <div>
+              <p class="project-meta">Strategy • In Development</p>
+              <h3 class="project-name">HackerSim</h3>
+              <p class="project-copy">
+                A cyber strategy simulation focused on layered systems, long-form play,
+                market pressure, research, and escalating risk.
+              </p>
+            </div>
+            <div class="project-actions">
+              <a href="/hackersim/index.html" class="project-link">Project Page</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="studio-grid">
+          <div>
+            <p class="eyebrow">More</p>
+            <h2 class="section-title">Follow releases and get support.</h2>
+          </div>
+          <div>
+            <p class="studio-copy">
+              Read the latest Dispatch Commander update on the blog, explore current
+              projects, or get in touch if you need support.
+            </p>
+            <div class="studio-links">
+              <a href="/blog/" class="text-link">Visit the blog</a>
+              <a href="/support.html" class="text-link">Support and contact</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-site-footer></div>
+  </body>
 </html>

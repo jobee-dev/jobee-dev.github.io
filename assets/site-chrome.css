@@ -9,7 +9,7 @@
 .site-header__inner {
   max-width: 72rem;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 16px 24px;
 }
 
 .site-header__row {
@@ -17,42 +17,169 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-height: 48px;
 }
 
-.site-brand {
-  font-size: 1.25rem;
+.nav-header {
+  --site-header-accent: #63f3ff;
+  --site-header-accent-soft: rgba(99, 243, 255, 0.08);
+  --site-header-accent-line: rgba(99, 243, 255, 0.16);
+  --site-header-active-shadow: inset 0 0 0 1px rgba(99, 243, 255, 0.16);
+  --site-header-active-text: #f3f7ff;
+  background: rgba(4, 6, 8, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2);
+}
+
+.site-header .site-brand {
+  display: inline-flex;
+  align-items: center;
+  font-size: 20px;
   font-weight: 700;
+  line-height: 20px;
   text-decoration: none;
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.14em;
+  color: #f3f7ff;
+  text-shadow: 0 0 16px rgba(99, 243, 255, 0.14);
 }
 
 .site-header__desktop {
+  display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.site-header__toggle {
+.site-header .nav-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  font-size: 2rem;
+  min-height: 40px;
+  color: #94a3b8;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.site-header__mobile-shell {
+.site-header .nav-link:hover {
+  color: #f3f7ff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.site-header .nav-link.active {
+  color: var(--site-header-active-text);
+  background: var(--site-header-accent-soft);
+  box-shadow: var(--site-header-active-shadow);
+}
+
+.site-header .site-header__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #f3f7ff;
+  cursor: pointer;
+  font-size: 32px;
+  transition: border-color 0.22s ease, background 0.22s ease;
+}
+
+.site-header .site-header__toggle:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.site-header .site-header__mobile-shell {
   margin-top: 1rem;
   padding-bottom: 1rem;
-  border-top: 1px solid rgba(107, 114, 128, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.site-header__mobile-links {
+.site-header .site-header__mobile-links {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 1rem;
+}
+
+.site-header .mobile-menu {
+  display: none;
+}
+
+.site-header .mobile-menu.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-nav {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.site-header--dispatch {
+  --site-header-accent: #00ff55;
+  --site-header-accent-soft: rgba(0, 255, 85, 0.12);
+  --site-header-accent-line: rgba(0, 255, 85, 0.18);
+  --site-header-active-shadow:
+    0 0 18px rgba(0, 255, 85, 0.12),
+    inset 0 0 0 1px rgba(0, 255, 85, 0.2);
+}
+
+.site-header--colormerge {
+  --site-header-accent: #f093fb;
+  --site-header-accent-soft: rgba(240, 147, 251, 0.14);
+  --site-header-accent-line: rgba(240, 147, 251, 0.2);
+  --site-header-active-shadow:
+    0 0 18px rgba(240, 147, 251, 0.14),
+    inset 0 0 0 1px rgba(240, 147, 251, 0.24);
+  background: rgba(118, 75, 162, 0.34);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 36px rgba(46, 38, 77, 0.22);
+}
+
+.site-header--colormerge .site-brand {
+  text-shadow: 0 0 16px rgba(240, 147, 251, 0.28);
+}
+
+.site-header--colormerge .nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.site-header--hackersim {
+  --site-header-accent: #00e5ff;
+  --site-header-accent-soft: rgba(0, 229, 255, 0.12);
+  --site-header-accent-line: rgba(0, 229, 255, 0.18);
+  --site-header-active-shadow:
+    0 0 18px rgba(0, 229, 255, 0.14),
+    inset 0 0 0 1px rgba(255, 0, 229, 0.24);
 }
 
 .site-footer {

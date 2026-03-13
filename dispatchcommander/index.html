@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <link rel="icon" href="/favicon.ico" />
-
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Dispatch Commander – Global Emergency-Dispatch Simulator | Jobee Development</title>
+    <title>Dispatch Commander | Emergency Dispatch Simulation Game for iOS</title>
     <meta
       name="description"
-      content="Dispatch Commander is a real-time global emergency-dispatch simulation game for iOS & Android. Coordinate police, fire & ambulance units anywhere on earth. Available now from Jobee Development."
+      content="Dispatch Commander is a real-time emergency dispatch simulation game for iOS. Coordinate police, fire and ambulance units, manage pressure, and play the new Campaign Mode."
     />
     <meta
       name="keywords"
-      content="dispatch commander, emergency dispatch game, police fire ambulance simulator, mobile simulation game, real time strategy app, jobee development"
+      content="Dispatch Commander, emergency dispatch game, dispatch simulator, police fire ambulance game, iOS simulation game, campaign mode"
     />
-    <link rel="canonical" href="https://jobee.dev/" />
-
+    <link rel="canonical" href="https://jobee.dev/dispatchcommander/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jobee.dev/" />
-    <meta property="og:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
+    <meta property="og:url" content="https://jobee.dev/dispatchcommander/" />
+    <meta property="og:title" content="Dispatch Commander | Emergency Dispatch Simulation Game" />
     <meta
       property="og:description"
-      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Available now."
+      content="Coordinate police, fire and ambulance units in a real-time dispatch simulation. Campaign Mode is now live on iOS."
     />
     <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/dispatchcommander" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@jobee_dev" />
-    <meta name="twitter:title" content="Dispatch Commander – Global Emergency-Dispatch Simulator" />
+    <meta name="twitter:title" content="Dispatch Commander | Emergency Dispatch Simulation Game" />
     <meta
       name="twitter:description"
-      content="Coordinate police, fire & ambulance units anywhere on earth in this real-time mobile simulation game. Available now."
+      content="A real-time emergency dispatch simulation for iOS, now with Campaign Mode."
     />
     <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/dispatchcommander" />
-
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "MobileApplication",
         "name": "Dispatch Commander",
-        "operatingSystem": "iOS, Android",
+        "operatingSystem": "iOS",
         "applicationCategory": "GameApplication",
         "genre": "Simulation",
         "publisher": {
@@ -58,450 +54,796 @@
           "price": "0.00",
           "priceCurrency": "USD"
         },
-        "description": "Dispatch Commander is a real-time global emergency-dispatch simulation game for mobile devices."
+        "description": "Dispatch Commander is a real-time emergency dispatch simulation game built around live operational pressure, multiple emergency services and Campaign Mode."
       }
     </script>
 
-
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/assets/site-chrome.css" />
     <script src="/assets/site-chrome.js" defer></script>
-
-
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
     <style>
       :root {
-        --bg: #000;
-        --fg: #d1d5db;
-        --accent: #00ff55;
-        --accent-soft: rgba(0, 255, 85, 0.12);
+        --dispatch-bg: #050806;
+        --dispatch-bg-2: #09110c;
+        --dispatch-surface: rgba(10, 19, 14, 0.72);
+        --dispatch-surface-2: rgba(12, 24, 17, 0.9);
+        --dispatch-text: #f4fff6;
+        --dispatch-muted: #99ab9e;
+        --dispatch-line: rgba(97, 255, 153, 0.16);
+        --dispatch-line-strong: rgba(97, 255, 153, 0.28);
+        --dispatch-accent: #61ff99;
+        --dispatch-accent-2: #d7ff5d;
+        --dispatch-accent-soft: rgba(97, 255, 153, 0.12);
+        --dispatch-shadow: 0 24px 72px rgba(0, 0, 0, 0.34);
       }
+
+      * {
+        box-sizing: border-box;
+      }
+
       html {
         scroll-behavior: smooth;
       }
+
       body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--fg);
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--dispatch-text);
+        background:
+          radial-gradient(circle at top left, rgba(97, 255, 153, 0.11), transparent 22rem),
+          radial-gradient(circle at 85% 12%, rgba(215, 255, 93, 0.08), transparent 20rem),
+          linear-gradient(180deg, var(--dispatch-bg) 0%, var(--dispatch-bg-2) 100%);
       }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.34), transparent 78%);
+      }
+
+      body::after {
+        background: linear-gradient(180deg, rgba(97, 255, 153, 0.05), transparent 18rem);
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 75%);
+      }
+
+      a {
+        color: inherit;
+      }
+
       .code {
         font-family: "IBM Plex Mono", monospace;
       }
-      .glow {
-        color: var(--accent);
-        text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-      }
-      .grid-overlay {
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.04) 1px,
-            transparent 1px
-          ),
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
-      }
-      /* CLI cursor */
-      .cursor {
-        display: inline-block;
-        width: 12px;
-        height: 16px;
-        background: var(--accent);
-        margin-left: 4px;
-        animation: blink 1s steps(2, start) infinite;
-      }
-      @keyframes blink {
-        to {
-          visibility: hidden;
-        }
-      }
-      
-      /* Navigation Styles */
-      .nav-header {
-        background: rgba(0,0,0,0.9);
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        backdrop-filter: blur(10px);
-      }
-      .nav-link {
-        color: var(--fg);
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        transition: all 0.3s;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.875rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .nav-link:hover {
-        color: var(--accent);
-        background: var(--accent-soft);
-      }
-      .nav-link.active {
-        color: var(--accent);
-        background: var(--accent-soft);
-      }
-      .mobile-menu {
-        display: none;
-      }
-      .mobile-menu.active {
-        display: block;
+
+      .dispatch-page {
+        position: relative;
+        z-index: 1;
+        width: min(1180px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 8.5rem 0 5rem;
       }
 
-      /* UPDATED: Cyberpunk Button with Glitch Animation */
-      @keyframes glitch-anim {
-        10% { clip-path: polygon(0 2%, 100% 2%, 100% 98%, 0 98%); }
-        20% { clip-path: polygon(0 78%, 100% 78%, 100% 100%, 0 100%); }
-        30% { clip-path: polygon(0 44%, 100% 44%, 100% 56%, 0 56%); }
-        40% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
-        50% { clip-path: polygon(0 40%, 100% 40%, 100% 85%, 0 85%); }
-        60% { clip-path: polygon(0 63%, 100% 63%, 100% 80%, 0 80%); }
-        70% { clip-path: var(--clip); }
-        80% { clip-path: polygon(0 55%, 100% 55%, 100% 65%, 0 65%); }
-        90% { clip-path: polygon(0 85%, 100% 85%, 100% 95%, 0 95%); }
-        100% { clip-path: var(--clip); }
-      }
-      @keyframes glitch-anim2 {
-        0% { clip-path: var(--clip); }
-        45% { clip-path: var(--clip); }
-        50% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
-        55% { clip-path: var(--clip); }
-        100% { clip-path: var(--clip); }
-      }
-      .cybr-btn {
-        --color: hsl(0, 0%, 100%);
-        --shadow-primary-hue: 141; /* Site green */
-        --font-size: 20px;
-        --border: 3px;
-        --clip: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 70%);
-        
+      .eyebrow {
+        margin: 0 0 1rem;
+        color: var(--dispatch-accent);
         font-family: "IBM Plex Mono", monospace;
-        color: var(--color);
-        cursor: pointer;
-        background: transparent;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        font-size: var(--font-size);
-        outline: transparent;
-        letter-spacing: 2px;
-        position: relative;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.86fr);
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .hero__title,
+      .section-title,
+      .feature-name,
+      .release-panel__title {
+        margin: 0;
+        letter-spacing: -0.07em;
+      }
+
+      .hero__title {
+        max-width: 10ch;
+        font-size: clamp(3.4rem, 7vw, 6.4rem);
+        line-height: 0.9;
         font-weight: 700;
-        border: 0;
-        min-width: 0;
-        width: 100%;
-        max-width: 330px;
-        height: auto;
-        line-height: 1.2;
-        padding: 1rem 1.5rem;
-        word-break: break-word;
-        white-space: normal;
+        color: var(--dispatch-text);
+        text-shadow: 0 0 24px rgba(97, 255, 153, 0.08);
+      }
+
+      .hero__copy,
+      .release-panel__copy,
+      .section-note,
+      .feature-copy,
+      .support-copy,
+      .gallery-note {
+        color: var(--dispatch-muted);
+      }
+
+      .hero__copy {
+        max-width: 40rem;
+        margin: 1.4rem 0 0;
+        font-size: 1.06rem;
+        line-height: 1.85;
+      }
+
+      .hero__actions,
+      .support-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-top: 1.8rem;
+      }
+
+      .button,
+      .button-ghost,
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0.8rem 1.1rem;
+        border-radius: 999px;
         text-decoration: none;
-        display: inline-block;
-        text-align: center;
-        margin-bottom: 1.5rem;
-      }
-      .cybr-btn span[aria-hidden] {
-        display: inline-block;
-        animation: blink 1s steps(2, start) infinite;
-      }
-      .cybr-btn:after,
-      .cybr-btn:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        clip-path: var(--clip);
-        z-index: -1;
-      }
-      .cybr-btn:before {
-        background: hsl(var(--shadow-primary-hue), 90%, 50%);
-        transform: translate(var(--border), 0);
-      }
-      .cybr-btn:after {
-        background: rgba(0,0,0,0.5);
-      }
-      .cybr-btn__glitch {
-        position: absolute;
-        top: calc(var(--border) * -1);
-        left: calc(var(--border) * -1);
-        right: calc(var(--border) * -1);
-        bottom: calc(var(--border) * -1);
-        background: hsl(var(--shadow-primary-hue), 90%, 50%);
-        clip-path: var(--clip);
-        z-index: -1;
-        display: none;
-      }
-      .cybr-btn:hover .cybr-btn__glitch {
-        display: block;
-        animation: glitch-anim 1s infinite;
-      }
-      .cybr-btn:hover:before {
-        animation: glitch-anim2 1s infinite linear alternate-reverse;
-      }
-      
-      .button {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        border: 2px solid var(--accent);
-        border-radius: 0.5rem;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
         font-family: "IBM Plex Mono", monospace;
-        text-decoration: none;
-        color: var(--accent);
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transition: background 0.3s;
       }
-      .button:hover {
-        background: var(--accent-soft);
+
+      .button {
+        border: 1px solid var(--dispatch-line-strong);
+        background: linear-gradient(135deg, rgba(97, 255, 153, 0.18), rgba(215, 255, 93, 0.08));
+        box-shadow: 0 0 24px rgba(97, 255, 153, 0.08);
       }
-      
-      /* Responsive height management */
-      @media (max-height: 700px) {
-        header {
-          min-height: auto !important;
-          padding-top: 6rem !important;
-          padding-bottom: 2rem !important;
+
+      .button-ghost {
+        border: 1px solid var(--dispatch-line);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .text-link {
+        min-height: 0;
+        padding: 0;
+        border-radius: 0;
+        color: var(--dispatch-text);
+        justify-content: flex-start;
+      }
+
+      .text-link::after {
+        content: "->";
+        margin-left: 0.5rem;
+      }
+
+      .button:hover,
+      .button-ghost:hover,
+      .text-link:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem 1.25rem;
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        color: var(--dispatch-muted);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .release-panel {
+        position: relative;
+        padding: 1.5rem;
+        border: 1px solid var(--dispatch-line);
+        background: linear-gradient(180deg, rgba(12, 24, 17, 0.84), rgba(8, 16, 12, 0.96));
+        box-shadow: var(--dispatch-shadow);
+        overflow: hidden;
+      }
+
+      .release-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+      }
+
+      .release-panel__title {
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        line-height: 0.95;
+        font-weight: 650;
+      }
+
+      .release-panel__copy {
+        margin: 1rem 0 0;
+        line-height: 1.8;
+      }
+
+      .release-panel__rail {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .release-log {
+        padding: 0.95rem 1rem;
+        border: 1px solid var(--dispatch-line);
+        background: rgba(255, 255, 255, 0.02);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        line-height: 1.8;
+        color: var(--dispatch-muted);
+      }
+
+      .release-log strong {
+        color: var(--dispatch-accent);
+        font-weight: 600;
+      }
+
+      .section {
+        margin-top: 5rem;
+        padding-top: 1.6rem;
+        border-top: 1px solid var(--dispatch-line);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
+        gap: 2rem;
+        align-items: end;
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        line-height: 0.96;
+        font-weight: 700;
+      }
+
+      .section-note {
+        margin: 0;
+        line-height: 1.8;
+      }
+
+      .features {
+        border-top: 1px solid var(--dispatch-line);
+      }
+
+      .feature {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 0.6fr);
+        gap: 2rem;
+        align-items: start;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--dispatch-line);
+      }
+
+      .feature-meta {
+        margin: 0 0 0.6rem;
+        color: var(--dispatch-accent);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .feature-name {
+        font-size: clamp(1.7rem, 4vw, 2.7rem);
+        line-height: 0.95;
+        font-weight: 650;
+      }
+
+      .feature-copy {
+        max-width: 42rem;
+        margin: 0.9rem 0 0;
+        line-height: 1.8;
+      }
+
+      .feature-side {
+        padding-top: 0.1rem;
+        color: var(--dispatch-muted);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        line-height: 1.8;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .gallery-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        gap: 1.25rem;
+      }
+
+      .gallery-feature {
+        min-height: 100%;
+      }
+
+      .gallery-stack {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .gallery-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .shot {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--dispatch-line);
+        background: linear-gradient(180deg, rgba(10, 19, 14, 0.9), rgba(7, 13, 10, 0.98));
+        box-shadow: var(--dispatch-shadow);
+        padding: 1rem;
+      }
+
+      .shot::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+      }
+
+      .shot__frame {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.75rem;
+        background: #0a0f0c;
+      }
+
+      .shot__frame::before {
+        content: "";
+        position: absolute;
+        top: 0.7rem;
+        left: 50%;
+        width: 34%;
+        height: 1.1rem;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.34);
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .shot__meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 0.85rem;
+      }
+
+      .shot__label {
+        margin: 0;
+        color: var(--dispatch-text);
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .shot__tag {
+        flex-shrink: 0;
+        margin: 0;
+        color: var(--dispatch-accent);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .shot__copy {
+        margin: 0.45rem 0 0;
+        color: var(--dispatch-muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .shot--feature {
+        padding: 1.25rem;
+      }
+
+      .shot--feature .shot__frame {
+        max-width: 24rem;
+        margin: 0 auto;
+        border-radius: 2.2rem;
+      }
+
+      .shot--feature .shot__label {
+        font-size: 1.3rem;
+      }
+
+      .shot--tilt-left .shot__frame {
+        transform: rotate(-2deg);
+      }
+
+      .shot--tilt-right .shot__frame {
+        transform: rotate(2deg);
+      }
+
+      .shot--compact {
+        padding: 0.85rem;
+      }
+
+      .shot--compact .shot__frame {
+        border-radius: 1.4rem;
+      }
+
+      .shot--compact .shot__meta {
+        align-items: baseline;
+      }
+
+      .shot--compact .shot__copy {
+        font-size: 0.84rem;
+        line-height: 1.6;
+      }
+
+      .support-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.84fr);
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .support-copy {
+        max-width: 38rem;
+        margin: 0;
+        line-height: 1.9;
+      }
+
+      .support-panel {
+        padding: 1.5rem;
+        border: 1px solid var(--dispatch-line);
+        background: linear-gradient(180deg, rgba(12, 24, 17, 0.84), rgba(8, 16, 12, 0.96));
+        box-shadow: var(--dispatch-shadow);
+      }
+
+      .support-panel__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .support-panel__list li {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid var(--dispatch-line);
+        color: var(--dispatch-muted);
+        line-height: 1.75;
+      }
+
+      .support-panel__list li:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .support-panel__links {
+        margin-top: 1.5rem;
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .section-head,
+        .feature,
+        .support-grid,
+        .gallery-shell {
+          grid-template-columns: 1fr;
         }
-        #cli-feed {
-          height: 120px !important;
-        }
-        h1 {
-          font-size: 3rem !important;
-          margin-bottom: 1rem !important;
-        }
-        header p {
-          font-size: 1rem !important;
-          margin-bottom: 1.5rem !important;
+
+        .gallery-stack,
+        .gallery-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
-      
-      @media (max-height: 600px) {
-        #cli-feed {
-          height: 100px !important;
-        }
-        h1 {
-          font-size: 2.5rem !important;
-        }
-      }
-      
+
       @media (max-width: 768px) {
-        .desktop-nav { display: none; }
-        .mobile-nav { display: block; }
-      }
-      @media (min-width: 769px) {
-        .desktop-nav { display: flex; }
-        .mobile-nav { display: none; }
-      }
-      @media (max-width: 500px) {
-        .cybr-btn {
-          font-size: 1rem;
-          padding: 0.75rem 1rem;
-          max-width: 100%;
+        .dispatch-page {
+          width: min(100% - 1rem, 1180px);
+          padding-top: 7.25rem;
+        }
+
+        .hero__title {
+          font-size: clamp(2.8rem, 13vw, 4.8rem);
+        }
+
+        .section-title {
+          font-size: clamp(1.9rem, 8vw, 2.8rem);
+        }
+
+        .gallery-stack,
+        .gallery-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .button,
+        .button-ghost {
+          width: 100%;
         }
       }
     </style>
   </head>
   <body data-site-page="dispatch">
-
-    <div class="fixed inset-0 grid-overlay z-0"></div>
-
     <div data-site-header></div>
 
-    <header class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center p-6 pt-24 pb-12">
-      <h1 class="text-5xl sm:text-7xl font-extrabold mb-6 glow">
-        DISPATCH COMMANDER
-      </h1>
-      <p class="code text-lg sm:text-xl max-w-xl mx-auto mb-8">
-        Real-time <span class="glow">global</span> emergency-dispatch <span>simulation</span> game. Coordinate police, fire & ambulance units <span class="glow">anywhere</span> on Earth.
-      </p>
-
-      <!-- UPDATED: App Store Button with animation elements -->
-      <a href="https://apps.apple.com/gb/app/dispatch-commander/id6740238633" class="cybr-btn" role="button">
-        Download Now<span aria-hidden>_</span>On The Apple App Store
-        <span aria-hidden class="cybr-btn__glitch"></span>
-      </a>
-  
-      <pre id="cli-feed" class="code text-left text-xs xs:text-sm sm:text-base w-full max-w-full sm:max-w-2xl mx-auto bg-black/60 rounded-lg p-3 sm:p-6 border border-accent-soft overflow-x-auto whitespace-pre-wrap break-words shadow-lg h-40 xs:h-48 sm:h-56"></pre>
-    </header>
-
-
-    <section class="relative z-10 py-20 px-6 max-w-6xl mx-auto">
-      <div class="grid gap-12 md:grid-cols-3">
-
+    <main class="dispatch-page">
+      <section class="hero">
         <div>
-          <span class="material-icons text-3xl glow mb-3" aria-hidden="true">public</span>
-          <h2 class="text-xl font-semibold mb-2">Anywhere on the Globe</h2>
-          <p class="code text-sm opacity-80">
-            Tap any city – Dispatch Commander renders real-world maps so you can
-            protect the places you know.
+          <p class="eyebrow">Dispatch Commander</p>
+          <h1 class="hero__title">Run the shift. Hold the line.</h1>
+          <p class="hero__copy">
+            Dispatch Commander is a real-time emergency dispatch simulation built around
+            pressure, prioritisation, and limited response capacity. Coordinate police,
+            fire and ambulance units, manage escalating incidents, and now play through
+            the new Campaign Mode on iOS.
+          </p>
+          <div class="hero__actions">
+            <a href="https://apps.apple.com/gb/app/dispatch-commander/id6740238633" class="button">Download on iPhone</a>
+            <a href="/blog/campaign-mode-is-out-starting-with-friday-night.html" class="button-ghost">Read Campaign Update</a>
+          </div>
+          <ul class="hero__meta">
+            <li>Live on iOS</li>
+            <li>Campaign Mode available</li>
+            <li>Police • Fire • Ambulance</li>
+          </ul>
+        </div>
+
+        <aside class="release-panel">
+          <p class="eyebrow">Latest Release</p>
+          <h2 class="release-panel__title">Friday Night is now live.</h2>
+          <p class="release-panel__copy">
+            Campaign Mode starts with a three-mission story arc set across Manchester
+            city centre. Calls escalate across the night, consequences carry between
+            missions, and the shift feels more connected from start to finish.
+          </p>
+          <div class="release-panel__rail">
+            <div class="release-log">
+              <strong>Dispatch Log</strong><br />
+              19:00 Early Doors online<br />
+              21:40 Pressure rising across the city<br />
+              23:10 Carryover and grading active
+            </div>
+            <a href="/blog/campaign-mode-is-out-starting-with-friday-night.html" class="text-link">Open the release post</a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Systems</p>
+            <h2 class="section-title">A dispatch sim built around pressure, not noise.</h2>
+          </div>
+          <p class="section-note">
+            The goal is to make each call, delay and deployment decision matter. Dispatch
+            Commander is not just a stream of random incidents. It is about control under
+            pressure and the consequences of getting the shift wrong.
           </p>
         </div>
 
-        <div>
-          <span class="material-icons text-3xl glow mb-3" aria-hidden="true">groups</span>
-          <h2 class="text-xl font-semibold mb-2">Police · Fire · Ambulance</h2>
-          <p class="code text-sm opacity-80">
-            Balance limited resources and evolving threats across all three core
-            emergency services.
+        <div class="features">
+          <article class="feature">
+            <div>
+              <p class="feature-meta">Operations</p>
+              <h3 class="feature-name">Coordinate across three emergency services.</h3>
+              <p class="feature-copy">
+                Deploy police, fire and ambulance resources in real time while calls
+                compete for attention and response times start to slip.
+              </p>
+            </div>
+            <div class="feature-side">
+              live city pressure<br />
+              multiple unit types<br />
+              response tradeoffs
+            </div>
+          </article>
+
+          <article class="feature">
+            <div>
+              <p class="feature-meta">Map Play</p>
+              <h3 class="feature-name">Respond anywhere on the map.</h3>
+              <p class="feature-copy">
+                Work from a global map and route units to the incidents that matter most,
+                with the city layout and travel pressure shaping every decision.
+              </p>
+            </div>
+            <div class="feature-side">
+              real-world map feel<br />
+              route awareness<br />
+              city-scale control
+            </div>
+          </article>
+
+          <article class="feature">
+            <div>
+              <p class="feature-meta">Campaign Mode</p>
+              <h3 class="feature-name">Play linked missions with carryover consequences.</h3>
+              <p class="feature-copy">
+                Friday Night moves beyond endless freeplay. Mission outcomes affect what
+                happens next, support levels can change, and your debrief now matters.
+              </p>
+            </div>
+            <div class="feature-side">
+              mission grading<br />
+              shift carryover<br />
+              replayable outcomes
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Screens</p>
+            <h2 class="section-title">Live game screenshots.</h2>
+          </div>
+          <p class="gallery-note">
+            A look at the live map, incident flow, command view and the wider operational
+            pressure inside Dispatch Commander.
           </p>
         </div>
- 
-        <div>
-          <span class="material-icons text-3xl glow mb-3" aria-hidden="true">access_time</span>
-          <h2 class="text-xl font-semibold mb-2">Every Second Counts</h2>
-          <p class="code text-sm opacity-80">
-            Incidents escalate if you're too slow. Prioritise, strategise and
-            keep your city safe under pressure.
-          </p>
+
+        <div class="gallery-shell">
+          <figure class="shot shot--feature">
+            <div class="shot__frame">
+              <img src="images/1.png" alt="Dispatch Commander campaign briefing screen for Friday Night" loading="lazy" />
+            </div>
+            <div class="shot__meta">
+              <p class="shot__label">Friday Night briefing</p>
+              <p class="shot__tag">Campaign</p>
+            </div>
+            <p class="shot__copy">
+              The campaign briefing screen for Friday Night, introducing the first live
+              mission arc in Campaign Mode.
+            </p>
+          </figure>
+
+          <div class="gallery-stack">
+            <figure class="shot shot--compact shot--tilt-left">
+              <div class="shot__frame">
+                <img src="images/2.png" alt="Dispatch Commander campaign screenshot showing decision making" loading="lazy" />
+              </div>
+              <div class="shot__meta">
+                <p class="shot__label">Campaign decisions</p>
+                <p class="shot__tag">Choices</p>
+              </div>
+              <p class="shot__copy">Decision points that shape mission outcomes and what carries into the next shift.</p>
+            </figure>
+
+            <figure class="shot shot--compact shot--tilt-right">
+              <div class="shot__frame">
+                <img src="images/3.png" alt="Dispatch Commander screenshot showing units responding to incidents" loading="lazy" />
+              </div>
+              <div class="shot__meta">
+                <p class="shot__label">Responding to incidents</p>
+                <p class="shot__tag">Response</p>
+              </div>
+              <p class="shot__copy">Deploy the right units quickly as incidents escalate in real time.</p>
+            </figure>
+
+            <figure class="shot shot--compact">
+              <div class="shot__frame">
+                <img src="images/4.png" alt="Dispatch Commander screenshot showing gameplay anywhere in the world" loading="lazy" />
+              </div>
+              <div class="shot__meta">
+                <p class="shot__label">Anywhere in the world</p>
+                <p class="shot__tag">Global</p>
+              </div>
+              <p class="shot__copy">Run dispatch operations on a worldwide map instead of a fixed city-only layout.</p>
+            </figure>
+
+            <figure class="shot shot--compact">
+              <div class="shot__frame">
+                <img src="images/5.png" alt="Dispatch Commander station management screen" loading="lazy" />
+              </div>
+              <div class="shot__meta">
+                <p class="shot__label">Station management</p>
+                <p class="shot__tag">Management</p>
+              </div>
+              <p class="shot__copy">Manage the station layer behind the shift and keep your services ready.</p>
+            </figure>
+          </div>
         </div>
-      </div>
-    </section>
 
+        <div class="gallery-strip">
+          <figure class="shot shot--compact">
+            <div class="shot__frame">
+              <img src="images/6.png" alt="Dispatch Commander screenshot showing the new utilities station and unit type" loading="lazy" />
+            </div>
+            <div class="shot__meta">
+              <p class="shot__label">Utilities station</p>
+              <p class="shot__tag">New unit</p>
+            </div>
+          </figure>
 
-    <section class="relative z-10 py-20 bg-gray-900/40 backdrop-blur">
-      <div class="max-w-6xl mx-auto px-6 text-center">
-        <h2 class="text-2xl font-semibold mb-10">Promo Pics</h2>
-        <div class="flex flex-wrap justify-center gap-2 lg:flex-nowrap">
-          <img
-            src="images/1.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Command a city"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/2.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Track every unit"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/3.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Deploy the perfect response"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/4.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — global incident map screenshot"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/4.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Upgrade your stations"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/5.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Master logistics & budget"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/6.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Operate worldwide"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/7.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Try the new custody cells update"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
-          <img
-            src="images/8.png"
-            width="220"
-            height="440"
-            alt="Dispatch Commander — Transfer patients to hospital"
-            class="rounded-lg shadow-lg border border-accent-soft w-[220px] h-auto"
-            loading="lazy"
-          />
+          <figure class="shot shot--compact">
+            <div class="shot__frame">
+              <img src="images/7.png" alt="Dispatch Commander screenshot showing the custody system" loading="lazy" />
+            </div>
+            <div class="shot__meta">
+              <p class="shot__label">Custody system</p>
+              <p class="shot__tag">Police</p>
+            </div>
+          </figure>
+
+          <figure class="shot shot--compact">
+            <div class="shot__frame">
+              <img src="images/8.png" alt="Dispatch Commander screenshot showing more incidents in action" loading="lazy" />
+            </div>
+            <div class="shot__meta">
+              <p class="shot__label">Incidents in action</p>
+              <p class="shot__tag">Live play</p>
+            </div>
+          </figure>
 
         </div>
-      </div>
+      </section>
 
-      <!-- Feedback buttons -->
-      <div class="flex flex-wrap gap-4 justify-center mt-12">
-        <a
-          href="https://github.com/jobee-dev/jobee-dev.github.io/issues/new?labels=bug&template=bug_report.md"
-          class="button"
-          >Report a Bug</a
-        >
-        <a
-          href="https://github.com/jobee-dev/jobee-dev.github.io/issues/new?labels=enhancement&template=feature_request.md"
-          class="button"
-          >Suggest a Feature</a
-        >
-      </div>
+      <section class="section">
+        <div class="support-grid">
+          <div>
+            <p class="eyebrow">Play Now</p>
+            <h2 class="section-title">Download Dispatch Commander and start the new missions.</h2>
+            <p class="support-copy">
+              Campaign Mode is live now on iOS, starting with Friday Night. If you need
+              help, want to report an issue, or want to follow future updates, use the
+              support page or the blog.
+            </p>
+            <div class="support-actions">
+              <a href="https://apps.apple.com/gb/app/dispatch-commander/id6740238633" class="button">Download Dispatch Commander</a>
+              <a href="/support.html" class="button-ghost">Support</a>
+            </div>
+          </div>
 
-    </section>
+          <aside class="support-panel">
+            <p class="eyebrow">Also Available</p>
+            <ul class="support-panel__list">
+              <li>Read the Campaign Mode release post for Friday Night and future mission updates.</li>
+              <li>Use the support page for bugs, feedback and player contact.</li>
+              <li>View the privacy policy for Dispatch Commander.</li>
+            </ul>
+            <div class="support-actions support-panel__links">
+              <a href="/blog/campaign-mode-is-out-starting-with-friday-night.html" class="text-link">Latest release post</a>
+              <a href="/dispatchcommander/privacy.html" class="text-link">Privacy policy</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
 
     <div data-site-footer></div>
-
-    <script>
-      const feedElem = document.getElementById("cli-feed");
-      const cursor = document.createElement("span");
-      cursor.className = "cursor";
-      feedElem.appendChild(cursor);
-
-      const lines = [
-        "[SYSTEM] Connecting to global dispatch network…",
-        "[OK] Secure channel established.",
-        "[INFO] Incident feed online.",
-        "[ALERT] Emergencies available in your area.",
-        "> Dispatch Commander is now live."
-      ];
-
-      let lineIdx = 0;
-      let charIdx = 0;
-
-      function typeNextChar() {
-        if (lineIdx >= lines.length) return; // done
-
-        const currentLine = lines[lineIdx];
-        if (charIdx < currentLine.length) {
-          cursor.insertAdjacentText("beforebegin", currentLine[charIdx]);
-          charIdx++;
-          setTimeout(typeNextChar, 30);
-        } else {
-          cursor.insertAdjacentHTML("beforebegin", "<br>");
-          lineIdx++;
-          charIdx = 0;
-          setTimeout(typeNextChar, 400);
-        }
-      }
-
-      setTimeout(typeNextChar, 600);
-
-    </script>
-        
   </body>
 </html>

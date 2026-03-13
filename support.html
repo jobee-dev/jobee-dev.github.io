@@ -107,37 +107,6 @@
       text-underline-offset: 2px;
     }
 
-    /* Navigation Styles */
-    .nav-header {
-      background: rgba(0,0,0,0.9);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-    }
-    .nav-link {
-      color: var(--fg);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      transition: all 0.3s;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .nav-link:hover {
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .nav-link.active {
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .mobile-menu {
-      display: none;
-    }
-    .mobile-menu.active {
-      display: block;
-    }
     @media (max-width: 768px) {
       .desktop-nav { display: none; }
       .mobile-nav { display: block; }

@@ -11,6 +11,7 @@
   const PAGE_CONFIG = {
     home: {
       activeNav: "home",
+      headerTheme: "neutral",
       footerClassName: "site-footer site-footer--compact site-footer--code site-footer--muted",
       footerLines: [
         "© {year} Jobee Developments Ltd"
@@ -18,6 +19,7 @@
     },
     support: {
       activeNav: "support",
+      headerTheme: "neutral",
       footerClassName: "site-footer site-footer--code site-footer--muted",
       footerLines: [
         "© {year} Jobee Developments Ltd"
@@ -25,6 +27,7 @@
     },
     blog: {
       activeNav: "blog",
+      headerTheme: "neutral",
       footerClassName: "site-footer site-footer--muted",
       footerLines: [
         "© {year} Jobee Developments Ltd • Writing on launches, systems, and studio craft."
@@ -32,6 +35,7 @@
     },
     "blog-post": {
       activeNav: "blog",
+      headerTheme: "neutral",
       footerClassName: "site-footer site-footer--muted",
       footerLines: [
         "© {year} Jobee Developments Ltd • <a href=\"/blog/\" class=\"underline\">Back to Blog</a>"
@@ -39,6 +43,7 @@
     },
     dispatch: {
       activeNav: "dispatch",
+      headerTheme: "dispatch",
       footerClassName: "site-footer site-footer--code site-footer--muted",
       footerLines: [
         "Dispatch Commander is a <strong>fictional simulation game</strong>. All incidents, agencies and data within the app are simulated and should not be used for real-world emergency response.",
@@ -47,6 +52,7 @@
     },
     "dispatch-privacy": {
       activeNav: "dispatch",
+      headerTheme: "dispatch",
       footerClassName: "site-footer site-footer--code site-footer--muted",
       footerLines: [
         "© {year} Jobee Development • <a href=\"/\" class=\"underline\">Back to Home</a> • <a href=\"/dispatchcommander/index.html\" class=\"underline\">Dispatch Commander</a>"
@@ -54,6 +60,7 @@
     },
     colormerge: {
       activeNav: "colormerge",
+      headerTheme: "colormerge",
       footerClassName: "site-footer",
       footerLines: [
         "© {year} Jobee Development • <a href=\"/colormerge/privacy.html\">Privacy Policy</a>"
@@ -61,6 +68,7 @@
     },
     "colormerge-privacy": {
       activeNav: "colormerge",
+      headerTheme: "colormerge",
       footerClassName: "",
       footerLines: [
         "© {year} Jobee Developments Limited. All rights reserved. • <a href=\"/colormerge/index.html\">Colour Merge</a>"
@@ -68,6 +76,7 @@
     },
     hackersim: {
       activeNav: "hackersim",
+      headerTheme: "hackersim",
       footerClassName: "site-footer site-footer--code site-footer--muted",
       footerLines: [
         "© {year} Jobee Development • <a href=\"/hackersim/privacy.html\" class=\"underline\">Privacy Policy</a>"
@@ -75,6 +84,7 @@
     },
     "hackersim-privacy": {
       activeNav: "hackersim",
+      headerTheme: "hackersim",
       footerClassName: "site-footer site-footer--code site-footer--muted",
       footerLines: [
         "© {year} Jobee Development • <a href=\"/\" class=\"underline\">Back to Home</a> • <a href=\"/hackersim/index.html\" class=\"underline\">HackerSim</a>"
@@ -83,21 +93,23 @@
   };
 
   function renderHeader(currentPage) {
-    const activeNav = (PAGE_CONFIG[currentPage] || PAGE_CONFIG.home).activeNav;
+    const pageConfig = PAGE_CONFIG[currentPage] || PAGE_CONFIG.home;
+    const activeNav = pageConfig.activeNav;
+    const themeClass = pageConfig.headerTheme ? ` site-header--${pageConfig.headerTheme}` : "";
     const navLinks = NAV_ITEMS.map((item) => {
       const activeClass = item.key === activeNav ? " active" : "";
       return `<a href="${item.href}" class="nav-link${activeClass}">${item.label}</a>`;
     }).join("");
 
     return `
-      <nav class="nav-header site-header">
+      <nav class="nav-header site-header${themeClass}">
         <div class="site-header__inner">
           <div class="site-header__row">
-            <a href="/" class="site-brand glow code">JOBEE.DEV</a>
+            <a href="/" class="site-brand code">JOBEE.DEV</a>
             <div class="desktop-nav site-header__desktop">
               ${navLinks}
             </div>
-            <button type="button" class="mobile-nav site-header__toggle glow" data-site-menu-toggle aria-expanded="false" aria-controls="site-mobile-menu">
+            <button type="button" class="mobile-nav site-header__toggle" data-site-menu-toggle aria-expanded="false" aria-controls="site-mobile-menu">
               <span class="material-icons">menu</span>
             </button>
           </div>
