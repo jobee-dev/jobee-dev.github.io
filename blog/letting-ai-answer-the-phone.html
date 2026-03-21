@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" href="/favicon.ico" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Letting AI Answer the Phone | Jobee Blog</title>
+  <meta name="description"
+    content="How I replaced branching dialogue trees with a Cloudflare Worker and LLM backend to power real-time AI conversations in a simulation game." />
+  <meta name="keywords"
+    content="AI dialogue system, game AI, Cloudflare Workers, LLM game integration, branching dialogue replacement, GPT-5.4-mini, streaming AI responses, prompt engineering games" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://jobee.dev/blog/letting-ai-answer-the-phone.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jobee.dev/blog/letting-ai-answer-the-phone.html" />
+  <meta property="og:title" content="Letting AI Answer the Phone" />
+  <meta property="og:description"
+    content="How branching dialogue trees turned into a Cloudflare Worker and LLM backend that powers real-time AI conversations in a simulation game." />
+  <meta property="og:image"
+    content="https://og-screenshot.jobee-dev.workers.dev/blog/letting-ai-answer-the-phone" />
+  <meta property="article:published_time" content="2026-03-21" />
+  <meta property="article:modified_time" content="2026-03-21" />
+  <meta property="article:section" content="Engineering" />
+  <meta property="article:tag" content="AI" />
+  <meta property="article:tag" content="Game Development" />
+  <meta property="article:tag" content="Cloudflare Workers" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Letting AI Answer the Phone" />
+  <meta name="twitter:description"
+    content="How branching dialogue trees turned into a Cloudflare Worker and LLM backend that powers real-time AI conversations in a simulation game." />
+  <meta name="twitter:image"
+    content="https://og-screenshot.jobee-dev.workers.dev/blog/letting-ai-answer-the-phone" />
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Letting AI Answer the Phone",
+        "description": "How branching dialogue trees turned into a Cloudflare Worker and LLM backend that powers real-time AI conversations in a simulation game.",
+        "image": "https://og-screenshot.jobee-dev.workers.dev/blog/letting-ai-answer-the-phone",
+        "datePublished": "2026-03-21",
+        "dateModified": "2026-03-21",
+        "author": {
+          "@type": "Organization",
+          "name": "Jobee Developments Ltd"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Jobee Developments Ltd",
+          "url": "https://jobee.dev"
+        },
+        "mainEntityOfPage": "https://jobee.dev/blog/letting-ai-answer-the-phone.html",
+        "keywords": [
+          "AI dialogue system",
+          "game AI",
+          "Cloudflare Workers",
+          "LLM game integration",
+          "prompt engineering",
+          "GPT-5.4-mini"
+        ]
+      }
+    </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site-chrome.css" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script src="/assets/site-chrome.js" defer></script>
+</head>
+
+<body data-site-page="blog-post">
+  <div data-site-header></div>
+
+  <main class="article-page">
+    <a class="article-back" href="/blog/">Back to Blog</a>
+
+    <article class="article-shell">
+      <div class="article-shell__top">
+        <header class="article-hero">
+          <span class="article-kicker">Engineering</span>
+          <h1 class="article-title">Letting AI Answer the Phone</h1>
+          <p class="article-dek">
+            Branching dialogue trees broke under real player behaviour. Here is how a
+            Cloudflare Worker, a streaming LLM, and some careful prompt design turned
+            that into a conversation system that actually works.
+          </p>
+          <div class="article-meta">
+            <span>Game Development</span>
+            <span>March 21, 2026</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+        <aside class="article-summary">
+          <div class="article-summary__label">Readout</div>
+          <h2 class="article-summary__title">What this post covers</h2>
+          <ul>
+            <li>Why traditional branching dialogue collapsed under player behaviour</li>
+            <li>How a Cloudflare Worker secures API keys and streams responses</li>
+            <li>Model selection tradeoffs and the debugging advantage of GPT-5.4-mini</li>
+            <li>Prompt design, structured tags, and fighting hallucinations</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="article-prose">
+        <p>
+          For a while I was trying to build a system of scripted conversations for a
+          simulation game I am working on. You know the type: branching dialogue,
+          conditional responses, maybe a few state flags depending on what the player
+          asked.
+        </p>
+
+        <p>
+          It worked until it did not.
+        </p>
+
+        <p>
+          The problem with simulated conversations is that players do not behave like
+          your dialogue tree expects. They ask strange questions, repeat themselves,
+          jump between topics, or misunderstand what is happening entirely. Once you
+          start trying to handle that with traditional branching dialogue, the
+          complexity explodes.
+        </p>
+
+        <p>
+          After a few days of wrestling with it I had a thought that felt both obvious
+          and slightly dangerous:
+        </p>
+
+        <blockquote>
+          What if I just let an AI handle the conversation instead?
+        </blockquote>
+
+        <p>
+          That idea eventually turned into a system that now powers part of a project
+          I have been quietly building behind the scenes. I am not quite ready to talk
+          about the game itself yet, but I can talk about the architecture that made
+          the AI side of it work.
+        </p>
+
+        <h2>Step one: do not give the internet your API key</h2>
+        <p>
+          My first attempt was the naive one. The client talked directly to the model
+          API.
+        </p>
+
+        <p>
+          This works great right up until you remember one small detail: games can be
+          decompiled. If your app ships with an API key baked into it, someone will
+          extract it and start sending requests on your behalf.
+        </p>
+
+        <p>
+          So that design lasted roughly five minutes.
+        </p>
+
+        <p>
+          The fix was putting a Cloudflare Worker in the middle:
+        </p>
+
+        <p>
+          <code>Game Client &rarr; Cloudflare Worker &rarr; LLM Provider</code>
+        </p>
+
+        <p>
+          The worker does three important things.
+        </p>
+
+        <p>
+          First, it stores the API keys safely using Worker secrets so the client
+          never sees them. Second, it validates and sanitises incoming requests. Since
+          the game client is ultimately controlled by the player, the worker acts as a
+          gatekeeper to ensure requests are well-formed and safe. Third, it streams
+          the AI response back to the client using server-sent events. Instead of
+          waiting for a full response, the dialogue appears gradually on screen as it
+          is generated. That small detail ended up making conversations feel
+          dramatically more natural.
+        </p>
+
+        <p>
+          Cloudflare Workers are a great fit for this because they are cheap, fast,
+          and run right at the edge.
+        </p>
+
+        <h2>Choosing a model is more complicated than it looks</h2>
+        <p>
+          The next decision was which model to actually run this on.
+        </p>
+
+        <p>
+          My initial testing used <strong>GPT-5.4-mini</strong>. It sits in a really
+          nice spot where it is cheap enough to run continuously in a game loop but
+          still smart enough to follow fairly strict prompt instructions.
+        </p>
+
+        <p>
+          For most cases it worked well, but I wanted to see if I could get a bit
+          more elasticity in the responses, slightly less rigid dialogue and something
+          that felt a bit more natural in conversation.
+        </p>
+
+        <p>
+          So I experimented with <strong>Kimi K2.5</strong>, which is priced in
+          roughly the same range and has a reputation for producing more expressive
+          responses. In practice the results were interesting. Sometimes the
+          conversations felt more dynamic, and it definitely had a different tone.
+        </p>
+
+        <p>
+          But I quickly ran into a practical issue that had nothing to do with the
+          model quality: debugging.
+        </p>
+
+        <p>
+          When you are building an AI gameplay system, being able to inspect exactly
+          what went into a prompt is incredibly important. With the OpenAI platform I
+          can open the dashboard and see the full request history, the prompt, the
+          structured payload, and the model's response. That visibility makes it much
+          easier to track down things like hallucinations, prompt conflicts, or
+          mistakes in the game state being passed to the model.
+        </p>
+
+        <p>
+          With Kimi, that kind of observability is not really built in. To achieve the
+          same level of insight you would need to build an LLM tunnel layer that logs
+          requests before forwarding them to the provider. At that point the extra
+          infrastructure started to outweigh the benefits of switching models.
+        </p>
+
+        <p>
+          So I ended up back where I started: <strong>GPT-5.4-mini</strong>. Not
+          because it was necessarily the most expressive model, but because the
+          tooling around it made development dramatically easier. When you are
+          iterating on prompts constantly, being able to see exactly what the model
+          saw turns out to be incredibly valuable.
+        </p>
+
+        <h2>Getting the AI to behave</h2>
+        <p>
+          A raw LLM is basically a polite assistant. That is great for writing emails.
+          It is terrible for simulation gameplay.
+        </p>
+
+        <p>
+          Out of the box it tends to answer too clearly, volunteer too much
+          information, remain overly calm, and try to be helpful in ways that break
+          the game.
+        </p>
+
+        <p>
+          So most of the real work ended up being prompt design. Instead of a simple
+          instruction, each interaction sends a structured context payload describing
+          the current state of the situation. Things like emotional tone, known facts,
+          what information is allowed to be revealed, and what the model absolutely
+          should not invent.
+        </p>
+
+        <div class="article-callout">
+          <strong>Structured Tags</strong>
+          One trick that worked particularly well was embedding structured tags inside
+          the AI's dialogue. When the model mentions something important, it wraps
+          that information in a tag the game can parse. The player just sees natural
+          dialogue, but under the hood the game quietly extracts those tagged pieces of
+          information and feeds them into the gameplay systems.
+        </div>
+
+        <p>
+          That ended up being the bridge between free-form AI conversation and
+          structured game logic.
+        </p>
+
+        <h2>The two biggest problems</h2>
+
+        <h3>Latency</h3>
+        <p>
+          Even a couple of seconds feels slow during a conversation. Waiting for a full
+          AI response completely breaks the flow. Switching everything to streaming
+          responses helped enormously. Instead of waiting for the full message, text
+          appears as the model generates it, which feels much closer to a real
+          conversation.
+        </p>
+
+        <h3>Hallucinations</h3>
+        <p>
+          LLMs love inventing details. Early versions of the system would casually
+          introduce things that were never part of the scenario. Entertaining, but
+          disastrous for game logic.
+        </p>
+
+        <p>
+          The fix was adding a strict fact-validation layer inside the prompt
+          instructions. The model only receives a list of allowed facts and is
+          explicitly instructed to avoid referencing anything outside that list. It is
+          not perfect, but it reduced hallucinations dramatically.
+        </p>
+
+        <hr class="article-divider" />
+
+        <h2>Where this is going</h2>
+        <p>
+          The conversation system is now stable enough to build gameplay around, which
+          is exciting. More importantly, it creates a kind of simulation that would be
+          incredibly difficult to achieve with traditional scripted dialogue.
+        </p>
+
+        <p>
+          This AI architecture is the backbone of a project I have been quietly
+          working on behind the scenes. I am not quite ready to show the full game
+          yet, but the goal is to build simulations that feel much less scripted and
+          much more reactive to the player.
+        </p>
+
+        <p>
+          If it works the way I hope it will, the result should be something that
+          feels far more unpredictable than traditional game dialogue systems.
+        </p>
+
+        <p>
+          More on that soon.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <div data-site-footer></div>
+</body>
+
+</html>

@@ -35,9 +35,17 @@
   <!-- Blog landing page -->
   <url>
     <loc>https://jobee.dev/blog/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Blog article: Letting AI Answer the Phone -->
+  <url>
+    <loc>https://jobee.dev/blog/letting-ai-answer-the-phone.html</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Blog article: Campaign Mode -->
