@@ -89,6 +89,14 @@
       footerLines: [
         "© {year} Jobee Development • <a href=\"/\" class=\"underline\">Back to Home</a> • <a href=\"/hackersim/index.html\" class=\"underline\">HackerSim</a>"
       ]
+    },
+    "emergencycalloperator-privacy": {
+      activeNav: "home",
+      headerTheme: "neutral",
+      footerClassName: "site-footer site-footer--code site-footer--muted",
+      footerLines: [
+        "© {year} Jobee Development • <a href=\"/\" class=\"underline\">Back to Home</a>"
+      ]
     }
   };
 
