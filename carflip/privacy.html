@@ -1,160 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="icon" href="/favicon.ico" />
 
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <link rel="icon" href="/favicon.ico" />
 
-
-    <title>Privacy Policy | Car Flip Tycoon – Jobee Development</title>
-    <meta
-      name="description"
-      content="How Jobee Development collects, uses and protects data in the Car Flip Tycoon mobile game."
-    />
-    <meta
-      name="keywords"
-      content="car flip tycoon privacy policy, jobee development privacy, mobile game data use"
-    />
-    <link rel="canonical" href="https://jobee.dev/carflip/privacy.html" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://jobee.dev/carflip/privacy.html" />
-    <meta property="og:title" content="Car Flip Tycoon – Privacy Policy" />
-    <meta
-      property="og:description"
-      content="Review the privacy practices for the Car Flip Tycoon mobile game."
-    />
-    <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/carflip/privacy" />
-    <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/carflip/privacy" />
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/site-chrome.css" />
-    <script src="/assets/site-chrome.js" defer></script>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+  <title>Privacy Policy | Car Flip Tycoon – Jobee Development</title>
+  <meta name="description"
+    content="How Jobee Development collects, uses and protects data in the Car Flip Tycoon mobile game." />
+  <meta name="keywords" content="car flip tycoon privacy policy, jobee development privacy, mobile game data use" />
+  <link rel="canonical" href="https://jobee.dev/carflip/privacy.html" />
 
 
-    <style>
-      :root {
-        --bg: #000;
-        --fg: #d1d5db;
-        --accent: #00ff55;
-        --accent-soft: rgba(0, 255, 85, 0.12);
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jobee.dev/carflip/privacy.html" />
+  <meta property="og:title" content="Car Flip Tycoon – Privacy Policy" />
+  <meta property="og:description" content="Review the privacy practices for the Car Flip Tycoon mobile game." />
+  <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/carflip/privacy" />
+  <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/carflip/privacy" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/site-chrome.css" />
+  <script src="/assets/site-chrome.js" defer></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #d1d5db;
+      --accent: #00ff55;
+      --accent-soft: rgba(0, 255, 85, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .code {
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .glow {
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+    }
+
+    .grid-overlay {
+      background-image: linear-gradient(to right,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .prose {
+      max-width: 65ch;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
       }
-      html {
-        scroll-behavior: smooth;
+
+      .mobile-nav {
+        display: block;
       }
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--fg);
-      }
-      .code {
-        font-family: "IBM Plex Mono", monospace;
-      }
-      .glow {
-        color: var(--accent);
-        text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-      }
-      .grid-overlay {
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.04) 1px,
-            transparent 1px
-          ),
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
+    }
+
+    @media (min-width: 769px) {
+      .desktop-nav {
+        display: flex;
       }
 
-      .prose {
-        max-width: 65ch;
+      .mobile-nav {
+        display: none;
       }
-      @media (max-width: 768px) {
-        .desktop-nav { display: none; }
-        .mobile-nav { display: block; }
-      }
-      @media (min-width: 769px) {
-        .desktop-nav { display: flex; }
-        .mobile-nav { display: none; }
-      }
-    </style>
-  </head>
-  <body data-site-page="carflip-privacy">
+    }
+  </style>
+</head>
 
-    <div class="fixed inset-0 grid-overlay z-0"></div>
-    <div data-site-header></div>
+<body data-site-page="carflip-privacy">
+
+  <div class="fixed inset-0 grid-overlay z-0"></div>
+  <div data-site-header></div>
 
 
-    <header class="relative z-10 text-center pt-32 pb-20 px-6">
-      <h1 class="text-4xl sm:text-6xl font-extrabold glow mb-4">
-        Privacy&nbsp;Policy
-      </h1>
-      <p class="code text-sm sm:text-base opacity-80">
-        Last updated: <span id="updated">15&nbsp;May&nbsp;2026</span>
-      </p>
-    </header>
+  <header class="relative z-10 text-center pt-32 pb-20 px-6">
+    <h1 class="text-4xl sm:text-6xl font-extrabold glow mb-4">
+      Privacy&nbsp;Policy
+    </h1>
+    <p class="code text-sm sm:text-base opacity-80">
+      Last updated: <span id="updated">15&nbsp;May&nbsp;2026</span>
+    </p>
+  </header>
 
 
-    <main
-      id="policy-wrapper"
-      class="relative z-10 px-6 pb-24 mx-auto prose prose-invert leading-relaxed space-y-6"
-    >
+  <main id="policy-wrapper" class="relative z-10 px-6 pb-24 mx-auto prose prose-invert leading-relaxed space-y-6">
 
-      <h2>Summary</h2>
-      <p>Car Flip Tycoon does <strong>not</strong> collect, store, or transmit any personal data. All game progress is saved locally on your device only.</p>
+    <h2>Summary</h2>
+    <p>Car Flip Tycoon does <strong>not</strong> collect, store, or transmit any personal data. All game progress is
+      saved locally on your device only.</p>
 
-      <h2>Data We Collect</h2>
+    <h2>Data We Collect</h2>
 
-      <h3>None</h3>
-      <p>The game runs entirely on-device. No accounts, no sign-ups, no analytics SDKs, no crash reporting tools, no advertising identifiers, and no third-party data collection are used.</p>
+    <h3>None</h3>
+    <p>The game runs entirely on-device. No accounts, no sign-ups, no analytics SDKs, no crash reporting tools, no
+      advertising identifiers, and no third-party data collection are used.</p>
 
-      <h3>In-App Purchases</h3>
-      <p>When you purchase Grandpa's Advice (monthly subscription or lifetime), the transaction is processed by <strong>RevenueCat</strong> and the platform's app store (Apple App Store or Google Play). We receive only a boolean flag indicating whether your purchase is active — no payment or personal information is shared with us.</p>
-      
-      <p>RevenueCat's privacy policy is available at:<br>
-      <a href="https://www.revenuecat.com/privacy" class="text-accent hover:underline">https://www.revenuecat.com/privacy</a></p>
+    <h3>In-App Purchases</h3>
+    <p>When you purchase Grandpa's Advice (monthly subscription or lifetime), the transaction is processed by
+      <strong>RevenueCat</strong> and the platform's app store (Apple App Store or Google Play). We receive only a
+      boolean flag indicating whether your purchase is active — no payment or personal information is shared with us.
+    </p>
 
-      <h3>Local Storage</h3>
-      <p>Game state (cars owned, money, upgrades, settings) is saved locally on your device using standard device storage (<code>AsyncStorage</code>). This data never leaves your device.</p>
+    <p>RevenueCat's privacy policy is available at:<br>
+      <a href="https://www.revenuecat.com/privacy"
+        class="text-accent hover:underline">https://www.revenuecat.com/privacy</a>
+    </p>
 
-      <h2>Third-Party Services</h2>
-      <ul>
-        <li><strong>RevenueCat</strong> — processes in-app purchase verification. RevenueCat receives only transaction identifiers from the app store.</li>
-        <li><strong>Apple App Store / Google Play</strong> — handle all payment processing under their own privacy policies.</li>
-      </ul>
-      <p>We do not use any analytics, crash reporting, advertising, or social media services.</p>
+    <h3>Local Storage</h3>
+    <p>Game state (cars owned, money, upgrades, settings) is saved locally on your device using standard device storage
+      (<code>AsyncStorage</code>). This data never leaves your device.</p>
 
-      <h2>Children's Privacy</h2>
-      <p>This game is rated 4+ and does not collect any personal information from anyone, including children under 13.</p>
+    <h2>Third-Party Services</h2>
+    <ul>
+      <li><strong>RevenueCat</strong> — processes in-app purchase verification. RevenueCat receives only transaction
+        identifiers from the app store.</li>
+      <li><strong>Apple App Store / Google Play</strong> — handle all payment processing under their own privacy
+        policies.</li>
+    </ul>
+    <p>We do not use any analytics, crash reporting, advertising, or social media services.</p>
 
-      <h2>Your Rights</h2>
-      <p>Since we collect no personal data, there is nothing to access, correct, delete, or export. Your entire game save resides on your device and can be removed by uninstalling the app or clearing app data.</p>
+    <h2>Children's Privacy</h2>
+    <p>This game is rated 4+ and does not collect any personal information from anyone, including children under 13.</p>
 
-      <h2>Changes</h2>
-      <p>If this policy ever changes (for example, if analytics are added in a future update), the "Last updated" date at the top will be revised and the changes will be described here.</p>
+    <h2>Your Rights</h2>
+    <p>Since we collect no personal data, there is nothing to access, correct, delete, or export. Your entire game save
+      resides on your device and can be removed by uninstalling the app or clearing app data.</p>
 
-      <h2>Contact</h2>
-      <p>For questions about this privacy policy, please contact:</p>
-      <p><strong>Email:</strong> <a href="mailto:privacy@carfliptycoon.com" class="text-accent hover:underline">privacy@carfliptycoon.com</a></p>
+    <h2>Changes</h2>
+    <p>If this policy ever changes (for example, if analytics are added in a future update), the "Last updated" date at
+      the top will be revised and the changes will be described here.</p>
 
-      <hr class="border-gray-800 my-8">
-      <p>© Car Flip Tycoon</p>
+    <h2>Contact</h2>
+    <p>For questions about this privacy policy, please contact:</p>
+    <p><strong>Email:</strong> <a href="mailto:support@jobee.dev"
+        class="text-accent hover:underline">privacy@carfliptycoon.com</a></p>
 
-    </main>
-    <div data-site-footer></div>
+    <hr class="border-gray-800 my-8">
+    <p>© Car Flip Tycoon</p>
+
+  </main>
+  <div data-site-footer></div>
 
 
 
-  </body>
+</body>
+
 </html>
