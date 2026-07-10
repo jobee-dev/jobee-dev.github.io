@@ -24,6 +24,14 @@
     <priority>0.6</priority>
   </url>
   
+  <!-- Last Orders privacy policy -->
+  <url>
+    <loc>https://jobee.dev/last-orders/privacy.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
   <!-- Support page -->
   <url>
     <loc>https://jobee.dev/support.html</loc>

@@ -1,0 +1,392 @@
+/* =============================================================================
+   site-core.css — shared foundation for jobee.dev
+   -----------------------------------------------------------------------------
+   The site keeps STRONG per-product identity. This file does NOT impose a look.
+   It provides:
+     1. A token contract  — variables every page sets to express its own world.
+     2. Layout primitives — shell, section, hero scaffolding.
+     3. Component bases    — eyebrow, buttons, cards, feature grid, phone frames.
+     4. Motion helpers.
+
+   To skin a page: set the tokens in a page-scoped block (e.g. body[data-site-page="x"])
+   or in the page's own <style>. Override only color/font/shape tokens — structure
+   stays shared. See the token list below for the full contract.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. TOKEN CONTRACT
+   Defaults below are the "neutral studio" dark theme. Every product page is
+   expected to override the COLOR, FONT and SHAPE tokens. Spacing / type-ramp /
+   motion tokens are shared and rarely changed.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Spacing scale (shared) */
+  --space-2xs: 0.4rem;
+  --space-xs: 0.6rem;
+  --space-sm: 0.85rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+  --space-3xl: 8.5rem; /* fixed-header top offset for page shells */
+
+  /* Type ramp (shared, fluid) */
+  --fs-hero: clamp(3.4rem, 7vw, 6.6rem);
+  --fs-section: clamp(2rem, 5vw, 3.4rem);
+  --fs-subtitle: clamp(1.7rem, 4vw, 2.7rem);
+  --fs-lead: 1.06rem;
+  --fs-body: 1rem;
+  --fs-mono: 0.74rem;
+  --lh-tight: 0.92;
+  --lh-snug: 1.2;
+  --lh-body: 1.85;
+  --tracking-display: -0.03em;
+  --tracking-mono: 0.12em;
+
+  /* Fonts (override per page) */
+  --font-display: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Color (override per page) */
+  --bg: #06080b;
+  --text: #f3f7ff;
+  --muted: #8f9caf;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --accent: #63f3ff;
+  --accent-2: #7aa2ff;
+  --accent-soft: rgba(99, 243, 255, 0.1);
+  --accent-strong: rgba(99, 243, 255, 0.2);
+
+  /* Surfaces / cards (override per page — this is where glass vs. bordered lives) */
+  --surface: rgba(255, 255, 255, 0.02);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: 1px solid var(--line);
+  --card-radius: 0;
+  --card-blur: 0px;
+  --card-shadow: none;
+
+  /* Shape */
+  --radius-pill: 999px;
+  --radius-frame: 1.75rem; /* phone-frame corner */
+
+  /* Motion (shared) */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur: 0.22s;
+  --shell-max: 1160px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: inherit;
+}
+
+/* Utility kept for parity with existing markup */
+.code {
+  font-family: var(--font-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   2. LAYOUT PRIMITIVES
+   --------------------------------------------------------------------------- */
+.page-shell {
+  position: relative;
+  z-index: 1;
+  width: min(var(--shell-max), calc(100% - 2rem));
+  margin: 0 auto;
+  padding: var(--space-3xl) 0 var(--space-2xl);
+}
+
+.section {
+  margin-top: var(--space-2xl);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+  gap: var(--space-lg);
+  align-items: end;
+  margin-bottom: var(--space-lg);
+}
+
+.section-note {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* -----------------------------------------------------------------------------
+   3. COMPONENT BASES
+   --------------------------------------------------------------------------- */
+
+/* Eyebrow / kicker */
+.eyebrow {
+  margin: 0 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Display headings */
+.hero-title,
+.section-title,
+.subtitle {
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
+  font-weight: 500;
+}
+
+.hero-title {
+  font-size: var(--fs-hero);
+  line-height: var(--lh-tight);
+  max-width: 14ch;
+}
+
+.section-title {
+  font-size: var(--fs-section);
+  line-height: 1;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: var(--fs-subtitle);
+  line-height: 1;
+  font-weight: 600;
+}
+
+.lead {
+  max-width: 40rem;
+  margin: 1.4rem 0 0;
+  color: var(--muted);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+}
+
+/* Buttons — pill, mono label. Solid vs. ghost via modifier. */
+.btn,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    background var(--dur) var(--ease);
+}
+
+.btn {
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent-soft));
+  color: var(--text);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn:hover,
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-strong);
+  background: var(--accent-soft);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.8rem;
+}
+
+/* Arrow text link */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.text-link::after {
+  content: "->";
+}
+
+.text-link:hover {
+  transform: translateX(2px);
+  color: var(--accent);
+}
+
+/* Card — shape comes entirely from tokens, so glass / bordered / flat all work. */
+.card {
+  position: relative;
+  padding: var(--space-md);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  -webkit-backdrop-filter: blur(var(--card-blur));
+  backdrop-filter: blur(var(--card-blur));
+}
+
+.card-title {
+  margin: 0 0 var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.card-copy {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Auto-fit feature grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Phone-frame screenshot — shared "device" shell with optional notch. */
+.phone-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-frame);
+  background: var(--bg);
+}
+
+.phone-frame--notch::before {
+  content: "";
+  position: absolute;
+  top: 0.7rem;
+  left: 50%;
+  width: 34%;
+  height: 1.1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.34);
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.phone-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Horizontal screenshot gallery */
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+
+.gallery .phone-frame {
+  width: 240px;
+}
+
+/* -----------------------------------------------------------------------------
+   4. MOTION HELPERS
+   --------------------------------------------------------------------------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.anim-fade-up {
+  opacity: 0;
+  animation: fade-up 1s var(--ease) forwards;
+}
+
+/* -----------------------------------------------------------------------------
+   5. SHARED RESPONSIVE BEHAVIOUR
+   --------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .section-head {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(100% - 1rem, var(--shell-max));
+    padding-top: 7.25rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 9vw, 4rem);
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .btn,
+  .btn-ghost {
+    width: 100%;
+  }
+
+  .gallery .phone-frame {
+    width: 180px;
+  }
+}

@@ -97,6 +97,14 @@
       footerLines: [
         "© {year} Jobee Development • <a href=\"/\" class=\"underline\">Back to Home</a>"
       ]
+    },
+    "lastorders-privacy": {
+      activeNav: "home",
+      headerTheme: "lastorders",
+      footerClassName: "site-footer site-footer--code site-footer--muted",
+      footerLines: [
+        "© {year} Jobee Development • <a href=\"/\" class=\"underline\">Back to Home</a>"
+      ]
     }
   };
 
@@ -117,11 +125,12 @@
     .site-header .mobile-menu.active{display:block}
     @media (max-width:768px){.desktop-nav{display:none!important}.mobile-nav{display:inline-flex!important}}
     @media (min-width:769px){.desktop-nav{display:flex!important}.mobile-nav{display:none!important}.site-header .site-header__mobile-shell,.site-header .site-header__mobile-shell.active{display:none!important}}
-    .site-header--dispatch{--site-header-accent:#00ff55;--site-header-accent-soft:rgba(0,255,85,0.12);--site-header-active-shadow:0 0 18px rgba(0,255,85,0.12),inset 0 0 0 1px rgba(0,255,85,0.2)}
+    .site-header--dispatch{--site-header-accent:#ffb24a;--site-header-accent-soft:rgba(255,178,74,0.12);--site-header-active-shadow:0 0 18px rgba(255,178,74,0.14),inset 0 0 0 1px rgba(255,178,74,0.22)}
     .site-header--colormerge{--site-header-accent:#f093fb;--site-header-accent-soft:rgba(240,147,251,0.14);--site-header-active-shadow:0 0 18px rgba(240,147,251,0.14),inset 0 0 0 1px rgba(240,147,251,0.24);background:rgba(118,75,162,0.34);border-bottom:1px solid rgba(255,255,255,0.14);box-shadow:0 10px 36px rgba(46,38,77,0.22)}
     .site-header--colormerge .site-brand{text-shadow:0 0 16px rgba(240,147,251,0.28)}
     .site-header--colormerge .nav-link:hover{background:rgba(255,255,255,0.08)}
     .site-header--hackersim{--site-header-accent:#00e5ff;--site-header-accent-soft:rgba(0,229,255,0.12);--site-header-active-shadow:0 0 18px rgba(0,229,255,0.14),inset 0 0 0 1px rgba(255,0,229,0.24)}
+    .site-header--lastorders{--site-header-accent:#f5a623;--site-header-accent-soft:rgba(245,166,35,0.12);--site-header-active-shadow:0 0 18px rgba(245,166,35,0.14),inset 0 0 0 1px rgba(245,166,35,0.22)}
   `;
 
   function ensureCriticalHeaderStyles() {

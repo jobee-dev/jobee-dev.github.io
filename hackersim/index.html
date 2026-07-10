@@ -10,7 +10,7 @@
     <title>HackerSim – Cyber Strategy Simulation | Jobee Development</title>
     <meta
       name="description"
-      content="Enter the digital underground. Build a cyber empire through strategic hacking, real‑time markets, mining, botnets, research, and a living Heat system."
+      content="Enter the digital underground. Build a cyber empire through strategic hacking, real-time markets, mining, botnets, research, and a living Heat system."
     />
     <meta
       name="keywords"
@@ -23,7 +23,7 @@
     <meta property="og:title" content="HackerSim – Cyber Strategy Simulation" />
     <meta
       property="og:description"
-      content="Build your cyber empire through strategic hacking, real‑time market trading, mining ops, botnets, and a living Heat system that fights back."
+      content="Build your cyber empire through strategic hacking, real-time market trading, mining ops, botnets, and a living Heat system that fights back."
     />
     <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/hackersim" />
 
@@ -46,7 +46,7 @@
         "genre": "Simulation",
         "publisher": {
           "@type": "Organization",
-          "name": "Jobee Development",
+          "name": "Jobee Developments Ltd",
           "url": "https://jobee.dev"
         },
         "offers": {
@@ -58,395 +58,386 @@
       }
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/site-core.css" />
     <link rel="stylesheet" href="/assets/site-chrome.css" />
     <script src="/assets/site-chrome.js" defer></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
-      :root {
-        --bg: #000;
-        --fg: #d1d5db;
-        --accent: #00ff55;
-        --accent-soft: rgba(0, 255, 85, 0.12);
-        --panel-bg: rgba(255,255,255,0.04);
-        /* HackerSim unique accents */
-        --hs-accent: #00e5ff; /* cyan */
-        --hs-accent-2: #ff00e5; /* magenta */
-        --hs-accent-soft: rgba(0,229,255,0.12);
-      }
-      html { scroll-behavior: smooth; }
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg);
-        color: var(--fg);
-        overflow-x: hidden;
-      }
-      .code { font-family: "IBM Plex Mono", monospace; }
-      .glow { /* keep for header */
-        color: var(--accent);
-        text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-      }
-      .hs-glow { /* page-unique glow */
-        color: var(--hs-accent);
-        text-shadow: 0 0 8px var(--hs-accent), 0 0 16px var(--hs-accent-2);
-      }
+      /* ===========================================================
+         HackerSim — operator HUD on site-core. One hero terminal,
+         primary systems with live mini-visuals, compact toolkit.
+         =========================================================== */
+      body[data-site-page="hackersim"] {
+        --text: #e9f6fa;
+        --muted: #7e8d94;
+        --accent: #00e5ff;        /* cyan */
+        --accent-2: #ff00e5;      /* magenta */
+        --accent-soft: rgba(0, 229, 255, 0.12);
+        --accent-strong: rgba(0, 229, 255, 0.24);
+        --line: rgba(0, 229, 255, 0.16);
+        --line-strong: rgba(0, 229, 255, 0.3);
+        --card-bg: rgba(8, 11, 14, 0.82);
+        --card-radius: 10px;
+        --radius-pill: 10px;
 
-      /* Background effects */
-      #matrix {
-        position: fixed;
-        top: 0; left: 0; width: 100vw; height: 100vh;
-        z-index: 0;
-        opacity: 0.22;
-        pointer-events: none;
+        background:
+          radial-gradient(circle at 50% -10%, rgba(0, 229, 255, 0.12), transparent 26rem),
+          radial-gradient(circle at 90% 12%, rgba(255, 0, 229, 0.08), transparent 24rem),
+          #000;
       }
-      .grid-overlay {
-        position: fixed;
-        inset: 0;
-        background-image:
-          linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .scanlines:before {
+      body[data-site-page="hackersim"]::before {
         content: "";
         position: fixed;
         inset: 0;
-        background: repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.03),
-          rgba(255,255,255,0.03) 1px,
-          transparent 2px,
-          transparent 4px
-        );
-        mix-blend-mode: overlay;
         pointer-events: none;
-        z-index: 1;
+        z-index: 0;
+        background-image:
+          linear-gradient(rgba(0, 229, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 229, 255, 0.045) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 70%);
       }
 
-      /* Terminal CTA button (unique to this page) */
-      @keyframes scan {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 200% 50%; }
-      }
-      .term-btn {
-        position: relative;
-        display: inline-flex;
+      .mono { font-family: var(--font-mono); }
+
+      /* Hero ----------------------------------------------------------- */
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.95fr);
+        gap: 2.5rem;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 0.9rem 1.2rem;
-        font-family: "IBM Plex Mono", monospace;
+      }
+      .hero-title {
+        font-family: var(--font-mono);
         font-weight: 700;
-        letter-spacing: 1px;
-        color: #fff;
-        text-decoration: none;
-        text-transform: uppercase;
-        border-radius: 10px;
-        background: #0b0b0b;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        letter-spacing: 0.02em;
+        color: var(--accent);
+        text-shadow: 0 0 14px var(--accent), 0 0 30px rgba(255, 0, 229, 0.3);
+      }
+      .hero__badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.6rem 0 0; padding: 0; list-style: none; }
+      .badge {
+        padding: 0.35rem 0.7rem; border-radius: 999px;
+        font-family: var(--font-mono); font-size: 0.68rem;
+        letter-spacing: 0.08em; text-transform: uppercase;
+      }
+      .badge--cyan { background: rgba(0, 229, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 229, 255, 0.3); }
+      .badge--mag { background: rgba(255, 0, 229, 0.1); color: var(--accent-2); border: 1px solid rgba(255, 0, 229, 0.3); }
+
+      /* Single signature CTA (kept from old design, the one flashy element) */
+      @keyframes scan { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+      .term-btn {
+        position: relative; display: inline-flex; align-items: center; justify-content: center;
+        gap: 10px; margin-top: 1.8rem; padding: 0.95rem 1.3rem;
+        font-family: var(--font-mono); font-weight: 700; letter-spacing: 1px;
+        color: #fff; text-decoration: none; text-transform: uppercase; border-radius: 10px;
+        background: #07090c;
         border: 2px solid transparent;
-        background-image: linear-gradient(#0b0b0b, #0b0b0b),
-          linear-gradient(90deg, var(--hs-accent), var(--hs-accent-2), var(--hs-accent));
-        background-origin: border-box;
-        background-clip: padding-box, border-box;
-        box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+        background-image: linear-gradient(#07090c, #07090c), linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+        background-origin: border-box; background-clip: padding-box, border-box;
+        box-shadow: 0 0 22px rgba(0, 229, 255, 0.2);
       }
-      .term-btn:hover {
-        animation: scan 1.6s linear infinite;
-        background-size: 100% 100%, 200% 100%;
-        box-shadow: 0 0 30px rgba(255, 0, 229, 0.2);
-        transform: translateY(-1px);
-      }
-      .term-caret { color: var(--hs-accent); text-shadow: 0 0 10px var(--hs-accent); }
-      @keyframes blink { to { visibility: hidden; } }
+      .term-btn:hover { animation: scan 1.6s linear infinite; background-size: 100% 100%, 200% 100%; transform: translateY(-1px); }
+      .term-caret { color: var(--accent); }
 
-      .panel {
-        background: var(--panel-bg);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 0.75rem;
-        padding: 1.25rem;
-      }
-
-      /* Terminal window card */
+      /* Terminal console (the one persistent effect) */
       .terminal {
-        background: rgba(10,10,10,0.8);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(6, 8, 10, 0.92);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       }
-      .terminal .titlebar {
-        display: flex; align-items: center; gap: 6px;
-        padding: 8px 12px; background: rgba(255,255,255,0.04);
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-      .dot { width: 10px; height: 10px; border-radius: 9999px; }
-      .dot.red { background: #ff5f56; }
-      .dot.yellow { background: #ffbd2e; }
-      .dot.green { background: #27c93f; }
-      .terminal .body { padding: 14px; }
-      .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 12px; }
-      .badge.cyan { background: rgba(0,229,255,0.12); color: var(--hs-accent); border: 1px solid rgba(0,229,255,0.25); }
-      .badge.mag { background: rgba(255,0,229,0.12); color: var(--hs-accent-2); border: 1px solid rgba(255,0,229,0.25); }
+      .terminal__bar { display: flex; align-items: center; gap: 7px; padding: 0.6rem 0.85rem; background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid var(--line); }
+      .terminal__bar .d { width: 10px; height: 10px; border-radius: 999px; }
+      .d.red { background: #ff5f56; } .d.amber { background: #ffbd2e; } .d.green { background: #27c93f; }
+      .terminal__bar .path { margin-left: 0.6rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+      .terminal__body { padding: 1rem 1.1rem; min-height: 220px; }
+      #cli-feed { margin: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.9; color: #b9e9f2; white-space: pre-wrap; word-break: break-word; }
 
-      /* Heat gauge */
-      .heat {
-        position: relative; height: 10px; border-radius: 9999px; overflow: hidden;
-        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+      /* Primary systems bento ------------------------------------------ */
+      .systems {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
       }
-      .heat .bar { height: 100%; width: 40%; background: linear-gradient(90deg, #11ff00, #ff7700, #ff0033); filter: saturate(1.2); animation: heatPulse 3s ease-in-out infinite; }
-      @keyframes heatPulse { 0%, 100% { width: 35%; } 50% { width: 70%; } }
-
-      /* Helpers */
-      #cli-feed { border-color: var(--accent-soft); font-size: 13px; }
-      @media (max-width: 640px) { #cli-feed { font-size: 11px; } }
-      .bg-accent { background: var(--accent); }
-
-      @media (max-width: 768px) {
-        .desktop-nav { display: none; }
-        .mobile-nav { display: block; }
-        .cybr-btn { font-size: 1rem; max-width: 100%; }
+      .syscard {
+        display: flex; flex-direction: column;
+        padding: 1.4rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--card-bg);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
       }
-      @media (min-width: 769px) {
-        .desktop-nav { display: flex; }
-        .mobile-nav { display: none; }
+      .syscard__meta { margin: 0 0 0.5rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+      .syscard__name { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; letter-spacing: -0.02em; }
+      .syscard__copy { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+      .syscard__viz { margin-top: 1.3rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+      /* viz: hack pipeline */
+      .pipeline { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.68rem; }
+      .pipeline .stage { padding: 0.3rem 0.5rem; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); }
+      .pipeline .stage--active { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 12px rgba(0, 229, 255, 0.2); }
+      .pipeline .arr { color: var(--accent-2); }
+
+      /* viz: heat gauge */
+      .gauge { height: 0.6rem; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); overflow: hidden; }
+      .gauge__bar { height: 100%; background: linear-gradient(90deg, #11ff88, #ffb24a 55%, #ff0033); animation: heat 4s ease-in-out infinite; }
+      @keyframes heat { 0%, 100% { width: 32%; } 50% { width: 76%; } }
+      .gauge__label { display: flex; justify-content: space-between; margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+      /* viz: market sparkline */
+      .spark { display: flex; align-items: flex-end; gap: 3px; height: 48px; }
+      .spark span { flex: 1; background: linear-gradient(180deg, var(--accent), rgba(0, 229, 255, 0.15)); border-radius: 2px 2px 0 0; }
+
+      /* viz: botnet nodes */
+      .nodes { position: relative; height: 60px; }
+      .node { position: absolute; width: 0.6rem; height: 0.6rem; border-radius: 999px; background: var(--accent); transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--accent); }
+      .node--mag { background: var(--accent-2); box-shadow: 0 0 10px var(--accent-2); }
+      .node::after { content: ""; position: absolute; inset: -4px; border-radius: 999px; border: 1px solid currentColor; opacity: 0.4; animation: nping 2.6s ease-out infinite; }
+      @keyframes nping { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(2.6); opacity: 0; } }
+
+      /* Compact toolkit grid ------------------------------------------- */
+      .toolkit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+      .tool {
+        padding: 0.95rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.015);
+      }
+      .tool h4 { margin: 0; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--text); }
+      .tool h4::before { content: "▸"; color: var(--accent); }
+      .tool p { margin: 0.45rem 0 0; font-size: 0.8rem; line-height: 1.55; color: var(--muted); }
+
+      /* Why / notice --------------------------------------------------- */
+      .why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+      .why .card { background: var(--card-bg); border-radius: 10px; }
+      .why .card p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+      .why .card strong { color: var(--accent); display: block; margin-bottom: 0.4rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+      .notice {
+        margin-top: 1.5rem;
+        padding: 1.1rem 1.25rem;
+        border: 1px solid rgba(255, 90, 77, 0.4);
+        border-radius: 10px;
+        background: rgba(255, 90, 77, 0.06);
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        line-height: 1.7;
+      }
+      .notice strong { color: #ff7a6e; }
+
+      @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; }
+        .systems, .why { grid-template-columns: 1fr; }
+        .toolkit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 560px) {
+        .toolkit { grid-template-columns: 1fr; }
       }
     </style>
   </head>
-  <body class="scanlines" data-site-page="hackersim">
-    <canvas id="matrix"></canvas>
-    <div class="grid-overlay"></div>
-
+  <body data-site-page="hackersim">
     <div data-site-header></div>
 
-    <!-- Hero -->
-    <header class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center p-6 pt-28 pb-12">
-      <h1 id="title" class="text-5xl sm:text-7xl font-extrabold mb-4 hs-glow tracking-tight">HACKER SIM</h1>
-      <p class="code text-lg sm:text-xl max-w-2xl mx-auto opacity-90 mb-6">
-        Enter the digital underground. Build your cyber empire through strategic hacking, real‑time market trading, mining operations, and a living Heat system that fights back.
-      </p>
-      <div class="flex items-center gap-2 mb-6">
-        <span class="badge cyan">Simulation</span>
-        <span class="badge mag">Strategy</span>
-        <span class="badge cyan">Offline Progression</span>
-      </div>
+    <main class="page-shell">
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Cyber Strategy Simulation</p>
+          <h1 class="hero-title" id="title">HACKER SIM</h1>
+          <p class="lead">
+            Enter the digital underground. Build a cyber empire through strategic hacking,
+            real-time market trading, mining operations, and a living Heat system that
+            fights back.
+          </p>
+          <ul class="hero__badges">
+            <li class="badge badge--cyan">Simulation</li>
+            <li class="badge badge--mag">Strategy</li>
+            <li class="badge badge--cyan">Offline Progression</li>
+          </ul>
+          <a href="/support.html" class="term-btn"><span class="term-caret">$</span> Join the Waitlist</a>
+        </div>
 
-      <a href="/support.html" class="term-btn" role="button">
-        <span class="term-caret">$</span> Join the Waitlist
-      </a>
+        <div class="terminal" aria-hidden="true">
+          <div class="terminal__bar">
+            <span class="d red"></span><span class="d amber"></span><span class="d green"></span>
+            <span class="path">/var/log/hackersim</span>
+          </div>
+          <div class="terminal__body"><pre id="cli-feed"></pre></div>
+        </div>
+      </section>
 
-      <div class="terminal w-full max-w-full sm:max-w-2xl mx-auto mt-8">
-        <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">/var/log/hackersim</span></div>
-        <div class="body">
-          <pre id="cli-feed" class="code text-left text-xs sm:text-sm whitespace-pre-wrap break-words leading-relaxed overflow-x-auto"></pre>
+      <!-- PRIMARY SYSTEMS -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Core Loop</p>
+            <h2 class="section-title">Four systems that fight for your attention.</h2>
+          </div>
+          <p class="section-note">
+            Every system interlocks. Push one too hard and the others react — that
+            tension is the game.
+          </p>
         </div>
-      </div>
-    </header>
 
-    <!-- What you'll do -->
-    <section class="relative z-10 py-20 px-6 max-w-6xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-10 glow text-center">What you’ll do</h2>
-      <div class="grid gap-6 md:grid-cols-2">
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">multi-stage-hacks.sh</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">travel_explore</span><h3 class="font-semibold">Multi‑stage hacks</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Recon → Penetrate → Escalate → Extract → Cleanup. Each stage changes your success odds and risk in real time.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">heat-monitor.log</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">whatshot</span><h3 class="font-semibold">Manage Heat</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Every action raises attention. High Heat reduces target availability and success rates—cool it down with tactical tools.</p>
-            <div class="heat mt-3"><div class="bar"></div></div>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">market-terminal</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">show_chart</span><h3 class="font-semibold">Play the market</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Trade a simulated crypto economy with trends, volatility, seasonal events, alerts, and a full price history.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">mining-daemon</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">memory</span><h3 class="font-semibold">Mine crypto (in‑game)</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Run mining ops that generate on‑chain amounts (e.g., 0.00012345 BTC/hr) while you cover electricity costs.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">botnet-orchestrator</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">hub</span><h3 class="font-semibold">Build botnets</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Deploy malware, scale infections, choose roles (mining, theft, DDoS), and weigh detection risk vs. reward.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">research-lab</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">science</span><h3 class="font-semibold">Research & skills</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Unlock advanced exploits, networking, cryptography, social engineering, malware, and hardware bonuses.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">hardware-config</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">settings</span><h3 class="font-semibold">Upgrade hardware</h3></div>
-          <p class="code text-sm opacity-80 mt-2">CPU, GPU, RAM, storage, network, and cooling—optimize performance to boost success and throughput.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">contracts</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">assignment</span><h3 class="font-semibold">Contracts & streaks</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Time‑boxed jobs with hot bonuses, near‑miss graces, and streak systems that reward consistency.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">daily-rewards</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">today</span><h3 class="font-semibold">Daily rewards</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Claim escalating bonuses with streak protection and milestone celebrations (7/30/100/365 days).</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">achievements</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">emoji_events</span><h3 class="font-semibold">Achievements & titles</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Earn badges, unlock titles, and show off your mastery.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">offline-engine</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">schedule</span><h3 class="font-semibold">Offline progression</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Time‑based activities keep running—return to meaningful results, not nothing.</p>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="titlebar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="ml-3 code opacity-70">leaderboards</span></div>
-          <div class="body">
-          <div class="flex items-start gap-3"><span class="material-icons glow" aria-hidden="true">leaderboard</span><h3 class="font-semibold">Game Center</h3></div>
-          <p class="code text-sm opacity-80 mt-2">Compete on lifetime earnings leaderboards.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="systems">
+          <article class="syscard">
+            <p class="syscard__meta">Multi-stage hacks</p>
+            <h3 class="syscard__name">Recon to cleanup.</h3>
+            <p class="syscard__copy">Each stage shifts your success odds and risk in real time. Abort late, or push your luck.</p>
+            <div class="syscard__viz pipeline">
+              <span class="stage">Recon</span><span class="arr">→</span>
+              <span class="stage stage--active">Penetrate</span><span class="arr">→</span>
+              <span class="stage">Escalate</span><span class="arr">→</span>
+              <span class="stage">Extract</span><span class="arr">→</span>
+              <span class="stage">Cleanup</span>
+            </div>
+          </article>
 
-    <!-- Why you'll love it -->
-    <section class="relative z-10 py-16 px-6 max-w-5xl mx-auto">
-      <h2 class="text-2xl font-semibold mb-6 glow text-center">Why you’ll love it</h2>
-      <ul class="grid gap-4">
-        <li class="panel code text-sm">Strategic depth without grind: Every system interlocks—Heat, equipment, research, market, botnets, and mining.</li>
-        <li class="panel code text-sm">Real agency: Abort risky hacks, choose targets, hedge with mining, or lay low to cool Heat.</li>
-        <li class="panel code text-sm">Fair monetization: Optional boosts and QoL—no paywalls for core play.</li>
-      </ul>
-    </section>
+          <article class="syscard">
+            <p class="syscard__meta">Heat system</p>
+            <h3 class="syscard__name">Attention fights back.</h3>
+            <p class="syscard__copy">Every action raises Heat. Too high and targets dry up and success drops — cool it with tactical tools.</p>
+            <div class="syscard__viz">
+              <div class="gauge"><div class="gauge__bar"></div></div>
+              <div class="gauge__label"><span>Heat</span><span>rising</span></div>
+            </div>
+          </article>
 
-    <!-- Important notice -->
-    <section class="relative z-10 py-12 px-6 max-w-4xl mx-auto">
-      <div class="panel border border-red-500/30">
-        <div class="flex items-center gap-2 mb-2"><span class="material-icons text-red-400">report</span><h3 class="font-semibold">Important</h3></div>
-        <p class="code text-sm opacity-90">This is a strategy simulation. No real hacking activity is taught or enabled.</p>
-      </div>
-    </section>
+          <article class="syscard">
+            <p class="syscard__meta">Market</p>
+            <h3 class="syscard__name">Trade the volatility.</h3>
+            <p class="syscard__copy">A simulated crypto economy with trends, seasonal events, alerts, and full price history.</p>
+            <div class="syscard__viz spark">
+              <span style="height:40%"></span><span style="height:62%"></span><span style="height:48%"></span>
+              <span style="height:80%"></span><span style="height:55%"></span><span style="height:90%"></span>
+              <span style="height:70%"></span><span style="height:100%"></span><span style="height:64%"></span>
+              <span style="height:82%"></span>
+            </div>
+          </article>
+
+          <article class="syscard">
+            <p class="syscard__meta">Botnets</p>
+            <h3 class="syscard__name">Scale the infection.</h3>
+            <p class="syscard__copy">Deploy malware, choose roles — mining, theft, DDoS — and weigh detection risk against reward.</p>
+            <div class="syscard__viz nodes">
+              <span class="node" style="left:15%;top:50%"></span>
+              <span class="node node--mag" style="left:42%;top:25%"></span>
+              <span class="node" style="left:55%;top:72%"></span>
+              <span class="node" style="left:78%;top:40%"></span>
+              <span class="node node--mag" style="left:90%;top:78%"></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- TOOLKIT (secondary systems, compact) -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Full Toolkit</p>
+            <h2 class="section-title">And everything around the core.</h2>
+          </div>
+          <p class="section-note">
+            Depth without grind — the supporting systems that keep a long game moving.
+          </p>
+        </div>
+
+        <div class="toolkit">
+          <div class="tool"><h4>Mining</h4><p>Run ops that generate on-chain amounts while you cover electricity costs.</p></div>
+          <div class="tool"><h4>Research &amp; skills</h4><p>Unlock exploits, networking, cryptography, social engineering and more.</p></div>
+          <div class="tool"><h4>Hardware</h4><p>CPU, GPU, RAM, storage, network and cooling — tune for throughput.</p></div>
+          <div class="tool"><h4>Contracts</h4><p>Time-boxed jobs with hot bonuses, near-miss graces and streaks.</p></div>
+          <div class="tool"><h4>Daily rewards</h4><p>Escalating bonuses with streak protection and milestone moments.</p></div>
+          <div class="tool"><h4>Achievements</h4><p>Earn badges, unlock titles, show off your mastery.</p></div>
+          <div class="tool"><h4>Offline progression</h4><p>Time-based activities keep running — return to real results.</p></div>
+          <div class="tool"><h4>Game Center</h4><p>Compete on lifetime earnings leaderboards.</p></div>
+        </div>
+      </section>
+
+      <!-- WHY -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Why You'll Love It</p>
+            <h2 class="section-title">Strategy with real agency.</h2>
+          </div>
+        </div>
+        <div class="why">
+          <div class="card"><p><strong>Interlocking depth</strong>Heat, equipment, research, market, botnets and mining all feed each other.</p></div>
+          <div class="card"><p><strong>Real choices</strong>Abort risky hacks, pick targets, hedge with mining, or lie low to cool Heat.</p></div>
+          <div class="card"><p><strong>Fair monetization</strong>Optional boosts and quality-of-life — no paywalls for core play.</p></div>
+        </div>
+
+        <div class="notice">
+          <strong>Important:</strong> This is a strategy simulation. No real hacking activity is taught or enabled.
+        </div>
+      </section>
+    </main>
 
     <div data-site-footer></div>
 
     <script>
-      // Matrix rain background
-      const canvas = document.getElementById('matrix');
-      const ctx = canvas.getContext('2d');
-      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }
-      window.addEventListener('resize', resize);
-      const chars = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#*+-/~=_';
-      let columns = [], fontSize = 14;
-      function init() {
-        const cols = Math.floor(canvas.width / fontSize);
-        columns = new Array(cols).fill(1);
-      }
-      function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.08)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(0,229,255,0.8)';
-        ctx.font = fontSize + 'px "IBM Plex Mono", monospace';
-        for (let i = 0; i < columns.length; i++) {
-          const text = chars.charAt(Math.floor(Math.random() * chars.length));
-          ctx.fillText(text, i * fontSize, columns[i] * fontSize);
-          if (columns[i] * fontSize > canvas.height && Math.random() > 0.975) columns[i] = 0;
-          columns[i]++;
+      // One-shot title scramble
+      (function () {
+        const title = document.getElementById("title");
+        if (!title) return;
+        const original = title.textContent;
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$*";
+        let frame = 0;
+        function scramble() {
+          const progress = Math.min(1, frame / 28);
+          let out = "";
+          for (let i = 0; i < original.length; i++) {
+            if (original[i] === " ") { out += " "; continue; }
+            out += Math.random() < progress ? original[i] : alphabet[Math.floor(Math.random() * alphabet.length)];
+          }
+          title.textContent = out;
+          frame++;
+          if (progress < 1) requestAnimationFrame(scramble);
+          else title.textContent = original;
         }
-        requestAnimationFrame(draw);
-      }
-      resize();
-      requestAnimationFrame(draw);
+        setTimeout(scramble, 300);
+      })();
 
-      // Scramble hero title effect
-      const title = document.getElementById('title');
-      const original = title.textContent;
-      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let frame = 0;
-      function scramble() {
-        const progress = Math.min(1, frame / 30);
-        let out = '';
-        for (let i = 0; i < original.length; i++) {
-          if (original[i] === ' ') { out += ' '; continue; }
-          out += (Math.random() < progress) ? original[i] : alphabet[Math.floor(Math.random()*alphabet.length)];
+      // Terminal boot feed (the one persistent effect)
+      (function () {
+        const feed = document.getElementById("cli-feed");
+        if (!feed) return;
+        const cursor = document.createElement("span");
+        cursor.textContent = "█";
+        feed.appendChild(cursor);
+        const lines = [
+          "[BOOT] Initialising rig…",
+          "[OK]   VPN tunnel established.",
+          "[INFO] Market feed synced — volatility: HIGH.",
+          "[HINT] Hack chain: Recon → Penetrate → Escalate → Extract → Cleanup.",
+          "[WARN] Heat rising. Recommend cooldown.",
+          "> HackerSim — coming soon."
+        ];
+        let li = 0, ci = 0;
+        function step() {
+          if (li >= lines.length) return;
+          const line = lines[li];
+          if (ci < line.length) {
+            cursor.insertAdjacentText("beforebegin", line[ci++]);
+            setTimeout(step, 20);
+          } else {
+            cursor.insertAdjacentHTML("beforebegin", "\n");
+            li++; ci = 0;
+            setTimeout(step, 360);
+          }
         }
-        title.textContent = out;
-        frame++;
-        if (progress < 1) requestAnimationFrame(scramble); else title.textContent = original;
-      }
-      setTimeout(scramble, 400);
-
-      // CLI-style teaser feed
-      const feedElem = document.getElementById("cli-feed");
-      const cursor = document.createElement("span");
-      cursor.className = "inline-block w-3 h-4 ml-1 align-baseline animate-pulse";
-      cursor.style.background = 'linear-gradient(180deg, var(--hs-accent), var(--hs-accent-2))';
-      feedElem.appendChild(cursor);
-
-      const rest = [
-        "[BOOT] Initialising neural rig…",
-        "[OK] Quantum VPN tunnel established.",
-        "[INFO] Market feed synced. Volatility: HIGH.",
-        "[HINT] Multi‑stage hacks unlocked: Recon → Penetrate → Escalate → Extract → Cleanup.",
-        "[ALERT] Heat rising. Recommend cooldown protocols.",
-        "> HackerSim link coming soon."
-      ];
-      const lines = rest;
-
-      let lineIdx = 0;
-      let charIdx = 0;
-
-      function typeNextChar() {
-        if (lineIdx >= lines.length) return;
-        const currentLine = lines[lineIdx];
-        if (charIdx < currentLine.length) {
-          cursor.insertAdjacentText("beforebegin", currentLine[charIdx]);
-          charIdx++;
-          setTimeout(typeNextChar, 22);
-        } else {
-          cursor.insertAdjacentHTML("beforebegin", "\n");
-          lineIdx++;
-          charIdx = 0;
-          setTimeout(typeNextChar, 380);
-        }
-      }
-
-      setTimeout(typeNextChar, 500);
+        setTimeout(step, 450);
+      })();
     </script>
   </body>
-  </html>
+</html>

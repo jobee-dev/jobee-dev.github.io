@@ -5,505 +5,365 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jobee Developments Ltd | Mobile Strategy & Simulation Games</title>
+    <title>Jobee Developments Ltd | Mobile Strategy &amp; Simulation Games</title>
     <meta
       name="description"
-      content="Jobee Developments Ltd builds mobile strategy and simulation games with deeper systems, cleaner UI, and long-tail progression."
+      content="Jobee Developments Ltd builds mobile games with strong identity, deeper systems, and updates that add real value. Play Colour Merge and Dispatch Commander on iOS."
     />
     <meta
       name="keywords"
       content="Jobee Developments, mobile strategy games, mobile simulation games, Dispatch Commander, HackerSim, Colour Merge"
     />
+    <link rel="canonical" href="https://jobee.dev/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jobee.dev/" />
+    <meta property="og:title" content="Jobee Developments Ltd | Mobile Games Studio" />
+    <meta
+      property="og:description"
+      content="A mobile games studio building products with strong identity and deeper systems. Colour Merge and Dispatch Commander are live on iOS."
+    />
     <meta property="og:image" content="https://og-screenshot.jobee-dev.workers.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@jobee_dev" />
     <meta name="twitter:image" content="https://og-screenshot.jobee-dev.workers.dev/" />
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Jobee Developments Ltd",
+        "url": "https://jobee.dev",
+        "description": "Mobile games studio building strategy and simulation titles with strong identity and deeper systems."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/assets/site-core.css" />
     <link rel="stylesheet" href="/assets/site-chrome.css" />
     <script src="/assets/site-chrome.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
     <style>
-      :root {
-        --bg: #06080b;
-        --bg-2: #0b1118;
-        --text: #f3f7ff;
-        --muted: #8f9caf;
-        --line: rgba(255, 255, 255, 0.1);
-        --line-strong: rgba(255, 255, 255, 0.18);
-        --accent: #63f3ff;
-        --accent-soft: rgba(99, 243, 255, 0.1);
-        --accent-strong: rgba(99, 243, 255, 0.2);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: "Space Grotesk", sans-serif;
-        color: var(--text);
+      /* ===========================================================
+         Home — studio deck + interactive game switcher (CSS-only)
+         =========================================================== */
+      body[data-site-page="home"] {
         background:
           radial-gradient(circle at top, rgba(99, 243, 255, 0.1), transparent 24rem),
-          radial-gradient(circle at 85% 20%, rgba(122, 162, 255, 0.08), transparent 28rem),
-          linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+          radial-gradient(circle at 85% 18%, rgba(122, 162, 255, 0.08), transparent 28rem),
+          linear-gradient(180deg, #06080b 0%, #0b1118 100%);
+        background-attachment: fixed;
       }
 
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 16rem);
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.75), transparent 75%);
-      }
+      .glow { color: var(--text); text-shadow: 0 0 16px rgba(99, 243, 255, 0.14); }
 
-      a {
-        color: inherit;
-      }
-
-      .code {
-        font-family: "IBM Plex Mono", monospace;
-      }
-
-      .glow {
-        color: var(--text);
-        text-shadow: 0 0 16px rgba(99, 243, 255, 0.14);
-      }
-
-      .home-shell {
-        position: relative;
-        z-index: 1;
-        width: min(1160px, calc(100% - 2rem));
-        margin: 0 auto;
-        padding: 8.5rem 0 5rem;
-      }
-
-      .eyebrow {
-        margin: 0 0 1rem;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.18em;
+      /* Studio status bar */
+      .studio-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem 1.3rem;
+        margin-bottom: 2.2rem;
+        padding: 0.7rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(99, 243, 255, 0.04);
+        font-family: var(--font-mono);
+        font-size: 0.71rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--accent);
+        color: var(--muted);
       }
+      .studio-bar__live { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); }
+      .studio-bar__live::before {
+        content: ""; width: 0.55rem; height: 0.55rem; border-radius: 999px;
+        background: var(--accent); box-shadow: 0 0 10px var(--accent);
+        animation: pulse 2.4s ease-in-out infinite;
+      }
+      .studio-bar .sep { opacity: 0.4; }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
+      /* Hero board: statement + release tile */
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
-        gap: 4rem;
-        align-items: end;
+        grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.85fr);
+        gap: 2.5rem;
+        align-items: stretch;
       }
+      .hero__statement { display: flex; flex-direction: column; justify-content: center; }
+      .hero-title { max-width: 15ch; }
 
-      .home-title,
-      .section-title,
-      .project-name,
-      .hero-side__title {
-        margin: 0;
-        letter-spacing: -0.07em;
-      }
-
-      .home-title {
-        max-width: 10ch;
-        font-size: clamp(3.4rem, 8vw, 6.8rem);
-        line-height: 0.9;
-        font-weight: 700;
-      }
-
-      .hero-copy,
-      .hero-side__copy,
-      .project-copy,
-      .section-note {
-        color: var(--muted);
-      }
-
-      .hero-copy {
-        max-width: 38rem;
-        margin: 1.5rem 0 0;
-        font-size: 1.08rem;
-        line-height: 1.85;
-      }
-
-      .hero-actions,
-      .project-actions,
-      .studio-links {
+      .release-tile {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.85rem;
-      }
-
-      .hero-actions {
-        margin-top: 1.8rem;
-      }
-
-      .button,
-      .button-ghost {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 3rem;
-        padding: 0.8rem 1.1rem;
-        border: 1px solid var(--line-strong);
-        border-radius: 999px;
-        text-decoration: none;
-        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.74rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-
-      .button {
-        background: linear-gradient(135deg, rgba(99, 243, 255, 0.18), rgba(122, 162, 255, 0.08));
-      }
-
-      .button-ghost {
-        background: transparent;
-      }
-
-      .button:hover,
-      .button-ghost:hover,
-      .project-link:hover,
-      .text-link:hover {
-        transform: translateY(-1px);
-      }
-
-      .hero-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.85rem 1.3rem;
-        margin: 2rem 0 0;
-        padding: 0;
-        list-style: none;
-        color: var(--muted);
-        font-size: 0.76rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .hero-side {
-        padding-left: 2rem;
-        border-left: 1px solid var(--line);
-      }
-
-      .hero-side__title {
-        font-size: clamp(1.8rem, 3vw, 2.7rem);
-        line-height: 0.96;
-        font-weight: 650;
-      }
-
-      .hero-side__copy {
-        margin: 1rem 0 0;
-        line-height: 1.8;
-      }
-
-      .text-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-top: 1.35rem;
-        color: var(--text);
-        text-decoration: none;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.74rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        transition: transform 0.2s ease, color 0.2s ease;
-      }
-
-      .text-link::after {
-        content: "->";
-      }
-
-      .section {
-        margin-top: 5rem;
-        padding-top: 1.6rem;
-        border-top: 1px solid var(--line);
-      }
-
-      .section-head {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
-        gap: 2rem;
-        align-items: end;
-        margin-bottom: 2rem;
-      }
-
-      .section-title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        line-height: 0.96;
-        font-weight: 700;
-      }
-
-      .section-note {
-        margin: 0;
-        line-height: 1.8;
-      }
-
-      .projects {
-        border-top: 1px solid var(--line);
-      }
-
-      .project-item {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 2rem;
-        padding: 1.5rem 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .project-meta {
-        margin: 0 0 0.6rem;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .project-item--dispatch .project-meta {
-        color: #8bffb5;
-      }
-
-      .project-item--colour .project-meta {
-        color: #f4a7ff;
-      }
-
-      .project-item--hacker .project-meta {
-        color: #7ddcff;
-      }
-
-      .project-name {
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
-        line-height: 0.95;
-        font-weight: 650;
-      }
-
-      .project-copy {
-        max-width: 42rem;
-        margin: 0.9rem 0 0;
-        line-height: 1.8;
-      }
-
-      .project-actions {
-        align-self: center;
-        justify-content: flex-end;
-      }
-
-      .project-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 12.5rem;
-        min-height: 3rem;
-        padding: 0.75rem 1rem;
+        flex-direction: column;
         border: 1px solid var(--line);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.02);
-        text-decoration: none;
-        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-        font-family: "IBM Plex Mono", monospace;
-        font-size: 0.73rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+        border-radius: 12px;
+        background: linear-gradient(180deg, rgba(13, 20, 30, 0.9), rgba(8, 12, 18, 0.96));
+        overflow: hidden;
       }
-
-      .project-link:hover,
-      .button:hover,
-      .button-ghost:hover {
-        border-color: var(--accent-strong);
-        background: rgba(99, 243, 255, 0.06);
-      }
-
-      .studio-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
-        gap: 3rem;
-        align-items: start;
-      }
-
-      .studio-copy {
-        max-width: 40rem;
-        margin: 0;
+      .release-tile__bar {
+        display: flex; align-items: center; gap: 0.55rem;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.25);
+        font-family: var(--font-mono);
+        font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
         color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.9;
       }
+      .release-tile__bar .dot {
+        width: 0.55rem; height: 0.55rem; border-radius: 999px;
+        background: #8bffb5; box-shadow: 0 0 10px rgba(139, 255, 181, 0.7);
+      }
+      .release-tile__body { padding: 1.3rem; display: flex; flex-direction: column; gap: 0.6rem; height: 100%; }
+      .release-tile__body h2 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+      .release-tile__body p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 0.95rem; }
+      .release-tile__body .text-link { margin-top: auto; padding-top: 0.6rem; }
 
-      .studio-links {
-        margin-top: 1.5rem;
-        justify-content: flex-start;
-        padding-top: 0.3rem;
+      /* ---- Interactive game deck ---- */
+      .deck { position: relative; display: grid; grid-template-columns: minmax(230px, 0.5fr) minmax(0, 1fr); gap: 1.25rem; }
+      .deck > input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+      .deck__rail { display: flex; flex-direction: column; gap: 0.85rem; }
+      .deck__tab {
+        --ta: var(--accent);
+        display: block;
+        padding: 1.1rem 1.2rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.015);
+        cursor: pointer;
+        transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
       }
+      .deck__tab:hover { transform: translateY(-2px); }
+      .tab--colour { --ta: #f093fb; }
+      .tab--dispatch { --ta: #ffb24a; }
+      .tab--hacker { --ta: #00e5ff; }
+
+      .deck__tab .t-meta {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        font-family: var(--font-mono); font-size: 0.68rem;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+      }
+      .deck__tab .t-meta::before {
+        content: ""; width: 0.6rem; height: 0.6rem; border-radius: 3px;
+        background: var(--ta); box-shadow: 0 0 8px var(--ta);
+      }
+      .deck__tab .t-name { margin: 0.55rem 0 0; font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; letter-spacing: -0.02em; }
+
+      /* active tab (sibling combinator — universally supported) */
+      #g-colour:checked ~ .deck__rail .tab--colour,
+      #g-dispatch:checked ~ .deck__rail .tab--dispatch,
+      #g-hacker:checked ~ .deck__rail .tab--hacker {
+        border-color: var(--ta);
+        background: color-mix(in srgb, var(--ta) 12%, transparent);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ta) 35%, transparent);
+      }
+      .deck > input:focus-visible ~ .deck__rail .deck__tab { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      /* stage */
+      .deck__stage {
+        --p-accent: var(--accent);
+        position: relative;
+        display: flex;
+        min-height: 360px;
+        padding: 1.5rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background:
+          radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--p-accent) 16%, transparent), transparent 60%),
+          rgba(255, 255, 255, 0.015);
+        overflow: hidden;
+        transition: background var(--dur) var(--ease);
+      }
+      #g-colour:checked ~ .deck__stage { --p-accent: #f093fb; }
+      #g-dispatch:checked ~ .deck__stage { --p-accent: #ffb24a; }
+      #g-hacker:checked ~ .deck__stage { --p-accent: #00e5ff; }
+
+      .panel { display: none; width: 100%; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; }
+      #g-colour:checked ~ .deck__stage .panel--colour,
+      #g-dispatch:checked ~ .deck__stage .panel--dispatch,
+      #g-hacker:checked ~ .deck__stage .panel--hacker { display: grid; }
+
+      .panel__meta { margin: 0 0 0.6rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--p-accent); }
+      .panel__name { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 0.98; letter-spacing: -0.03em; }
+      .panel__copy { max-width: 34rem; margin: 0.9rem 0 1.4rem; color: var(--muted); line-height: 1.8; }
+      .panel__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+      .panel .btn {
+        border-color: color-mix(in srgb, var(--p-accent) 45%, var(--line));
+        background: linear-gradient(135deg, color-mix(in srgb, var(--p-accent) 22%, transparent), color-mix(in srgb, var(--p-accent) 8%, transparent));
+      }
+      .panel .btn:hover { border-color: var(--p-accent); background: color-mix(in srgb, var(--p-accent) 14%, transparent); }
+
+      .panel__art { display: flex; justify-content: center; }
+      .panel__art .phone-frame {
+        width: 190px;
+        border-color: color-mix(in srgb, var(--p-accent) 30%, var(--line-strong));
+        box-shadow: 0 24px 60px color-mix(in srgb, var(--p-accent) 20%, transparent);
+      }
+      .panel__placeholder {
+        width: 190px; padding: 1rem;
+        border: 1px solid color-mix(in srgb, var(--p-accent) 30%, var(--line));
+        border-radius: 1.6rem;
+        background: rgba(0, 0, 0, 0.55);
+        font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.9; color: var(--muted);
+      }
+      .panel__placeholder strong { color: var(--p-accent); font-weight: 600; }
+
+      /* closing links */
+      .studio-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr); gap: 3rem; align-items: start; }
+      .studio-copy { max-width: 40rem; margin: 0; color: var(--muted); line-height: 1.9; }
+      .studio-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.5rem; }
 
       @media (max-width: 900px) {
-        .hero,
-        .section-head,
-        .studio-grid,
-        .project-item {
-          grid-template-columns: 1fr;
-        }
-
-        .hero {
-          gap: 2.5rem;
-        }
-
-        .hero-side {
-          padding-left: 0;
-          padding-top: 1.6rem;
-          border-left: 0;
-          border-top: 1px solid var(--line);
-        }
-
-        .project-actions {
-          justify-content: flex-start;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .desktop-nav {
-          display: none;
-        }
-
-        .mobile-nav {
-          display: block;
-        }
-
-        .home-shell {
-          width: min(100% - 1rem, 1160px);
-          padding-top: 7.25rem;
-        }
-
-        .home-title {
-          font-size: clamp(2.8rem, 13vw, 4.8rem);
-        }
-
-        .section-title {
-          font-size: clamp(1.9rem, 8vw, 2.8rem);
-        }
-
-        .project-link,
-        .button,
-        .button-ghost {
-          width: 100%;
-        }
-      }
-
-      @media (min-width: 769px) {
-        .desktop-nav {
-          display: flex;
-        }
-
-        .mobile-nav {
-          display: none;
-        }
+        .hero, .studio-grid { grid-template-columns: 1fr; }
+        .deck { grid-template-columns: 1fr; }
+        .deck__rail { flex-direction: row; flex-wrap: wrap; }
+        .deck__tab { flex: 1; min-width: 150px; }
+        .panel { grid-template-columns: 1fr; }
+        .panel__art { order: -1; }
       }
     </style>
   </head>
   <body data-site-page="home">
     <div data-site-header></div>
 
-    <main class="home-shell">
+    <main class="page-shell">
+      <div class="studio-bar">
+        <span class="studio-bar__live">Studio Online</span>
+        <span class="sep">/</span>
+        <span>2 live on iOS</span>
+        <span class="sep">/</span>
+        <span>1 in development</span>
+        <span class="sep">/</span>
+        <span>Campaign Mode out now</span>
+      </div>
+
       <section class="hero">
-        <div>
+        <div class="hero__statement">
           <p class="eyebrow">Jobee Developments Ltd</p>
-          <h1 class="home-title glow">Mobile strategy and simulation with more weight.</h1>
-          <p class="hero-copy">
-            Jobee Developments builds games with clearer systems, stronger identity, and
-            updates that add real value. The goal is simple: make mobile games that feel
-            considered, durable, and worth sticking with.
+          <h1 class="hero-title glow">Mobile games with more weight.</h1>
+          <p class="lead">
+            A small studio building strategy and simulation titles with strong identity,
+            deeper systems, and updates that add real value. Games that feel considered,
+            durable, and worth sticking with.
           </p>
-          <div class="hero-actions">
-            <a href="/dispatchcommander/index.html" class="button">Dispatch Commander</a>
-            <a href="/blog/" class="button-ghost">Studio Updates</a>
+          <div class="btn-row">
+            <a href="/colormerge/index.html" class="btn">Play Colour Merge</a>
+            <a href="/dispatchcommander/index.html" class="btn-ghost">Dispatch Commander</a>
           </div>
-          <ul class="hero-meta code">
-            <li>03 live products</li>
-            <li>Campaign Mode out now</li>
-            <li>iOS focused</li>
-          </ul>
         </div>
 
-        <aside class="hero-side">
-          <p class="eyebrow">Latest Release</p>
-          <h2 class="hero-side__title">Campaign Mode is live for Dispatch Commander.</h2>
-          <p class="hero-side__copy">
-            Friday Night is the first campaign arc: three linked missions, more carryover
-            pressure, and a shift structure that feels more connected from start to finish.
-          </p>
-          <a href="/blog/campaign-mode-is-out-starting-with-friday-night.html" class="text-link"
-            >Read the release post</a
-          >
+        <aside class="release-tile">
+          <div class="release-tile__bar"><span class="dot"></span> Latest Release</div>
+          <div class="release-tile__body">
+            <h2>Campaign Mode is live for Dispatch Commander.</h2>
+            <p>
+              Friday Night is the first campaign arc: three linked missions, more
+              carryover pressure, and a shift that feels connected from start to finish.
+            </p>
+            <a href="/blog/campaign-mode-is-out-starting-with-friday-night.html" class="text-link">Read the release post</a>
+          </div>
         </aside>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Projects</p>
-            <h2 class="section-title">Current games and products.</h2>
+            <p class="eyebrow">Games</p>
+            <h2 class="section-title">Three worlds, one studio.</h2>
           </div>
           <p class="section-note">
-            Each project has its own tone and visual language, but the studio focus stays
-            the same: readability, depth, and product decisions that hold up over time.
+            Each game has its own tone and visual language. Pick one to take a closer
+            look — readability, depth, and decisions that hold up over time run through
+            all of them.
           </p>
         </div>
 
-        <div class="projects">
-          <article class="project-item project-item--dispatch">
-            <div>
-              <p class="project-meta">Simulation • Live</p>
-              <h3 class="project-name">Dispatch Commander</h3>
-              <p class="project-copy">
-                A real-time emergency dispatch simulation built around operational
-                pressure, resource decisions, and now a growing campaign structure.
-              </p>
-            </div>
-            <div class="project-actions">
-              <a href="/dispatchcommander/index.html" class="project-link">Game Page</a>
-              <a
-                href="/blog/campaign-mode-is-out-starting-with-friday-night.html"
-                class="project-link"
-                >Latest Update</a
-              >
-            </div>
-          </article>
+        <div class="deck">
+          <input type="radio" name="game" id="g-colour" checked />
+          <input type="radio" name="game" id="g-dispatch" />
+          <input type="radio" name="game" id="g-hacker" />
 
-          <article class="project-item project-item--colour">
-            <div>
-              <p class="project-meta">Puzzle • Live</p>
-              <h3 class="project-name">Colour Merge</h3>
-              <p class="project-copy">
-                A cleaner, more tactile puzzle game built around satisfying motion, colour
-                progression, and quick readability on mobile.
-              </p>
-            </div>
-            <div class="project-actions">
-              <a href="/colormerge/index.html" class="project-link">Game Page</a>
-            </div>
-          </article>
+          <div class="deck__rail">
+            <label class="deck__tab tab--colour" for="g-colour">
+              <span class="t-meta">Puzzle · Live</span>
+              <p class="t-name">Colour Merge</p>
+            </label>
+            <label class="deck__tab tab--dispatch" for="g-dispatch">
+              <span class="t-meta">Simulation · Live</span>
+              <p class="t-name">Dispatch Commander</p>
+            </label>
+            <label class="deck__tab tab--hacker" for="g-hacker">
+              <span class="t-meta">Strategy · In Dev</span>
+              <p class="t-name">HackerSim</p>
+            </label>
+          </div>
 
-          <article class="project-item project-item--hacker">
-            <div>
-              <p class="project-meta">Strategy • In Development</p>
-              <h3 class="project-name">HackerSim</h3>
-              <p class="project-copy">
-                A cyber strategy simulation focused on layered systems, long-form play,
-                market pressure, research, and escalating risk.
-              </p>
-            </div>
-            <div class="project-actions">
-              <a href="/hackersim/index.html" class="project-link">Project Page</a>
-            </div>
-          </article>
+          <div class="deck__stage">
+            <article class="panel panel--colour">
+              <div>
+                <p class="panel__meta">Puzzle · Live on iOS</p>
+                <h3 class="panel__name">Colour Merge</h3>
+                <p class="panel__copy">
+                  A dreamy physics puzzle that fuses colour-matching merge mechanics with
+                  realistic motion — clean, tactile, and quick to read on mobile.
+                </p>
+                <div class="panel__actions">
+                  <a href="/colormerge/index.html" class="btn">View game</a>
+                  <a href="https://apps.apple.com/gb/app/colour-merge/id6748066557" class="btn-ghost" target="_blank" rel="noopener">App Store</a>
+                </div>
+              </div>
+              <div class="panel__art">
+                <div class="phone-frame"><img src="/colormerge/images/screenshot1.png" alt="Colour Merge gameplay" loading="lazy" /></div>
+              </div>
+            </article>
+
+            <article class="panel panel--dispatch">
+              <div>
+                <p class="panel__meta">Simulation · Live on iOS</p>
+                <h3 class="panel__name">Dispatch Commander</h3>
+                <p class="panel__copy">
+                  A real-time emergency dispatch simulation built around pressure,
+                  prioritisation, and limited capacity — now with a full Campaign Mode.
+                </p>
+                <div class="panel__actions">
+                  <a href="/dispatchcommander/index.html" class="btn">View game</a>
+                  <a href="https://apps.apple.com/gb/app/dispatch-commander/id6740238633" class="btn-ghost" target="_blank" rel="noopener">App Store</a>
+                </div>
+              </div>
+              <div class="panel__art">
+                <div class="phone-frame phone-frame--notch"><img src="/dispatchcommander/images/1.png" alt="Dispatch Commander campaign briefing" loading="lazy" /></div>
+              </div>
+            </article>
+
+            <article class="panel panel--hacker">
+              <div>
+                <p class="panel__meta">Strategy · In Development</p>
+                <h3 class="panel__name">HackerSim</h3>
+                <p class="panel__copy">
+                  A cyber strategy simulation built on interlocking systems — hacking,
+                  markets, mining, botnets, research, and a living Heat system that fights back.
+                </p>
+                <div class="panel__actions">
+                  <a href="/hackersim/index.html" class="btn">Project page</a>
+                  <a href="/support.html" class="btn-ghost">Join the waitlist</a>
+                </div>
+              </div>
+              <div class="panel__art">
+                <div class="panel__placeholder">
+                  <strong>$ status</strong><br />
+                  build: in development<br />
+                  target: iOS / Android<br />
+                  <strong>&gt;</strong> waitlist open
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -515,8 +375,8 @@
           </div>
           <div>
             <p class="studio-copy">
-              Read the latest Dispatch Commander update on the blog, explore current
-              projects, or get in touch if you need support.
+              Read the latest update on the blog, dig into a current project, or get in
+              touch if you need help with one of the games.
             </p>
             <div class="studio-links">
               <a href="/blog/" class="text-link">Visit the blog</a>

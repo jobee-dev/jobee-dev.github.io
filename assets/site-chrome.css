@@ -145,12 +145,12 @@
 }
 
 .site-header--dispatch {
-  --site-header-accent: #00ff55;
-  --site-header-accent-soft: rgba(0, 255, 85, 0.12);
-  --site-header-accent-line: rgba(0, 255, 85, 0.18);
+  --site-header-accent: #ffb24a;
+  --site-header-accent-soft: rgba(255, 178, 74, 0.12);
+  --site-header-accent-line: rgba(255, 178, 74, 0.2);
   --site-header-active-shadow:
-    0 0 18px rgba(0, 255, 85, 0.12),
-    inset 0 0 0 1px rgba(0, 255, 85, 0.2);
+    0 0 18px rgba(255, 178, 74, 0.14),
+    inset 0 0 0 1px rgba(255, 178, 74, 0.22);
 }
 
 .site-header--colormerge {
@@ -180,6 +180,15 @@
   --site-header-active-shadow:
     0 0 18px rgba(0, 229, 255, 0.14),
     inset 0 0 0 1px rgba(255, 0, 229, 0.24);
+}
+
+.site-header--lastorders {
+  --site-header-accent: #f5a623;
+  --site-header-accent-soft: rgba(245, 166, 35, 0.12);
+  --site-header-accent-line: rgba(245, 166, 35, 0.18);
+  --site-header-active-shadow:
+    0 0 18px rgba(245, 166, 35, 0.14),
+    inset 0 0 0 1px rgba(245, 166, 35, 0.22);
 }
 
 .site-footer {
